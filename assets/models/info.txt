@@ -1,0 +1,1 @@
+﻿Here we store the raw model files. (fbx, obj, stl, etc..)
