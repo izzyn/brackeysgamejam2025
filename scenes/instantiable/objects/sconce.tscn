@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqejm8aebr4mb"]
+
+[ext_resource type="PackedScene" uid="uid://cmins7u0oyorr" path="res://assets/models/objects/sconce.glb" id="1_a305t"]
+[ext_resource type="Material" uid="uid://2w4kjn51lll8" path="res://assets/materials/wood_mat.tres" id="2_m01wg"]
+[ext_resource type="Material" uid="uid://bpm56rj1xt1y5" path="res://assets/materials/metal_mat.tres" id="4_hyuu6"]
+
+[node name="sconce" instance=ExtResource("1_a305t")]
+
+[node name="wood" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_m01wg")
+
+[node name="metal" parent="." index="1"]
+surface_material_override/0 = ExtResource("4_hyuu6")

@@ -1,0 +1,2297 @@
+[gd_scene load_steps=8 format=4 uid="uid://dieumyp8m6u8e"]
+
+[ext_resource type="Material" uid="uid://ck03gpfly2wj1" path="res://assets/materials/chain_mat.tres" id="1_5t3d6"]
+[ext_resource type="Script" uid="uid://pfg8fik1n5mp" path="res://scripts/visuals/shader_to_chains.gd" id="1_wsxdp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8q3bv"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vgwr8"]
+_surfaces = [{
+"aabb": AABB(-0.197269, -0.051436, -0.126608, 0.394538, 0.102872, 0.253216),
+"format": 34896613377,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAgABABYAAAAEAAEAFwAAAAIABAAGAAEABQAEAAAAAQAGABgAAQAYABYABAAIAAYAAwAAABcAAwAFAAAABQAHAAQABwAIAAQAFAAFAAMACQAHAAUAFAAJAAUACQAQAAcABwAZAAgAEAAZAAcAGQASAAgAEQAQAAkAFQAJABQAFQARAAkADAAVABQAEQAKABAAEAANABkACgANABAADQAaABkAGQAaABIACgALAA0AGgAXABIAGgADABcADQAOABoADgADABoADgAUAAMACwAOAA0ADAAUAA4ACwAMAA4AEgAXABMAGAAMAAsAFwACABMAFgAYAAsAFgALAAoAGAAbAAwAAgAWABwAHAAWAAoAEwACABwAHAAKABEAGwAVAAwABgAbABgAHQARABUAHQAcABEAGwAdABUAEwAcAB0ABgAPABsADwAdABsADwATAB0AEgATAA8ACAAPAAYACAASAA8A"),
+"lods": [0.0715542, PackedByteArray("AAABAAIAAwAAAAIAAAAEAAEAAwAFAAAABQAEAAAABAAGAAEABQAHAAQABwAIAAQABAAIAAYACQAHAAUAAgABAAoAAQAGAAsAAQALAAoABgAMAAsACgALAA0ACwAOAA0ACwAMAA4ADQAOAAgABgAPAAwACAAPAAYACgANABAAEAANAAgAEAAIAAcACQAQAAcAEQAKABAAEQAQAAkAAgAKABEACAASAA8ACAAOABIAEwACABEAEgATAA8AAwACABMADgADABIAEgADABMADgAUAAMADAAUAA4AFAAFAAMAFAAJAAUADAAVABQAFQAJABQADwAVAAwADwATABUAFQARAAkAEwARABUA")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 30,
+"vertex_data": PackedByteArray("//84gOx/AACnxEf7lR8AAI3Q/XwAAAAAusT1BFbgAAAz6LL9bX8AAJzQSYPn/wAAb7GTzLRTAACyxP//Ud8AALvBsM2lfwAAcS8Bg///AADDF1X9jH8AAD4+dc24fwAAQz5OMlmAAACLTpHOqasAAI9OazNKrAAAc7FtMVVUAABPO8H/ZN8AAAAAxn8RgAAAwMGJMkaAAACvxD0AmiAAAFc7twRp4AAAyxdMApGAAABEOwn7qB8AADvoqQJygAAAhU5nzMJTAAB0sb3Om6sAAHmxlzM8rAAAik5BMWNUAABiL7V8FwAAAEw7AACtIAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_x04tv"]
+resource_name = "ChainLink_Torus_001"
+_surfaces = [{
+"aabb": AABB(-0.197269, -0.051436, -0.126608, 0.394538, 0.102872, 0.253216),
+"attribute_data": PackedByteArray("/78ys1TVmZlU1TKz//+Zmf//MrP/v5mZqqoys6qqmZlUlTKzVJWZmf9/MrP/f5mZ/7+ZmVTV/39U1ZmZ////f///mZn/v/9/qqqZmVSVmZlUlf9//3+Zmf9//3//v///VNVl5lTV////v2Xm/79l5lTVzMxU1WXm///MzP//ZeaqqszMVJVl5lSVzMz/f2Xm/3/MzKqqzMxU1TKzVNXMzP//MrP//8zM/78ys6qqMrNUlczMVJUys/9/zMz/fzKzVNX/////Zeb/////VNVl5v9///9UlWXmVJX///9/ZeZUlf//VJVl5v+/////v2XmVNX/f1TVmZlU1czMVNVl5v+/zMz/v8zMVNUys6nqmZmp6jKzVNWZmanq/3+p6pmZqepl5qnq//+p6szMqepl5lTVzMyp6jKzqerMzFTVMrOp6jKzqeqZmanqmZmp6v9/qer//6nqZeap6mXmqerMzKnqzMyp6jKzVJWZmVSVMrNUlczMVJVl5lSVMrNUlczMVJWZmaqq/39Ulf9/qqpl5qqq//+qqmXmqqoys/+/mZn/vzKzqqqZmaqqmZn/v/9//7+Zmaqq/3+qqv//qqpl5qqqZeb/v8zM/79l5qqqzMyqqszM/78ys/+/zMyqqjKz"),
+"format": 34896613399,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAAAFAAEADAA8AD0ADAARADwAFwAYABkAFwAaABgAGwA+AD8AGwBAAD4AQQAmACcAQQAqACYAQgBDAEQAQgBFAEMADgBGAEcADgANAEYAMABIAEkAMAAzAEgAHQBKAEsAHQAcAEoATABNAE4ATABPAE0AUAADAAQAUABRAAMAUgAPABAAUgBTAA8AVAAxADIAVABVADEAVgAeAB8AVgBXAB4AWAAoACkAWABZACgACgBaAFsACgALAFoAFQAUABMAFQAWABQANAA1ADYANAA3ADUAIwBcAF0AIwAkAFwALgBeAF8ALgAvAF4ACAAHAAYACAAJAAcAYABhABIAYABiAGEAOABjAGQAOAA5AGMAIQAgAGUAIQAiACAALAArACUALAAtACsAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgA7ADoAbgBvADsAcABxAHIAcABzAHEAdAB1AHYAdAB3AHUA"),
+"lods": [0.0715542, PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAAFAAEABgAFAAAABgAHAAUACAAHAAYACAAJAAcACgAJAAgACgALAAkADAANAA4ADgANAA8ADgAPABAADAARAA0AEgARAAwAEwARABIAEwAUABEAFQAUABMAFQAWABQAFwAYABkAFwAaABgAGwAcAB0AHQAcAB4AHQAeAB8AGwAgABwAIQAgABsAIQAiACAAIwAiACEAIwAkACIAJQAmACcAJwAmACgAJwAoACkAJQAqACYAJQArACoALAArACUALAAtACsALgAtACwALgAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOgA5ADsA")],
+"material": SubResource("StandardMaterial3D_8q3bv"),
+"primitive": 3,
+"uv_scale": Vector4(2, 2, 0, 0),
+"vertex_count": 120,
+"vertex_data": PackedByteArray("//84gOx/PtenxEf7lR8+143Q/XwAAD7XwxdV/Yx/NNcAAMZ/EYA01zPosv1tfz7XnNBJg+f/SZeyxP//Ud9Jl3EvAYP//0mXTzvB/2TfSZcAAMZ/EYAQsMMXVf2MfxCwM+iy/W1/qehvsZPMtFP5/6fER/uVH/n/Pj51zbh/nujDF1X9jH+e6LvBsM2lf6nossT//1HfB89PO8H/ZN9J1otOkc6pq0nWwxdV/Yx/SdY+PnXNuH9J1rvBsM2lf8b/c7FtMVVUxv9vsZPMtFPG/8DBiTJGgMb/wMGJMkaASOivxD0AmiD//3OxbTFVVP//yxdMApGATOhDPk4yWYBM6LrE9QRW4DbOj05rM0qsNs5XO7cEaeA2zkM+TjJZgKPVyxdMApGAo9W6xPUEVuB5lo3Q/XwAABrXr8Q9AJogGtcAAMZ/EYAW18sXTAKRgBbX//84gOx/Gtec0EmD5/95llc7twRp4HmWcS8Bg///eZbLF0wCkYC4rwAAxn8RgLivb7GTzLRT+f9DPk4yWYDP/z4+dc24f87/c7FtMVVU+f8+PnXNuH+n/49OazNKrKf/i06Rzqmrp/9DPk4yWYCn/4tOkc6pq5b/j05rM0qslv+7wbDNpX+i/8DBiTJGgKL/b7GTzLRTqeinxEf7lR+p6K/EPQCaIEjoc7FtMVVUSOg76KkCcoBI6DvoqQJygBrXjdD9fAAA//9EOwn7qB///2IvtXwXAP//p8RH+5Uf//+FTmfMwlP5/0Q7CfuoH/n/ik5BMWNU+f+FTmfMwlP5/0w7AACtIP//ik5BMWNU//+vxD0AmiD//2IvtXwXAP//TDsAAK0g//+N0P18AAD//2IvtXwXADTXRDsJ+6gfNNdEOwn7qB+e6IVOZ8zCU57ohU5nzMJTz/+KTkExY1TP/4pOQTFjVEzoTDsAAK0gTOhMOwAArSAW12IvtXwXABbXTzvB/2TfELBxLwGD//8QsFc7twRp4KPVj05rM0qso9VxLwGD//+4r1c7twRp4LivTzvB/2TfB890sb3Om6sHz4tOkc6pqwfPebGXMzyslv90sb3Om6uW/3mxlzM8rDbOnNBJg+f/GbAz6LL9bX8ZsP//OIDsfxmwssT//1HfGbCyxP//Ud9Q1rvBsM2lf1DWM+iy/W1/UNZ0sb3Om6tQ1nSxvc6bq6L/ebGXMzysov95sZczPKyh1TvoqQJygKHVwMGJMkaAodW6xPUEVuCh1brE9QRW4L2v//84gOx/va876KkCcoC9r5zQSYPn/72v36frDt+n6w7fp+sO5Y4n2OWOJ9jfp+sO7//Rf+//0X/v/9F/7//Rf0ikgcdIpIHHt9icIP9/t7T/f7e0nKBKp5ygSqe32Jwg+/8PgNHACJrRwAia0cAImtHACJpOUWSATlFkgE5RZIBOUWSAhl8jWQOA8ksDgPJL1CZ939Qmfd8MAPN/DADzfwwA83++GVO/vhlTvxkA0n+hcSkooXEpKMdXlfHHV5XxoXEpKBkA0n8ZANJ/GQDSf6dHvNynR7zcBoCigGoAtS5qALUuBoCigEAAAFFAAABRQAAAUUAAAFEOAPh/DgD4f/8uNoD/LjaAt9icILfYnCCGXyNZhl8jWYZfI1mhcSko+3+/4/t/v+P7f7/j+3+/4/9/t7T/f7e0BoCigAaAooADgPJLA4DyS+Zi9f/mYvX/5mL1/+Zi9f/ljifY5Y4n2JygSqecoEqnagC1LmoAtS7UJn3f1CZ938dXlfHHV5XxSKSBx0ikgce+GVO/vhlTv6dHvNynR7zc+/8PgPv/D4D7/w+ADgD4fw4A+H8MAPN/h7hGJIe4RiSHuEYkh7hGJPvlzkD75c5A++XOQPvlzkD/LjaA/y42gF0/NmZdPzZmXT82Zl0/NmbFXEY4xVxGOMVcRjjFXEY4")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vgwr8")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d6rrl"]
+size = Vector3(0.226563, 0.0913086, 0.0654297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_thi7j"]
+size = Vector3(0.109329, 0.0791016, 0.0546875)
+
+[node name="PhysicsChainLong" type="Node3D"]
+script = ExtResource("1_wsxdp")
+chain_shader_material = ExtResource("1_5t3d6")
+
+[node name="ChainLink" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0198478, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_5t3d6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337079, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink3"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.160911, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink2"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.513214, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink4"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink5" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693225, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink5"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink6" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05015, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink6"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink7" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.873984, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink7"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink8" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.22629, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink8"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink9" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4084, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink9"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink10" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.76533, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink10"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink11" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.58916, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink11"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink12" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.94146, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink12"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink13" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12147, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink13"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink14" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4784, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink14"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink15" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.30223, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink15"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink16" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.65453, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink16"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink17" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84249, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink17"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink18" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.19942, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink18"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink19" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3.02325, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink19"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink20" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3.37555, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink20"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink20"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink20"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink20"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink20"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink21" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55556, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink21"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink21"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink21"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink21"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink21"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink22" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91249, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink22"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink22"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink22"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink22"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink22"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink23" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3.73632, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink23"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink23"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink23"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink23"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink23"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink24" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.08863, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink24"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink24"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink24"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink24"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink24"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink25" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.27074, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink25"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink25"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink25"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink25"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink25"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink25"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink25"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink26" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.62767, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink26"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink26"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink26"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink26"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink26"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink26"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink26"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink27" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.4515, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink27"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink27"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink27"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink27"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink27"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink28" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.8038, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink28"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink28"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink28"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink28"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink28"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink28"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink28"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink29" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98381, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink29"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink29"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink29"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink29"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink29"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink30" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.34074, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink30"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink30"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink30"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink30"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink30"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink31" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5.16457, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink31"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink31"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink31"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink31"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink31"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink32" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5.51687, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink32"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink32"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink32"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink32"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink32"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink33" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69696, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink33"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink33"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink33"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink33"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink33"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink34" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.05389, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink34"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink34"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink34"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink34"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink34"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink35" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5.87772, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink35"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink35"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink35"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink35"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink35"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink36" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.23002, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink36"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink36"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink36"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink36"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink36"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink36"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink36"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink37" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41003, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink37"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink37"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink37"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink37"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink37"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink37"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink37"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink38" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.76696, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink38"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink38"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink38"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink38"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink38"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink38"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink38"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink39" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.59079, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink39"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink39"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink39"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink39"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink39"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink39"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink39"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink40" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.9431, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink40"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink40"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink40"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink40"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink40"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink40"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink40"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink41" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12521, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink41"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink41"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink41"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink41"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink41"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink41"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink41"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink42" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.48214, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink42"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink42"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink42"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink42"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink42"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink42"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink42"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink43" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.30597, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink43"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink43"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink43"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink43"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink43"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink43"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink43"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink44" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.65827, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink44"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink44"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink44"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink44"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink44"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink44"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink44"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink45" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.83828, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink45"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink45"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink45"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink45"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink45"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink45"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink45"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink46" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.19521, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink46"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink46"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink46"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink46"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink46"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink46"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink46"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink47" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -8.01904, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink47"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink47"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink47"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink47"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink47"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink47"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink47"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink48" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -8.37134, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink48"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink48"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink48"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink48"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink48"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink48"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink48"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink49" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5593, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink49"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink49"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink49"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink49"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink49"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink49"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink49"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink50" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.91623, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink50"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink50"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink50"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink50"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink50"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink50"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink50"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink51" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -8.74006, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink51"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink51"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink51"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink51"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink51"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink51"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink51"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink52" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -9.09236, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink52"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink52"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink52"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink52"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink52"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink52"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink52"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink53" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27237, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink53"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink53"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink53"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink53"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink53"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink53"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink53"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink54" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.6293, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink54"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink54"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink54"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink54"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink54"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink54"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink54"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink55" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -9.45313, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink55"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink55"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink55"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink55"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink55"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink55"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink55"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink56" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -9.80544, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink56"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink56"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink56"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink56"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink56"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink56"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink56"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink57" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.98755, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink57"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink57"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink57"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink57"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink57"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink57"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink57"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink58" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3445, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink58"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink58"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink58"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink58"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink58"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink58"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink58"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink59" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -10.1683, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink59"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink59"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink59"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink59"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink59"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink59"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink59"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink60" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -10.5206, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink60"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink60"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink60"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink60"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink60"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink60"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink60"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink61" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7006, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink61"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink61"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink61"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink61"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink61"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink61"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink61"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink62" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0575, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink62"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink62"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink62"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink62"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink62"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink62"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink62"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink63" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -10.8814, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink63"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink63"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink63"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink63"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink63"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink63"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink63"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink64" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -11.2337, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 31.623
+gravity_scale = 0.4
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink64"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink64"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink64"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink64"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink64"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink64"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink64"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.131638, -0.00463867, 0.0283795)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196479, 0, 0)
+node_b = NodePath("../ChainLink")
+
+[node name="PinJoint3D2" type="PinJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4041, 0, 0)
+node_b = NodePath("../ChainLink64")

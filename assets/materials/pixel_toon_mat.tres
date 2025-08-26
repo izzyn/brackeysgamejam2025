@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://blmgqndldqepe"]
+
+[ext_resource type="Shader" uid="uid://bl8qiisrhkmt8" path="res://assets/shaders/toon_shader.gdshader" id="1_240bi"]
+[ext_resource type="Texture2D" uid="uid://c6camt3ouyprt" path="res://assets/textures/environment/stonetileDiffuse.png" id="2_nffhn"]
+[ext_resource type="Texture2D" uid="uid://cowhlxelhdsr" path="res://assets/textures/environment/stonetileAO.bmp" id="3_nffhn"]
+[ext_resource type="Texture2D" uid="uid://8ykhheax7ydm" path="res://assets/textures/environment/stonetileSpec.png" id="3_y7g34"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_240bi")
+shader_parameter/albedo = Color(0.385492, 0.385493, 0.385492, 1)
+shader_parameter/albedo_texture = ExtResource("2_nffhn")
+shader_parameter/clamp_diffuse_to_max = true
+shader_parameter/use_triplanar = true
+shader_parameter/triplanar_scale = 0.02
+shader_parameter/triplanar_sharpness = 1.515
+shader_parameter/use_ambient_occlusion = false
+shader_parameter/ambient_occlusion_map = ExtResource("3_nffhn")
+shader_parameter/cuts = 4
+shader_parameter/wrap = -0.0509999
+shader_parameter/steepness = 1.479
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = true
+shader_parameter/specular_strength = 0.128
+shader_parameter/specular_shininess = 0.0
+shader_parameter/specular_map = ExtResource("3_y7g34")
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 6.488
+shader_parameter/rim_color = Color(0.190762, 0.190762, 0.190762, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01

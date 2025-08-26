@@ -1,0 +1,843 @@
+[gd_scene load_steps=23 format=4 uid="uid://dm0h1khkexvsk"]
+
+[ext_resource type="Material" uid="uid://ck03gpfly2wj1" path="res://assets/materials/chain_mat.tres" id="1_ctul8"]
+[ext_resource type="Material" uid="uid://dvvurfteukngw" path="res://assets/shaders/fire/stylized_fire_shader.tres" id="2_xgb6l"]
+[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visuals/flickering_light.gd" id="3_slrmp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8q3bv"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vgwr8"]
+_surfaces = [{
+"aabb": AABB(-0.197269, -0.051436, -0.126608, 0.394538, 0.102872, 0.253216),
+"format": 34896613377,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAgABABYAAAAEAAEAFwAAAAIABAAGAAEABQAEAAAAAQAGABgAAQAYABYABAAIAAYAAwAAABcAAwAFAAAABQAHAAQABwAIAAQAFAAFAAMACQAHAAUAFAAJAAUACQAQAAcABwAZAAgAEAAZAAcAGQASAAgAEQAQAAkAFQAJABQAFQARAAkADAAVABQAEQAKABAAEAANABkACgANABAADQAaABkAGQAaABIACgALAA0AGgAXABIAGgADABcADQAOABoADgADABoADgAUAAMACwAOAA0ADAAUAA4ACwAMAA4AEgAXABMAGAAMAAsAFwACABMAFgAYAAsAFgALAAoAGAAbAAwAAgAWABwAHAAWAAoAEwACABwAHAAKABEAGwAVAAwABgAbABgAHQARABUAHQAcABEAGwAdABUAEwAcAB0ABgAPABsADwAdABsADwATAB0AEgATAA8ACAAPAAYACAASAA8A"),
+"lods": [0.0715542, PackedByteArray("AAABAAIAAwAAAAIAAAAEAAEAAwAFAAAABQAEAAAABAAGAAEABQAHAAQABwAIAAQABAAIAAYACQAHAAUAAgABAAoAAQAGAAsAAQALAAoABgAMAAsACgALAA0ACwAOAA0ACwAMAA4ADQAOAAgABgAPAAwACAAPAAYACgANABAAEAANAAgAEAAIAAcACQAQAAcAEQAKABAAEQAQAAkAAgAKABEACAASAA8ACAAOABIAEwACABEAEgATAA8AAwACABMADgADABIAEgADABMADgAUAAMADAAUAA4AFAAFAAMAFAAJAAUADAAVABQAFQAJABQADwAVAAwADwATABUAFQARAAkAEwARABUA")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 30,
+"vertex_data": PackedByteArray("//84gOx/AACnxEf7lR8AAI3Q/XwAAAAAusT1BFbgAAAz6LL9bX8AAJzQSYPn/wAAb7GTzLRTAACyxP//Ud8AALvBsM2lfwAAcS8Bg///AADDF1X9jH8AAD4+dc24fwAAQz5OMlmAAACLTpHOqasAAI9OazNKrAAAc7FtMVVUAABPO8H/ZN8AAAAAxn8RgAAAwMGJMkaAAACvxD0AmiAAAFc7twRp4AAAyxdMApGAAABEOwn7qB8AADvoqQJygAAAhU5nzMJTAAB0sb3Om6sAAHmxlzM8rAAAik5BMWNUAABiL7V8FwAAAEw7AACtIAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_x04tv"]
+resource_name = "ChainLink_Torus_001"
+_surfaces = [{
+"aabb": AABB(-0.197269, -0.051436, -0.126608, 0.394538, 0.102872, 0.253216),
+"attribute_data": PackedByteArray("/78ys1TVmZlU1TKz//+Zmf//MrP/v5mZqqoys6qqmZlUlTKzVJWZmf9/MrP/f5mZ/7+ZmVTV/39U1ZmZ////f///mZn/v/9/qqqZmVSVmZlUlf9//3+Zmf9//3//v///VNVl5lTV////v2Xm/79l5lTVzMxU1WXm///MzP//ZeaqqszMVJVl5lSVzMz/f2Xm/3/MzKqqzMxU1TKzVNXMzP//MrP//8zM/78ys6qqMrNUlczMVJUys/9/zMz/fzKzVNX/////Zeb/////VNVl5v9///9UlWXmVJX///9/ZeZUlf//VJVl5v+/////v2XmVNX/f1TVmZlU1czMVNVl5v+/zMz/v8zMVNUys6nqmZmp6jKzVNWZmanq/3+p6pmZqepl5qnq//+p6szMqepl5lTVzMyp6jKzqerMzFTVMrOp6jKzqeqZmanqmZmp6v9/qer//6nqZeap6mXmqerMzKnqzMyp6jKzVJWZmVSVMrNUlczMVJVl5lSVMrNUlczMVJWZmaqq/39Ulf9/qqpl5qqq//+qqmXmqqoys/+/mZn/vzKzqqqZmaqqmZn/v/9//7+Zmaqq/3+qqv//qqpl5qqqZeb/v8zM/79l5qqqzMyqqszM/78ys/+/zMyqqjKz"),
+"format": 34896613399,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAAAFAAEADAA8AD0ADAARADwAFwAYABkAFwAaABgAGwA+AD8AGwBAAD4AQQAmACcAQQAqACYAQgBDAEQAQgBFAEMADgBGAEcADgANAEYAMABIAEkAMAAzAEgAHQBKAEsAHQAcAEoATABNAE4ATABPAE0AUAADAAQAUABRAAMAUgAPABAAUgBTAA8AVAAxADIAVABVADEAVgAeAB8AVgBXAB4AWAAoACkAWABZACgACgBaAFsACgALAFoAFQAUABMAFQAWABQANAA1ADYANAA3ADUAIwBcAF0AIwAkAFwALgBeAF8ALgAvAF4ACAAHAAYACAAJAAcAYABhABIAYABiAGEAOABjAGQAOAA5AGMAIQAgAGUAIQAiACAALAArACUALAAtACsAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgA7ADoAbgBvADsAcABxAHIAcABzAHEAdAB1AHYAdAB3AHUA"),
+"lods": [0.0715542, PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAAFAAEABgAFAAAABgAHAAUACAAHAAYACAAJAAcACgAJAAgACgALAAkADAANAA4ADgANAA8ADgAPABAADAARAA0AEgARAAwAEwARABIAEwAUABEAFQAUABMAFQAWABQAFwAYABkAFwAaABgAGwAcAB0AHQAcAB4AHQAeAB8AGwAgABwAIQAgABsAIQAiACAAIwAiACEAIwAkACIAJQAmACcAJwAmACgAJwAoACkAJQAqACYAJQArACoALAArACUALAAtACsALgAtACwALgAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOgA5ADsA")],
+"material": SubResource("StandardMaterial3D_8q3bv"),
+"primitive": 3,
+"uv_scale": Vector4(2, 2, 0, 0),
+"vertex_count": 120,
+"vertex_data": PackedByteArray("//84gOx/PtenxEf7lR8+143Q/XwAAD7XwxdV/Yx/NNcAAMZ/EYA01zPosv1tfz7XnNBJg+f/SZeyxP//Ud9Jl3EvAYP//0mXTzvB/2TfSZcAAMZ/EYAQsMMXVf2MfxCwM+iy/W1/qehvsZPMtFP5/6fER/uVH/n/Pj51zbh/nujDF1X9jH+e6LvBsM2lf6nossT//1HfB89PO8H/ZN9J1otOkc6pq0nWwxdV/Yx/SdY+PnXNuH9J1rvBsM2lf8b/c7FtMVVUxv9vsZPMtFPG/8DBiTJGgMb/wMGJMkaASOivxD0AmiD//3OxbTFVVP//yxdMApGATOhDPk4yWYBM6LrE9QRW4DbOj05rM0qsNs5XO7cEaeA2zkM+TjJZgKPVyxdMApGAo9W6xPUEVuB5lo3Q/XwAABrXr8Q9AJogGtcAAMZ/EYAW18sXTAKRgBbX//84gOx/Gtec0EmD5/95llc7twRp4HmWcS8Bg///eZbLF0wCkYC4rwAAxn8RgLivb7GTzLRT+f9DPk4yWYDP/z4+dc24f87/c7FtMVVU+f8+PnXNuH+n/49OazNKrKf/i06Rzqmrp/9DPk4yWYCn/4tOkc6pq5b/j05rM0qslv+7wbDNpX+i/8DBiTJGgKL/b7GTzLRTqeinxEf7lR+p6K/EPQCaIEjoc7FtMVVUSOg76KkCcoBI6DvoqQJygBrXjdD9fAAA//9EOwn7qB///2IvtXwXAP//p8RH+5Uf//+FTmfMwlP5/0Q7CfuoH/n/ik5BMWNU+f+FTmfMwlP5/0w7AACtIP//ik5BMWNU//+vxD0AmiD//2IvtXwXAP//TDsAAK0g//+N0P18AAD//2IvtXwXADTXRDsJ+6gfNNdEOwn7qB+e6IVOZ8zCU57ohU5nzMJTz/+KTkExY1TP/4pOQTFjVEzoTDsAAK0gTOhMOwAArSAW12IvtXwXABbXTzvB/2TfELBxLwGD//8QsFc7twRp4KPVj05rM0qso9VxLwGD//+4r1c7twRp4LivTzvB/2TfB890sb3Om6sHz4tOkc6pqwfPebGXMzyslv90sb3Om6uW/3mxlzM8rDbOnNBJg+f/GbAz6LL9bX8ZsP//OIDsfxmwssT//1HfGbCyxP//Ud9Q1rvBsM2lf1DWM+iy/W1/UNZ0sb3Om6tQ1nSxvc6bq6L/ebGXMzysov95sZczPKyh1TvoqQJygKHVwMGJMkaAodW6xPUEVuCh1brE9QRW4L2v//84gOx/va876KkCcoC9r5zQSYPn/72v36frDt+n6w7fp+sO5Y4n2OWOJ9jfp+sO7//Rf+//0X/v/9F/7//Rf0ikgcdIpIHHt9icIP9/t7T/f7e0nKBKp5ygSqe32Jwg+/8PgNHACJrRwAia0cAImtHACJpOUWSATlFkgE5RZIBOUWSAhl8jWQOA8ksDgPJL1CZ939Qmfd8MAPN/DADzfwwA83++GVO/vhlTvxkA0n+hcSkooXEpKMdXlfHHV5XxoXEpKBkA0n8ZANJ/GQDSf6dHvNynR7zcBoCigGoAtS5qALUuBoCigEAAAFFAAABRQAAAUUAAAFEOAPh/DgD4f/8uNoD/LjaAt9icILfYnCCGXyNZhl8jWYZfI1mhcSko+3+/4/t/v+P7f7/j+3+/4/9/t7T/f7e0BoCigAaAooADgPJLA4DyS+Zi9f/mYvX/5mL1/+Zi9f/ljifY5Y4n2JygSqecoEqnagC1LmoAtS7UJn3f1CZ938dXlfHHV5XxSKSBx0ikgce+GVO/vhlTv6dHvNynR7zc+/8PgPv/D4D7/w+ADgD4fw4A+H8MAPN/h7hGJIe4RiSHuEYkh7hGJPvlzkD75c5A++XOQPvlzkD/LjaA/y42gF0/NmZdPzZmXT82Zl0/NmbFXEY4xVxGOMVcRjjFXEY4")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vgwr8")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d6rrl"]
+size = Vector3(0.226563, 0.0913086, 0.0654297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_thi7j"]
+size = Vector3(0.0935669, 0.0791016, 0.0546875)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcyxp"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o7t7s"]
+_surfaces = [{
+"aabb": AABB(-1.05694, -1.08034, -1.05694, 2.11388, 5.04376, 2.11388),
+"format": 34359742465,
+"index_count": 720,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAAFAAEABgAFAAAABAAHAAYABgAHAAUABAADAAcABQAIAAEAAQAJAAMAAQAIAAkAAwAKAAcAAwAJAAoABwALAAUABQALAAgABwAKAAsACAAMAAkACQANAAoACQAMAA0ACgAOAAsACgANAA4ACwAPAAgACAAPAAwACwAOAA8ADAAQAA0ADQARAA4ADQAQABEADgASAA8ADgARABIADwATAAwADAATABAADwASABMAFAARABAAFQASABEAFQARABQAFgATABIAFgASABUAFwAQABMAFwATABYAFAAQABcAFgAYABcAFAAZABUAFQAaABYAFgAaABgAFQAZABoAFwAYABsAFwAbABQAGwAYABoAFAAbABkAGwAaABkAHAAdAB4AHgAfABwAHAAgAB0AHgAhAB8AHAAfACIAIwAgABwAHAAiACMAIwAkACAAJAAgACAAIwAiACUAJAAkACAAJgAkACMAIwAlACYAJgAhAB4AJgAlACEAHgAnACYAJgAnACQAHgAdACcAHQAoACcAJwAoACkAKQAoACoAHQAqACgAKQAqACsALAArACoALAAqAB0ALQApACsAJwApAC0ALQArACwALgAnAB0ALwAnAC0AMAAnAC4AMAAtACcALgAxADAAMgAnAC8AMgAkACcALwAiADIAMwAtADAAMwAsAC0AMAA0ADMAMAAxADQANQAsADMALgAdADUANQAdACwANQAlAC4ALgAlADEAMwAhADUANQAhACUAMwA0ACEALwAlACIANgAlAC8ANgAxACUALwAtADYANgAtADcAOAAxADYANgA3ADgAOAA5ADEAMgAiADkAMgA5ADgAOAAkADIAOAA3ACQANwA3ACQANwAkACQAOgAxADkAOwAxADoAOwA0ADEAOgAsADsAOgAtACwAPAAtADoAOgA5ADwAPAA3AC0APAA5AD0AOwAsAD4APgA3ADcAPwA0ADsAOwA+AD8APwA3ADwAPAA9AD8APwA9ADQAPwA+ADcAPgA+ADcAQAA9ADkAQQA+ACwAQAA5AEIAQgA5ACIAQgA+AEAAQgA3AD4AQQAsAEMAQwAsAB0AQwA9AEEAQwA0AD0AQwAdAEQARAA0AEMARAAhADQARAAdACAARQAhAEQARAAgAEUARQAfACEAQQA9AB8AQQAfAEUARQA+AEEARQAgAD4ARgAfAD0ARgA9AEAAIAA+AD4ARwAfAEYARwAiAB8AQAAgAEYAQAA+ACAAIAAgAD4AQABIAEYAQgAiAEcAQABJAEgAQgBJAEAARgBIAEoASQBKAEgARgBKAEcASQBLAEoAQgBLAEkARwBKAEsARwBLAEIARwA3AEIARgAkAEcARwAkADcARgAgACQANwBMACQAJABNACAAJABMAE0ANwBOAEwAPgBOADcAIABPAD4APgBPAE4AIABNAE8ATgBQAEwATABRAE0ATABQAFEATQBSAE8ATQBRAFIATwBTAE4ATgBTAFAATwBSAFMAUABUAFEAUQBVAFIAUQBUAFUAUgBWAFMAUgBVAFYAUwBXAFAAUABXAFQAUwBWAFcAVQBYAFYAVwBZAFQAVABaAFUAVQBaAFgAVABZAFoAVgBYAFsAVgBbAFcAWgBbAFgAVwBbAFkAWgBZAFsAXABdAF4AXgBdAF8AXABgAF0AYQBcAF4AYABiAF0AYwBgAFwAXQBiAGQAXQBkAF8AYABlAGIAZgBcAGEAZgBjAFwAYwBnAGAAZwBlAGAAaABjAGYAYgBoAGQAZABoAGYAZABmAGkAaQBmAGEAXwBkAGkAaQBhAGUAXwBpAGcAZwBpAGUAZQBhAGoAZQBqAGIAYgBqAGgAYQBeAGoAawBfAGcAXgBfAGsAawBnAGMAagBeAGsAaABrAGMAagBrAGgA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 108,
+"vertex_data": PackedByteArray("AACAPwAAgD8AAIC/kFs8v6xF4T+IWzy/AACAvwAAgD8AAIC/kFs8v6xF4T+IWzw/AACAvwAAgD8AAIA/gFs8P6xF4T+IWzy/AACAPwAAgD8AAIA/gFs8P6xF4T+IWzw/9kVqvqxF4T+VRWq+9kVqvqxF4T+VRWo+MkVqPqxF4T+VRWo+MkVqPqxF4T+VRWq+9kVqvm9ZB0CVRWo+MkVqPm9ZB0CVRWo+MkVqPm9ZB0CVRWq+9kVqvm9ZB0CVRWq+PATXPpK1DUBOBNc+PATXPpK1DUBOBNe+XQTXvpK1DUBLBNe+XQTXvpK1DUBLBNc+lJQGP3xYF0CElAa/cpQGv3xYF0CElAa/cpQGv3xYF0CElAY/lJQGP3xYF0CElAY/QgtnPk01MEAnC2c+CAtnvk01MEAnC2e+CAtnvk01MEAnC2c+QgtnPk01MEAnC2e+zG8gvwQJbL8ulgs/JrZxv4FWfj8mtnE/Ajx8v9rpaz9vYmc/ojEnv7D+hr+WMSc/FNwRv4xJcr8I3BE/30mHvwzZgD/fSYc/ojEnv7D+hr+WMSe/zG8gvwQJbL8ulgu/FNwRv4xJcr8I3BG/30mHvwzZgD/fSYe/Ajx8v9rpaz9vYme/JrZxv4FWfj8mtnG/JrZxv694ij8mtnG/JrZxP654ij8mtnG/JrZxv694ij8mtnE/JrZxP654ij8mtnE/JrZxP4BWfj8mtnE/JrZxP4BWfj8mtnG/Dw+Cvxk5ij8PD4K/b2Jnv9rpaz8BPHy/Dw+CPxk5ij8PD4K/30mHPwzZgD/fSYe/OpYLvwQJbL/BbyC/Dw+CPxk5ij8PD4I/30mHPwzZgD/fSYc/Dw+Cvxk5ij8PD4I/bmJnP9rpaz8BPHy//NsRP4xJcr8I3BG/I5YLPwQJbL/BbyC/ijEnP7D+hr+WMSe/ATx8P9rpaz9vYme/ATx8P9rpaz9vYmc/tW8gPwQJbL8ulgu/ijEnP7D+hr+WMSc//NsRP4xJcr8I3BE/tW8gPwQJbL8ulgs/lo0YP65Iir+ijRg/I5YLPwQJbL/BbyA/lo0YP65Iir+ijRi/bmJnP9rpaz8BPHw/b2Jnv9rpaz8BPHw/OpYLvwQJbL/BbyA/r40Yv65Iir+jjRg/r40Yv65Iir+jjRi/r40YvzWvhb+jjRg/lo0YPzWvhb+ijRg/r40YvzWvhb+jjRi/lo0YPzWvhb+ijRi/FNwRvwM1g78I3BG/FNwRvwM1g78I3BE//NsRPwM1g78I3BG//NsRPwM1g78I3BE/wBBEvgM1g79bEES+wBBEvgM1g79bEEQ+9g9EPgM1g79bEEQ+9g9EPgM1g79bEES+wBBEvnUwcL9bEEQ+9g9EPnUwcL9bEEQ+9g9EPnUwcL9bEES+wBBEvnUwcL9bEES++8ycPjAgRb8lzZy+T82cvjAgRb8lzZw++8ycPjAgRb8lzZw+T82cvjAgRb8lzZy+O0B4PzOBQECLiAi8PpJoPJltcUD+KDs+PpJoPLGofUCLiAi8Qw9AvzOBQED+KDs+3FNHPzOBQED+KDs+3FNHPzOBQEAQOky+PpJoPIAyZUCLiAi8PpJoPLRZA0CLiAi84CIPvzOBQECLiAi8emcWPzOBQECLiAi8PpJoPNGUD0AQOky+PpJoPNGUD0D+KDs+Qw9AvzOBQEAQOky+PpJoPOrPG0CLiAi8PpJoPJltcUAQOky+tvtwvzOBQECLiAi8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_72d1b"]
+resource_name = "hanging_lantern_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1.05694, -1.08034, -1.05694, 2.11388, 5.04376, 2.11388),
+"attribute_data": PackedByteArray("AAAgPwAAAD8AACA/AABAPwAAID8AAEA/AAAgPwAAAD8AACA/AAAAAAAAID8AAIA+AAAgPwAAgD4AACA/AAAAAAAAID8AAAA/AAAgPwAAAD8AACA/AABAPwAAID8AAEA/AAAgPwAAgD8AACA/AACAPwAAID8AAIA+AAAgPwAAAD8AACA/AAAAPwAAID8AAIA+AAAgPwAAQD8AACA/AACAPwAAID8AAIA/AAAgPwAAQD8AACA/AAAAAAAAID8AAIA+AAAgPwAAgD4AACA/AAAAAAAAwD4AAIA/AAAgPwAAgD8AACA/AACAPwAAwD4AAIA/AAAgPwAAgD8AAMA+AACAPwAAwD4AAIA/AAAgPwAAgD8AACA/AACAPwAAID8AAEA/AAAgPwAAQD8AACA/AACAPwAAID8AAEA/AAAgPwAAgD8AACA/AACAPwAAID8AAEA/AAAgPwAAQD8AACA/AACAPwAAID8AAIA/AAAgPwAAQD8AACA/AACAPwAAID8AAEA/AAAgPwAAQD8AACA/AACAPwAAID8AAEA/AADAPgAAQD8AAMA+AABAPwAAID8AAEA/AADAPgAAQD8AACA/AABAPwAAID8AAEA/AADAPgAAQD8AAMA+AABAPwAAwD4AAIA/AADAPgAAgD8AAMA+AABAPwAAwD4AAIA/AADAPgAAQD8AAMA+AABAPwAAwD4AAIA/AADAPgAAgD8AAMA+AABAPwAAwD4AAEA/AADAPgAAgD8AAMA+AABAPwAAwD4AAIA/AADAPgAAgD8AAMA+AABAPwAAwD4AAEA/AAAgPwAAQD8AACA/AABAPwAAwD4AAEA/AAAgPwAAQD8AAMA+AABAPwAAwD4AAEA/AAAgPwAAQD8AACA/AABAPwAAID8AAAA/AAAgPwAAAD8AACA/AABAPwAAID8AAAA/AAAgPwAAQD8AACA/AABAPwAAID8AAAA/AAAgPwAAAD8AACA/AABAPwAAID8AAEA/AAAgPwAAAD8AACA/AABAPwAAID8AAAA/AAAgPwAAAD8AACA/AABAPwAAID8AAAA/AADAPgAAAD8AAMA+AAAAPwAAID8AAAA/AADAPgAAAD8AACA/AAAAPwAAID8AAAA/AADAPgAAAD8AAMA+AAAAPwAAwD4AAEA/AADAPgAAQD8AAMA+AAAAPwAAwD4AAEA/AADAPgAAAD8AAMA+AAAAPwAAwD4AAEA/AADAPgAAQD8AAMA+AAAAPwAAwD4AAAA/AADAPgAAQD8AAMA+AAAAPwAAwD4AAEA/AADAPgAAQD8AAMA+AAAAPwAAwD4AAAA/AAAgPwAAAD8AACA/AAAAPwAAwD4AAAA/AAAgPwAAAD8AAMA+AAAAPwAAwD4AAAA/AAAgPwAAAD8AACA/AAAAPwAAID8AAIA+AAAgPwAAgD4AACA/AAAAPwAAID8AAIA+AAAgPwAAAD8AACA/AAAAPwAAID8AAIA+AAAgPwAAgD4AACA/AAAAPwAAID8AAAA/AAAgPwAAgD4AACA/AAAAPwAAID8AAIA+AAAgPwAAgD4AACA/AAAAPwAAID8AAIA+AADAPgAAgD4AAMA+AACAPgAAID8AAIA+AADAPgAAgD4AACA/AACAPgAAID8AAIA+AADAPgAAgD4AAMA+AACAPgAAwD4AAAA/AADAPgAAAD8AAMA+AACAPgAAwD4AAAA/AADAPgAAgD4AAMA+AACAPgAAwD4AAAA/AADAPgAAAD8AAMA+AACAPgAAwD4AAIA+AADAPgAAAD8AAMA+AACAPgAAwD4AAAA/AADAPgAAAD8AAMA+AACAPgAAwD4AAIA+AAAgPwAAgD4AACA/AACAPgAAwD4AAIA+AAAgPwAAgD4AAMA+AACAPgAAwD4AAIA+AAAgPwAAgD4AACA/AACAPgAAID8AAAAAAAAgPwAAAAAAACA/AACAPgAAID8AAAAAAAAgPwAAgD4AACA/AACAPgAAID8AAAAAAAAgPwAAAAAAACA/AACAPgAAID8AAIA+AAAgPwAAAAAAACA/AACAPgAAID8AAAAAAAAgPwAAAAAAACA/AACAPgAAID8AAAAAAADAPgAAAAAAAMA+AAAAAAAAID8AAAAAAADAPgAAAAAAACA/AAAAAAAAID8AAAAAAADAPgAAAAAAAMA+AAAAAAAAwD4AAIA+AADAPgAAgD4AAMA+AAAAAAAAwD4AAIA+AADAPgAAAAAAAMA+AAAAAAAAwD4AAIA+AADAPgAAgD4AAMA+AAAAAAAAwD4AAAAAAADAPgAAgD4AAMA+AAAAAAAAwD4AAIA+AADAPgAAgD4AAMA+AAAAAAAAID8AAIA/AAAgPwAAQD8AACA/AABAPwAAID8AAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AACA/AACAPgAAID8AAAAAAAAgPwAAAAAAACA/AACAPgAAID8AAAA/AAAgPwAAgD4AACA/AACAPgAAID8AAAA/AAAgPwAAQD8AACA/AAAAPwAAID8AAAA/AAAgPwAAQD8AAMA+AACAPgAAwD4AAAA/AADAPgAAAD8AAMA+AABAPwAAwD4AAIA+AADAPgAAAAAAAMA+AAAAAAAAwD4AAEA/AADAPgAAgD8AAMA+AACAPwAAwD4AAIA+AADAPgAAAD8AAMA+AAAAPwAAwD4AAIA+AADAPgAAAAAAAMA+AACAPgAAwD4AAIA+AADAPgAAAAAAAMA+AAAAPwAAwD4AAAA/AADAPgAAQD8AAMA+AABAPwAAwD4AAIA/AADAPgAAgD8AAMA+AABAPwAAwD4AAIA/AADAPgAAgD8AAMA+AABAPwAAwD4AAAAAAADAPgAAgD4AAMA+AACAPgAAwD4AAAAAAADAPgAAAD8AAMA+AABAPwAAwD4AAEA/AADAPgAAAD8AAMA+AACAPwAAwD4AAEA/AADAPgAAQD8AAMA+AACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AADAPgAAAD8AAMA+AACAPgAAwD4AAIA+AADAPgAAAD8AAMA+AABAPwAAwD4AAAA/AADAPgAAAD8AAMA+AABAPwAAwD4AAIA+AADAPgAAAAAAAMA+AAAAAAAAwD4AAIA+AAAgPwAAAD8AACA/AABAPwAAID8AAEA/AAAgPwAAAD8AACA/AACAPgAAID8AAAA/AAAgPwAAAD8AACA/AACAPgAAID8AAEA/AAAgPwAAgD8AACA/AACAPwAAID8AAEA/AAAgPwAAAAAAACA/AACAPgAAID8AAIA+AAAgPwAAAAAAACA/AAAAAAAAID8AAIA+AAAgPwAAgD4AACA/AAAAAAAAID8AAAAAAAAgPwAAgD4AACA/AgCAPgAAID8AAAAAAAAgPwAAAD8AACA/AABAPwAAID8AAEA/AAAgPwAAAD8AACA/AACAPgAAID8AAAA/AAAgPwAAAD8AACA/AACAPgAAID8AAAA/AABgPwAAgD4AAGA/AAAAPwAAID8AAIA+AAAgPwAAAD8AACA/AABAPwAAID8AAEA/AAAgPwAAAD8AACA/AACAPgAAID8AAAA/AAAgPwAAAD8AACA/AACAPgAAID8AAEA/AAAgPwAAgD8AACA/AACAPwAAID8AAEA/AAAgPwAAgD8AACA/AABAPwAAID8AAEA/AAAgPwAAgD8AACA/AABAPwAAID8AAAA/AAAgPwAAAD8AACA/AABAPwAAID8AAAA/AAAgPwAAgD4AACA/AACAPgAAID8AAAA/AAAgPwIAgD4AACA/AAAAAAAAID8AAAAAAAAgPwAAgD4AACA/AABAPwAAID8AAIA/AAAgPwAAgD8AACA/AABAPwAAAD8AAAA/AABAPwAAgD4AAEA/AAAAPwAAAD8AAIA+AAAAPwAAgD4AAEA/AAAAAAAAQD8AAIA+AAAAPwAAAAAAAAA/AACAPwAAQD8AAEA/AABAPwAAgD8AAAA/AABAPwAAAD8AAEA/AABAPwAAAD8AAEA/AABAPwAAAD8AAAA/AABAPwAAAD8AAIA/AACAPgAAgD8AAAA/AABAPwAAgD4AAEA/AACAPgAAgD8AAAAAAACAPwAAgD4AAEA/AAAAAAAAQD8AAIA/AACAPwAAQD8AAIA/AACAPwAAQD8AAEA/AABAPwAAQD8AAIA/AAAAPwAAgD8AAEA/AABAPwAAAD8AAAAAAAAAPwAAgD4AAIA+AACAPgAAAD8AAAAAAACAPgAAAAAAAIA+AACAPgAAAAAAAIA+AACAPgAAAAAAAAAAAAAAAAAAgD8AAIA+AABAPwAAgD4AAIA/AAAAAAAAQD8AAAAAAABAPwAAgD4AAAA/AACAPgAAQD8AAAAAAAAAPwAAgD4AAAA/AAAAPwAAgD4AAAA/AAAAPwAAgD4AAIA+AACAPgAAgD4AAAA/AAAAAAAAAD8AAIA+AACAPgAAAAAAAIA+AACAPwAAAD8AAEA/AAAAPwAAgD8AAIA+AABAPwAAgD4AAEA/AAAAPwAAAD8AAAA/AABAPwAAgD4AAAA/AADAPgAAAAAAAMA+AACAPgAAwD4AAIA+AADAPgAAAAAAAMA+AACAPgAAwD4AAAA/AADAPgAAAD8AAMA+AACAPgAAwD4AAAA/AADAPgAAQD8AAMA+AABAPwAAwD4AAAA/AADAPgAAgD4AAMA+AAAAPwAAwD4AAAA/AADAPgAAgD4AAMA+AABAPwAAwD4AAIA/AADAPgAAgD8AAMA+AABAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AADAPgAAQD8AAMA+AACAPwAAwD4AAIA/AADAPgAAQD8AAMA+AAAAAAAAwD4AAIA+AADAPgAAgD4AAMA+AAAAAAAAwD4AAAA/AADAPgAAQD8AAMA+AABAPwAAwD4AAAA/"),
+"format": 34359742487,
+"index_count": 720,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUABgAFAAgABgAIAAkACQAIAAoACQAKAAsACwAKAAwACwAMAA0ADgAPABAADgARAA8AEgATABQAEgAVABMAFgAXABgAFgAZABcAGgAbABwAGgAdABsAHgAfACAAHgAhAB8AIgAjACQAIgAlACMAJgAnACgAJgApACcAKgArACwAKgAtACsALgAvADAALgAxAC8AMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsAfgB/AIAAfgCBAH8AggCDAIQAggCFAIMAhgCHAIgAhgCJAIcAigCLAIwAigCNAIsAjgCPAJAAjgCRAI8AkgCTAJQAkgCVAJMAlgCXAJgAlgCZAJcAmgCbAJwAmgCdAJsAngCfAKAAngChAJ8AogCjAKQAogClAKMApgCnAKgApgCpAKcAqgCrAKwAqgCtAKsArgCvALAArgCxAK8AsgCzALQAsgC1ALMAtgC3ALgAtgC5ALcAugC7ALwAugC9ALsAvgC/AMAAvgDBAL8AwgDDAMQAwgDFAMMAxgDHAMgAxgDJAMcAygDLAMwAygDNAMsAzgDPANAAzgDRAM8A0gDTANQA0gDVANMA1gDXANgA1gDZANcA2gDbANwA2gDdANsA3gDfAOAA3gDhAN8A4gDjAOQA4gDlAOMA5gDnAOgA5gDpAOcA6gDrAOwA6gDtAOsA7gDvAPAA8ADvAPEA7gDyAO8A8wDyAO4A8wD0APIA8ADxAPUA9QDxAPYA9QD2APcA+AD5APoA+AD7APkA/AD9AP4A/AD/AP0A/gD9AAAB/gAAAQEBAQEAAQIBAQECAQMBAwECAQQBAwEEAQUBBgEHAQgBBgEJAQcBCgELAQwBCgENAQsBDgEPARABDgERAQ8BEgETARQBEgEVARMBFgEXARgBFgEZARcBGgEbARwBGgEdARsBHgEfASABHgEhAR8BIgEjASQBIgElASMBJgEnASgBJgEpAScBKgErASwBKgEtASsBLgEvATABLgExAS8BMgEzATQBMgE1ATMBNgE3ATgBNgE5ATcBOgE7ATwBOgE9ATsBPgE/AUABPgFBAT8BQgFDAUQBQgFFAUMBRgFHAUgBRgFJAUcBSgFLAUwBSgFNAUsBTgFPAVABTgFRAU8BUgFTAVQBUgFVAVMBVgFXAVgBVgFZAVcBWgFbAVwBWgFdAVsBXgFfAWABXgFhAV8BYgFjAWQBYgFlAWMBZgFnAWgBZgFpAWcBagFrAWwBagFtAWsBbgFvAXABbgFxAW8BcgFzAXQBcgF1AXMBdgF3AXgBdgF5AXcBegF7AXwBegF9AXsBfgF/AYABfgGBAX8BggGDAYQBggGFAYMBhgGHAYgBhgGJAYcBigGLAYwBigGNAYsBjgGPAZABjgGRAY8BkgGTAZQBkgGVAZMBlgGXAZgBlgGZAZcBmgGbAZwBmgGdAZsBngGfAaABngGhAZ8BogGjAaQBogGlAaMBpgGnAagBpgGpAacBqgGrAawBqgGtAasBrgGvAbABrgGxAa8BsgGzAbQBsgG1AbMBtgG3AbgBtgG5AbcBugG7AbwBugG9AbsBvgG/AcABvgHBAb8BwgHDAcQBwgHFAcMBxgHHAcgBxgHJAccBygHLAcwBygHNAcsB"),
+"material": SubResource("StandardMaterial3D_bcyxp"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 462,
+"vertex_data": PackedByteArray("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wBBEvnUwcL9bEES+T82cvjAgRb8lzZw+wBBEvnUwcL9bEEQ+T82cvjAgRb8lzZy+wBBEvnUwcL9bEEQ++8ycPjAgRb8lzZw+9g9EPnUwcL9bEEQ+T82cvjAgRb8lzZw+9g9EPnUwcL9bEES+T82cvjAgRb8lzZy+wBBEvnUwcL9bEES++8ycPjAgRb8lzZy++d7//////7/53v//////v/ne//////+/+d7//////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/neBaH///+/+d4Fof///7/53gWh////v/neBaH///+/BSEFof///78FIQWh////vwUhBaH///+/BSEFof///7//fwWh////P/9/BaH///8//38Fof///z//fwWh////PznrX9v///+/Oetf2////78561/b////vznrX9v///+/8Al+VP///7/wCX5U////v/AJflT///+/8Al+VP///7940XlR////v3jReVH///+/eNF5Uf///7940XlR////v4M6fEX///+/gzp8Rf///7+DOnxF////v4M6fEX///+/2MUluv///7/YxSW6////v9jFJbr///+/2MUluv///7/WLdWt////v9Yt1a3///+/1i3Vrf///7/WLdWt////v56kxZT///8/nqTFlP///z+epMWU////P56kxZT///8/gSsOdv///z+BKw52////P4ErDnb///8/gSsOdv///z9rppLZ////v2umktn///+/a6aS2f///79rppLZ////vz4VPpX///+/PhU+lf///78+FT6V////vz4VPpX///+/F+sXa////78X6xdr////vxfrF2v///+/F+sXa////79SWK0n////v1JYrSf///+/UlitJ////79SWK0n////v5rGxZT///8/msbFlP///z+axsWU////P5rGxZT///8/DvaQIf///78O9pAh////vw72kCH///+/DvaQIf///7//f3lR////P/9/eVH///8//395Uf///z//f3lR////P3vFAAD///+/e8UAAP///797xQAA////v3vFAAD///+//38luv///z//fyW6////P/9/Jbr///8//38luv///z8o0v//////vyjS//////+/KNL//////78o0v//////v2Q5xZT///8/ZDnFlP///z9kOcWU////P2Q5xZT///8/8AmQIf///7/wCZAh////v/AJkCH///+/8AmQIf///7//f5LZ////P/9/ktn///8//3+S2f///z//f5LZ////P8Dq//////+/wOr//////7/A6v//////v8Dq//////+//38Xa////z//fxdr////P/9/F2v///8//38Xa////z+spwAA////v6ynAAD///+/rKcAAP///7+spwAA////v2BbxZT///8/YFvFlP///z9gW8WU////P2BbxZT///8/fdQOdv///z991A52////P33UDnb///8/fdQOdv///z+GLnlR////v4YueVH///+/hi55Uf///7+GLnlR////v3vFfEX///+/e8V8Rf///797xXxF////v3vFfEX///+/Jjoluv///78mOiW6////vyY6Jbr///+/Jjoluv///78o0tWt////vyjS1a3///+/KNLVrf///78o0tWt////v8UUX9v///+/xRRf2////7/FFF/b////v8UUX9v///+/DvZ+VP///78O9n5U////vw72flT///+/DvZ+VP///7+TWZLZ////v5NZktn///+/k1mS2f///7+TWZLZ////v8DqPpX///+/wOo+lf///7/A6j6V////v8DqPpX///+/5xQXa////7/nFBdr////v+cUF2v///+/5xQXa////7+sp60n////v6ynrSf///+/rKetJ////7+sp60n////v8UUZLn///+/xRRkuf///7/FFGS5////v8UUZLn///+/b14Odv///z9vXg52////P29eDnb///8/b14Odv///z940QAA////v3jRAAD///+/eNEAAP///7940QAA////v/9/fEX///8//398Rf///z//f3xF////P/9/fEX///8/2MX//////7/Yxf//////v9jF//////+/2MX//////7//f9Wt////P/9/1a3///8//3/Vrf///z//f9Wt////PznrZLn///+/Oetkuf///78562S5////vznrZLn///+/j6EOdv///z+PoQ52////P4+hDnb///8/j6EOdv///z9rpv//////v2um//////+/a6b//////79rpv//////v/9/PpX///8//38+lf///z//fz6V////P/9/PpX///8/F+sAAP///78X6wAA////vxfrAAD///+/F+sAAP///7//f60n////P/9/rSf///8//3+tJ////z//f60n////P////3////+/////f////7////9/////v////3////+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//////////v/////////+//////////7//////////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+//3//f////z//f/9/////P/9//3////8//3//f////z//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7////9/////v////3////+/////f////7////9/////v/////////+//////////7//////////v/////////+//3//f////z//f/9/////P/9//3////8//3//f////z////9/////v////3////+/////f////7////9/////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+/AAD/f////78AAP9/////vwAA/3////+/AAD/f////7//f/9/////P/9//3////8//3//f////z//f/9/////P/////////+//////////7//////////v/////////+//////////7//////////v/////////+//////////7////9/////v////3////+/////f////7////9/////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+//3//f////z//f/9/////P/9//3////8//3//f////z//f8Yr////P/9/xiv///8//3/GK////z//f8Yr////P/9/x7f///8//3/Ht////z//f8e3////P/9/x7f///8/Nsj//////782yP//////vzbI//////+/Nsj//////782yMe3////vzbIx7f///+/NsjHt////782yMe3////v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+/xqsAAP///7/GqwAA////v8arAAD///+/xqsAAP///7/Gq8Yr////v8arxiv///+/xqvGK////7/Gq8Yr////vzhUxiv///+/OFTGK////784VMYr////vzhUxiv///+/zjQwS////7/ONDBL////v840MEv///+/zjQwS////78wywAA////vzDLAAD///+/MMsAAP///78wywAA////vzDLMEv///+/MMswS////78wyzBL////vzDLMEv///+//38wS////z//fzBL////P/9/MEv///8//38wS////z/IN8e3////v8g3x7f///+/yDfHt////7/IN8e3////v6qqqqr/P//fqqqqqv8//9+qqqqq/z//36qqqqr/P//fVFVUVf8//99UVVRV/z//31RVVFX/P//fVFVUVf8//9+qKqoq/z//36oqqir/P//fqiqqKv8//9+qKqoq/z//31TVVNX/P//fVNVU1f8//99U1VTV/z//31TVVNX/P//fVVWpqv8//59VVamq/z//n1VVqar/P/+fVVWpqv8//5+qqlZVAUD/n6qqVlUBQP+fqqpWVQFA/5+qqlZVAUD/n1XVqyoAQP6fVdWrKgBA/p9V1asqAED+n1XVqyoAQP6fqSpV1f8//5+pKlXV/z//n6kqVdX/P/+fqSpV1f8//59VVVVV/7//n1VVVVX/v/+fVVVVVf+//59VVVVV/7//n6qqqqr/v/+fqqqqqv+//5+qqqqq/7//n6qqqqr/v/+fVNVU1f+//59U1VTV/7//n1TVVNX/v/+fVNVU1f+//5+pKqkq/7//n6kqqSr/v/+fqSqpKv+//5+pKqkq/7//n6mqVVX/v//fqapVVf+//9+pqlVV/7//36mqVVX/v//fVlWqqgDA/t9WVaqqAMD+31ZVqqoAwP7fVlWqqgDA/t+rKlXV/7/+36sqVdX/v/7fqypV1f+//t+rKlXV/7/+31XVqSr/v//fVdWpKv+//99V1akq/7//31XVqSr/v//f/3//f////z//f/9/////P/9//3////8//3//f////z8VzBVM////vxXMFUz///+/FcwVTP///78VzBVM////v/////////+//////////7//////////v/////////+/////f////7////9/////v////3////+/////f////78AAP9/////vwAA/3////+/AAD/f////78AAP9/////v/9///////+//3///////7//f///////v/9///////+/6TMVTP///7/pMxVM////v+kzFUz///+/6TMVTP///7//fxVM////P/9/FUz///8//38VTP///z//fxVM////PxXMAAD///+/FcwAAP///78VzAAA////vxXMAAD///+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o7t7s")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n4uug"]
+size = Vector3(0.426758, 0.759342, 0.418091)
+
+[sub_resource type="Gradient" id="Gradient_ymdgk"]
+colors = PackedColorArray(0.733479, 0.430208, 0, 1, 1, 0, 0.447059, 0)
+
+[sub_resource type="GradientTexture2D" id="3"]
+gradient = SubResource("Gradient_ymdgk")
+width = 128
+
+[sub_resource type="Curve" id="Curve_lswb3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.365019, 0.35828), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6d38h"]
+curve = SubResource("Curve_lswb3")
+
+[sub_resource type="Curve" id="Curve_tca28"]
+_data = [Vector2(0, 0), 0.0, 3.65289, 0, 0, Vector2(0.556561, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="5"]
+width = 128
+curve = SubResource("Curve_tca28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ctul8"]
+lifetime_randomness = 0.25
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.2
+initial_velocity_max = 0.6
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.699998
+linear_accel_max = 0.699998
+scale_min = 0.3
+scale_max = 0.4
+scale_curve = SubResource("5")
+color_ramp = SubResource("3")
+emission_curve = SubResource("CurveTexture_6d38h")
+
+[sub_resource type="QuadMesh" id="QuadMesh_y7juq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ipank"]
+noise_type = 2
+frequency = 0.3026
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_xkvfm"]
+noise = SubResource("FastNoiseLite_ipank")
+
+[node name="PhysicsChainShort" type="Node3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ChainLink" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0198478, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337079, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink3"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink3"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.160911, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink2"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink2"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.513214, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink4"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink4"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink5" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693225, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink5"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink5"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink6" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05015, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink6"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink6"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink7" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.873984, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink7"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink7"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink8" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.22629, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink8"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink8"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink9" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4084, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink9"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink9"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink10" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.76533, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink10"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink10"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink11" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.58916, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink11"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink11"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink12" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.94146, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink12"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink12"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink13" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12147, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink13"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink13"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink14" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4784, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink14"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink14"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink15" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.30223, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink15"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink15"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink16" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.65453, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink16"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink16"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink17" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84249, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink17"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink17"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.118513, -0.00463867, 0.0510099)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink18" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.19942, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink18"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink18"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="ChainLink19" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3.02325, 0, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 4.703
+gravity_scale = 0.517
+
+[node name="Chain_013" type="MeshInstance3D" parent="ChainLink19"]
+mesh = SubResource("ArrayMesh_x04tv")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00268555, 0.0871607)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, -0.0872641)
+shape = SubResource("BoxShape3D_d6rrl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, -0.126194, 0.00111389, -0.0405644)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.508515, 0, -0.861053, 0, 1, 0, 0.861053, 0, -0.508515, 0.12698, -0.00119019, 0.0398735)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, 0.126891, -0.00274658, -0.0431448)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="ChainLink19"]
+transform = Transform3D(-0.501707, 0, 0.865038, 0, 1, 0, -0.865038, 0, -0.501707, -0.127684, -0.00463867, 0.035197)
+shape = SubResource("BoxShape3D_thi7j")
+
+[node name="PinJoint3D" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196479, 0, 0)
+node_b = NodePath("../ChainLink")
+motor/enable = true
+motor/target_velocity = 0.31765
+motor/max_impulse = 170.39
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2387, 1.41568e-07, 0)
+node_a = NodePath("../ChainLink18")
+node_b = NodePath("../hanging_lantern")
+exclude_nodes_from_collision = false
+motor/target_velocity = 0.107687
+
+[node name="hanging_lantern" type="RigidBody3D" parent="."]
+transform = Transform3D(4.04606e-09, 1, 2.38826e-09, 0.998504, -4.17064e-09, 0.0546709, 0.0546709, 2.16349e-09, -0.998504, -3.97674, -0.0117188, 0.00881259)
+
+[node name="Cube" type="MeshInstance3D" parent="hanging_lantern"]
+transform = Transform3D(0.202754, 0, 0, 0, 0.202754, 0, 0, 0, 0.202754, 0, 0, 0)
+mesh = SubResource("ArrayMesh_72d1b")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_ctul8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hanging_lantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000422154, 0.171038, -0.00103976)
+shape = SubResource("BoxShape3D_n4uug")
+
+[node name="Fire" type="GPUParticles3D" parent="hanging_lantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.177512, 0)
+material_override = ExtResource("2_xgb6l")
+amount = 70
+lifetime = 0.71
+randomness = 0.21
+fixed_fps = 60
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_ctul8")
+draw_pass_1 = SubResource("QuadMesh_y7juq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="hanging_lantern/Fire"]
+light_color = Color(0.339315, 0.000369307, 0.427852, 1)
+light_volumetric_fog_energy = 16.0
+light_specular = 6.526
+shadow_enabled = true
+shadow_bias = 0.234
+shadow_blur = 10.0
+omni_range = 4.144
+omni_attenuation = -0.863
+script = ExtResource("3_slrmp")
+noise = SubResource("NoiseTexture3D_xkvfm")
+position_jitter_amount = 0.375
+
+[node name="Timer" type="Timer" parent="hanging_lantern/Fire/OmniLight3D"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="hanging_lantern/Fire/OmniLight3D/Timer" to="hanging_lantern/Fire/OmniLight3D" method="_on_timer_timeout"]
