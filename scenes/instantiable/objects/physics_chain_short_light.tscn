@@ -1,8 +1,8 @@
 [gd_scene load_steps=23 format=4 uid="uid://dm0h1khkexvsk"]
 
 [ext_resource type="Material" uid="uid://ck03gpfly2wj1" path="res://assets/materials/chain_mat.tres" id="1_ctul8"]
-[ext_resource type="Material" uid="uid://dvvurfteukngw" path="res://assets/shaders/fire/stylized_fire_shader.tres" id="2_xgb6l"]
-[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visuals/flickering_light.gd" id="3_slrmp"]
+[ext_resource type="Material" uid="uid://dvvurfteukngw" path="res://assets/shader_materials/stylized_fire_shader.tres" id="2_xgb6l"]
+[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="3_slrmp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8q3bv"]
 
