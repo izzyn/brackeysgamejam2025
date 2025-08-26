@@ -11,6 +11,7 @@ radiance_size = 1
 
 [resource]
 background_color = Color(0.695503, 0.695503, 0.695503, 1)
+background_energy_multiplier = 0.0
 sky = SubResource("1")
 tonemap_mode = 4
 tonemap_exposure = 3.34

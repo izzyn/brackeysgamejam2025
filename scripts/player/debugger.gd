@@ -9,7 +9,7 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		toggle_camera_controls()
 	
-	if event.is_action_pressed("reset_player") and Input.is_key_pressed(KEY_SHIFT):
+	if event.is_action_pressed("reset_scene"):
 		get_tree().reload_current_scene()
 
 func toggle_camera_controls():

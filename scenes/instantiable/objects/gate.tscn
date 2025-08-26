@@ -1,0 +1,561 @@
+[gd_scene load_steps=40 format=4 uid="uid://de7tgoogckogd"]
+
+[ext_resource type="PackedScene" uid="uid://dskasiidy5wda" path="res://assets/models/objects/gate.glb" id="1_clh4q"]
+[ext_resource type="Material" uid="uid://bpm56rj1xt1y5" path="res://assets/materials/metal_mat.tres" id="2_av16k"]
+[ext_resource type="Shader" uid="uid://iip0itxdwxl0" path="res://scripts/shaders/stylized_fire.gdshader" id="5_nri80"]
+[ext_resource type="Texture2D" uid="uid://bgxegv32lmxou" path="res://assets/textures/vfx/HoleNoise.png" id="6_fogt6"]
+[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="7_nri80"]
+[ext_resource type="Texture2D" uid="uid://6ck83pikq2h7" path="res://assets/textures/vfx/FireMask.png" id="7_tkc7x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nf1db"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xekw2"]
+_surfaces = [{
+"aabb": AABB(-3.78499, -0.983072, -0.29278, 10.385, 1.58482, 0.606432),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIAAwAFAAEABAACAAYAAwAHAAUACAAEAAYABwAJAAUACAAGAAoABwALAAkACwAIAAoACwAKAAkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("6BbSA1ExAAD//47z/z8AALvaxvkAAAAA0C0AAKhYAAAAAKUHqFgAAP//jvP/vwAAd7X///8/AADQLQAAVqcAAAAApQdWpwAAu9rG+f//AAB3tf///78AAOgW0gOtzgAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qp4nq"]
+resource_name = "sconce_Cube_004"
+_surfaces = [{
+"aabb": AABB(-3.78499, -0.983072, -0.29278, 10.385, 1.58482, 0.606432),
+"attribute_data": PackedByteArray("/////4eTI4up6v9/NLY/7v///3/piePtqer//+PSBIup6v//P55EllTV/3/Q+Pv/qer/f1mb//9U1f//Je9CmVTV///fokaW/7//f///9P9U1f9/36L///+///+b7W+W/7///+2pL4upqv9/H9OY7f+//39ZrvTtqar//+HxTYupqv//2cIrpFSV/3+yz///qar/f8m///9Ulf//ocwrpFSV//9vjf9//3//f9ilY9xUlf9//3/D2/9///9kyyOA"),
+"format": 34896613431,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_nf1db"),
+"primitive": 3,
+"uv_scale": Vector4(2, 1, 0.465421, 2),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("6BbSA1ExSvz//47z/z9K/LvaxvkAAEr80C0AAKhYSvzQLQAAqFhX0f//jvP/v1fR//+O8/8/V9HQLQAAVqdX0dAtAABWpyqUu9rG+f//KpT//47z/78qlOgW0gOtziqU6BbSA63OwY93tf///7/Bj7vaxvn//8GPAAClB1anwY8AAKUHVqeq0He1////P6rQd7X///+/qtAAAKUHqFiq0AAApQeoWC/8u9rG+QAAL/x3tf///z8v/OgW0gNRMS/8en1gG3p9YBt6fWAben1gG+dXMFDnVzBQ51cwUOdXMFDdHC9t3Rwvbd0cL23dHC9tcN2Xl3Ddl5dw3ZeXcN2Xl5+nv7Cfp7+wn6e/sJ+nv7BWgrbpVoK26VaCtulWgrbp")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xekw2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d44jh"]
+resource_name = "metal"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v8nn2"]
+_surfaces = [{
+"aabb": AABB(-7.61274, -1.19886, -1.05218, 16.4137, 2.05392, 2),
+"format": 34359742465,
+"index_count": 204,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYACAAJAAoACgAJAAsACgALAAwACAANAAkADgANAAgACQAPAAsADgAQAA0AEQAQAA4ADQASAAkACQASAA8AEAATAA0ADQATABIAEQAUABAAFQAUABEAEAAWABMAFgASABMAFAAWABAAEgAXAA8AEgAWABcACwAPABcAFAAYABYAFwAWABgAFQAZABQAGQAYABQAGQAXABgACwAXABkADAAZABUADAALABkAGgAbABwAGwAaAB0AHQAaAB4AGwAdAB8AIAAhACIAIAAjACEAJAAiACEAIwAkACEAJQAgACIAIwAgACUAJAAmACIAJQAiACYAIwAnACQAIwAlACcAJwAmACQAJwAlACYAKAApACoAKAArACkALAAqACkAKwAsACkALQAoACoAKwAoAC0ALAAuACoALQAqAC4AKwAvACwAKwAtAC8ALwAuACwALwAtAC4A"),
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("m5vzwBh0mb88pHI/m5vzwM8XTT/irYa/m5vzwM8XTT88pHI/m5vzwBh0mb/irYa/m5uzwM8XTT/irYa/m5uzwBh0mb88pHI/m5uzwM8XTT88pHI/m5uzwBh0mb/irYa/JTPTQI5VBj9QjxC+9dKiQMIwED/RCv6+9dKiQMgwED8455W+Gv8jQJKoID/gsni+muVkQAQMGj9OjxC+aabzQOhx/z7msni+JTPTQI5VBj/k7iU+kvRvQEvlWj/isni+aabzQOhx/z49CYc+9dKiQMgwED/9lqA+sc3IQHttSj/RCv6+ktAMQaz1OT/msni+9dKiQMIwED9JXQQ/muVkQAQMGj/m7iU+ktAMQaz1OT89CYc+kvRvQEvlWj8/CYc+sc3IQHttSj9JXQQ/Gv8jQJKoID9ACYc+Nj1ywISMb7+efKm9AJb2v5Sqe7+gfKm9HMQ2wIybdb9yLDS+HMQ2wIybdb8EjEk+Nj1ywISMb7/TO9Q9AJb2v5Sqe7/RO9Q9jfzEwKqBHT57eNM+jfzEwKBveD6ZyMi+jfzEwKBveD57eNM+jfzEwKqBHT6ZyMi+05ihQIC0Xb2cyMi+816QQOrLCb54eNM+05ihQIC0Xb14eNM+816QQOrLCb6cyMi+u/LbwCNq8L50eNM+u/LbwCjzwr6gyMi+u/LbwCjzwr50eNM+u/LbwCNq8L6gyMi+VLSsP8RwLb+jyMi+qJlPP3cIQr9xeNM+VLSsP8RwLb9xeNM+qJlPP3cIQr+jyMi+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ja565"]
+resource_name = "sconce_Cube_001"
+_surfaces = [{
+"aabb": AABB(-7.61274, -1.19886, -1.05218, 16.4137, 2.05392, 2),
+"attribute_data": PackedByteArray("AADAPgAAgD8AACA/AABAPwAAID8AAIA/AADAPgAAQD8AAMA+AABAPwAAID8AAAA/AAAgPwAAQD8AAMA+AAAAPwAAwD4AAAA/AAAgPwAAgD4AACA/AAAAPwAAwD4AAIA+AADAPgAAgD4AACA/AAAAAAAAID8AAIA+AADAPgAAAAAAAAA+AAAAPwAAwD4AAIA+AADAPgAAAD8AAAA+AACAPgAAID8AAAA/AABgPwAAgD4AAGA/AAAAPwAAID8AAIA+VVVVPwAAAAAAAIA/AAAAAAAAgD8AAAAAVVVVPwAAAACqqio/AAAAAKqqKj8AAAAA/v//PgAAAAD+//8+AAAAAKiqqj4AAAAAqKqqPgAAAAClqio+AAAAAKWqKj4AAAAAAADAswAAAAAAAMCzAAAAAJnKCj+uRyE/ZTV1P65HIT8AAEA/XI8CPwAAQD+kcH0/mcoKP1K4Xj9lNXU/UrhePwAAwLMAAAAApaoqPgAAAAClqio+AAAAAAAAwLMAAAAAymrqPlK4Xj8AAIA+XI8CP8pq6j6uRyE/kKksPVK4Xj8AAIA+pHB9P5CpLD2uRyE/qKqqPgAAAAD+//8+AAAAAP7//z4AAAAAqKqqPgAAAACqqio/AAAAAFVVVT8AAAAAVVVVPwAAAACqqio/AAAAAKWqKj4AAAAAqKqqPgAAAACoqqo+AAAAAKWqKj4AAAAA/v//PgAAAACqqio/AAAAAKqqKj8AAAAA/v//PgAAAABVVVU/AAAAAAAAgD8AAAAAAACAPwAAAABVVVU/AAAAAAAAwD4AAIA/AAAgPwAAQD8AACA/AACAPwAAwD4AAEA/AADAPgAAQD8AACA/AAAAPwAAID8AAEA/AADAPgAAAD8AAMA+AAAAPwAAID8AAIA+AAAgPwAAAD8AAMA+AACAPgAAwD4AAIA+AAAgPwAAAAAAACA/AACAPgAAwD4AAAAAAAAAPgAAAD8AAMA+AACAPgAAwD4AAAA/AAAAPgAAgD4AACA/AAAAPwAAYD8AAIA+AABgPwAAAD8AACA/AACAPgAAwD4AAIA/AAAgPwAAQD8AACA/AACAPwAAwD4AAEA/AADAPgAAQD8AACA/AAAAPwAAID8AAEA/AADAPgAAAD8AAMA+AAAAPwAAID8AAIA+AAAgPwAAAD8AAMA+AACAPgAAwD4AAIA+AAAgPwAAAAAAACA/AACAPgAAwD4AAAAAAAAAPgAAAD8AAMA+AACAPgAAwD4AAAA/AAAAPgAAgD4AACA/AAAAPwAAYD8AAIA+AABgPwAAAD8AACA/AACAPg=="),
+"format": 34359742487,
+"index_count": 204,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAbABgAHAAdABsAHgAdABwAHgAfAB0AIAAfAB4AIAAhAB8AIgAhACAAIgAjACEAJAAjACIAJAAlACMAJgAnACgAJwAmACkAKQAmACoAJwApACsALAAtAC4ALAAvAC0AMAAxADIAMQAwADMAMwAwADQAMQAzADUANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMAdgB3AHgAdgB5AHcA"),
+"material": SubResource("StandardMaterial3D_d44jh"),
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 122,
+"vertex_data": PackedByteArray("m5vzwBh0mb88pHI/m5vzwM8XTT/irYa/m5vzwM8XTT88pHI/m5vzwBh0mb/irYa/m5vzwBh0mb/irYa/m5uzwM8XTT/irYa/m5vzwM8XTT/irYa/m5uzwBh0mb/irYa/m5uzwBh0mb/irYa/m5uzwM8XTT88pHI/m5uzwM8XTT/irYa/m5uzwBh0mb88pHI/m5uzwBh0mb88pHI/m5vzwM8XTT88pHI/m5uzwM8XTT88pHI/m5vzwBh0mb88pHI/m5vzwBh0mb/irYa/m5uzwBh0mb88pHI/m5uzwBh0mb/irYa/m5vzwBh0mb88pHI/m5uzwM8XTT/irYa/m5vzwM8XTT88pHI/m5vzwM8XTT/irYa/m5uzwM8XTT88pHI/JTPTQI5VBj9QjxC+9dKiQMIwED/RCv6+9dKiQMgwED8455W+aabzQOhx/z7msni+JTPTQI5VBj/k7iU+aabzQOhx/z49CYc+9dKiQMgwED/9lqA+9dKiQMIwED9JXQQ/muVkQAQMGj/m7iU+Gv8jQJKoID9ACYc+muVkQAQMGj9OjxC+Gv8jQJKoID/gsni+9dKiQMgwED8455W+9dKiQMIwED/RCv6+Nj1ywISMb7+efKm9AJb2v5Sqe7+gfKm9HMQ2wIybdb9yLDS+HMQ2wIybdb8EjEk+Nj1ywISMb7/TO9Q9AJb2v5Sqe7/RO9Q99dKiQMIwED/RCv6+kvRvQEvlWj/isni+Gv8jQJKoID/gsni+sc3IQHttSj/RCv6+ktAMQaz1OT89CYc+sc3IQHttSj/RCv6+ktAMQaz1OT/msni+kvRvQEvlWj8/CYc+sc3IQHttSj9JXQQ/kvRvQEvlWj/isni+Gv8jQJKoID9ACYc+sc3IQHttSj9JXQQ/9dKiQMIwED9JXQQ/kvRvQEvlWj8/CYc+aabzQOhx/z49CYc+ktAMQaz1OT/msni+aabzQOhx/z7msni+ktAMQaz1OT89CYc+Gv8jQJKoID/gsni+kvRvQEvlWj8/CYc+Gv8jQJKoID9ACYc+kvRvQEvlWj/isni+9dKiQMIwED9JXQQ/ktAMQaz1OT89CYc+aabzQOhx/z49CYc+sc3IQHttSj9JXQQ/aabzQOhx/z7msni+sc3IQHttSj/RCv6+9dKiQMIwED/RCv6+ktAMQaz1OT/msni+jfzEwKqBHT57eNM+jfzEwKBveD6ZyMi+jfzEwKBveD57eNM+jfzEwKqBHT6ZyMi+jfzEwKqBHT6ZyMi+05ihQIC0Xb2cyMi+jfzEwKBveD6ZyMi+816QQOrLCb6cyMi+816QQOrLCb6cyMi+05ihQIC0Xb14eNM+05ihQIC0Xb2cyMi+816QQOrLCb54eNM+816QQOrLCb54eNM+jfzEwKBveD57eNM+05ihQIC0Xb14eNM+jfzEwKqBHT57eNM+jfzEwKqBHT6ZyMi+816QQOrLCb54eNM+816QQOrLCb6cyMi+jfzEwKqBHT57eNM+05ihQIC0Xb2cyMi+jfzEwKBveD57eNM+jfzEwKBveD6ZyMi+05ihQIC0Xb14eNM+u/LbwCNq8L50eNM+u/LbwCjzwr6gyMi+u/LbwCjzwr50eNM+u/LbwCNq8L6gyMi+u/LbwCNq8L6gyMi+VLSsP8RwLb+jyMi+u/LbwCjzwr6gyMi+qJlPP3cIQr+jyMi+qJlPP3cIQr+jyMi+VLSsP8RwLb9xeNM+VLSsP8RwLb+jyMi+qJlPP3cIQr9xeNM+qJlPP3cIQr9xeNM+u/LbwCjzwr50eNM+VLSsP8RwLb9xeNM+u/LbwCNq8L50eNM+u/LbwCNq8L6gyMi+qJlPP3cIQr9xeNM+qJlPP3cIQr+jyMi+u/LbwCNq8L50eNM+VLSsP8RwLb+jyMi+u/LbwCjzwr50eNM+u/LbwCjzwr6gyMi+VLSsP8RwLb9xeNM+AAD/f/9///8AAP9//3///wAA/3//f///AAD/f/9//////////3//////////f/////////9//////////3///////3//f///////f/9///////9//3///////3//f////3//f/9/////f/9//3////9//3//f////3//f/9/////fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwPP/JdB0HwvA8/8l0HQfC8Dz/yXQdB8LwPP/JdB0HwvA8/8l0HQfC8Dz/yXQSAmsPj///+/ICaw+P///78gJrD4////vyAmsPj///+/LoPP/M/8Z74ug8/8z/xnvi6Dz/zP/Ge+LoPP/M/8Z74ug8/8z/xnvi6Dz/zP/Ge+sHggpv///z+weCCm////P7B4IKb///8/sHggpv///z+UlJUU////v5SUlRT///+/lJSVFP///7+UlJUU////v2praev///+/amtp6////79qa2nr////v2praev///+/TofeWf///z9Oh95Z////P06H3ln///8/TofeWf///z/e2U4H////v97ZTgf///+/3tlOB////7/e2U4H////vwAA/3//f///AAD/f/9///8AAP9//3///wAA/3//f////////6uAqf//////5eqLyv//////f////////1vvUcijkKQQWu9RyKOQpBBa71HIo5CkEFrvUcijkKQQWu9RyP9//38U73TI/3//f7mAov//f/9/W+9RyP9//3//f///oXxdA6H8UL6hfF0DofxQvqF8XQOh/FC+oXxdA6H8UL5Ng7D8TgOmwU2DsPxOA6bBTYOw/E4DpsFNg7D8TgOmwQAA/3//f///AAD/f/9///8AAP9//3///wAA/3//f/////////WAg///////lOk0y///////f////////1vvUcijkKQQWu9RyKOQpBBa71HIo5CkEFrvUcijkKQQWu9RyP9//3/57oLI/3//fxGBdv//f/9/W+9RyP9//3//f///XnuhBF37rr1ee6EEXfuuvV57oQRd+669XnuhBF37rr11hIj7dgQ6wnWEiPt2BDrCdYSI+3YEOsJ1hIj7dgQ6wg==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_v8nn2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2ts4"]
+render_priority = 0
+shader = ExtResource("5_nri80")
+shader_parameter/noise_texture = ExtResource("6_fogt6")
+shader_parameter/texture_mask = ExtResource("7_tkc7x")
+shader_parameter/emission_intensity = 2.0
+shader_parameter/time_scale = 3.0
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/edge_softness = 0.1
+
+[sub_resource type="Gradient" id="Gradient_ymdgk"]
+offsets = PackedFloat32Array(0.00190114, 1)
+colors = PackedColorArray(0.0888431, 0.587518, 1, 1, 1, 0, 0.447059, 0)
+
+[sub_resource type="GradientTexture2D" id="3"]
+gradient = SubResource("Gradient_ymdgk")
+width = 128
+
+[sub_resource type="Curve" id="Curve_lswb3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.365019, 0.35828), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6d38h"]
+curve = SubResource("Curve_lswb3")
+
+[sub_resource type="Curve" id="Curve_tca28"]
+_data = [Vector2(0.0217391, 0), 0.0, 3.65289, 0, 0, Vector2(1, 0.878261), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="5"]
+width = 128
+curve = SubResource("Curve_tca28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i3wmh"]
+lifetime_randomness = 0.81
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.5
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 4.0
+linear_accel_max = 4.0
+scale_min = 0.7
+scale_max = 0.8
+scale_curve = SubResource("5")
+color = Color(0, 0.538208, 0.931617, 1)
+color_ramp = SubResource("3")
+emission_curve = SubResource("CurveTexture_6d38h")
+
+[sub_resource type="QuadMesh" id="QuadMesh_342rn"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dyoei"]
+noise_type = 2
+frequency = 0.3026
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_342rn"]
+noise = SubResource("FastNoiseLite_dyoei")
+
+[sub_resource type="CurveTexture" id="CurveTexture_fogt6"]
+width = 128
+curve = SubResource("Curve_tca28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tkc7x"]
+lifetime_randomness = 0.81
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 4.0
+linear_accel_max = 4.0
+scale_min = 0.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_fogt6")
+color_ramp = SubResource("3")
+emission_curve = SubResource("CurveTexture_6d38h")
+
+[sub_resource type="Animation" id="Animation_tkc7x"]
+resource_name = "ignite"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireBurst:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sparks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fire/OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0315503),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fire/OmniLight3D:omni_range")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0333333, 0.133333, 1.4, 3),
+"transitions": PackedFloat32Array(1, 0.366022, 1, 1),
+"update": 0,
+"values": [0.0, 30.0, 15.748, 15.748]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Fire/OmniLight3D:omni_attenuation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0333333, 0.134295, 1.4, 3),
+"transitions": PackedFloat32Array(1, 0.366022, 1, 1),
+"update": 0,
+"values": [1.693, 0.376, 0.499, 0.499]
+}
+
+[sub_resource type="Animation" id="Animation_q2ts4"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireBurst:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sparks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fire/OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fire/OmniLight3D:omni_range")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.748]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Fire/OmniLight3D:omni_attenuation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.499]
+}
+
+[sub_resource type="Animation" id="Animation_fogt6"]
+resource_name = "off"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireBurst:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sparks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fire/OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_i3wmh"]
+resource_name = "on"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireBurst:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sparks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fire/OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q2ts4"]
+_data = {
+&"RESET": SubResource("Animation_q2ts4"),
+&"ignite": SubResource("Animation_tkc7x"),
+&"off": SubResource("Animation_fogt6"),
+&"on": SubResource("Animation_i3wmh")
+}
+
+[sub_resource type="Gradient" id="Gradient_fogt6"]
+offsets = PackedFloat32Array(0, 0.0969582, 0.203422, 0.389734, 0.475285, 0.992395, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0.935, 1, 1, 1, 1, 1, 0.657626, 0.549443, 0.973147, 1, 0.318422, 0.103058, 0.946542, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tkc7x"]
+gradient = SubResource("Gradient_fogt6")
+
+[sub_resource type="Curve" id="Curve_fogt6"]
+_limits = [0.0, 1.0, 0.0, 44.42]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.393617, 0.919334), 0.0, 0.0, 0, 0, Vector2(11.0245, 0.391304), 0.0, 0.0, 0, 0, Vector2(44.42, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tkc7x"]
+curve = SubResource("Curve_fogt6")
+
+[sub_resource type="Curve" id="Curve_q2ts4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.326087, 0.926087), 0.0, 0.0, 0, 0, Vector2(1, 0.134783), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i3wmh"]
+curve = SubResource("Curve_q2ts4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fogt6"]
+angle_min = -78.1
+angle_max = 48.9
+direction = Vector3(1, 2, 0)
+spread = 111.805
+initial_velocity_min = 1.0
+initial_velocity_max = 3.69
+gravity = Vector3(0, 1, 0)
+linear_accel_min = -5.08
+linear_accel_max = -2.23517e-06
+radial_accel_min = -3.73
+radial_accel_max = -1.01
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_i3wmh")
+color_ramp = SubResource("GradientTexture1D_tkc7x")
+emission_curve = SubResource("CurveTexture_tkc7x")
+hue_variation_min = -0.28
+hue_variation_max = 0.13
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkc7x"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.815686, 0.815686, 0.815686, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_i3wmh"]
+material = SubResource("StandardMaterial3D_tkc7x")
+
+[node name="gate" instance=ExtResource("1_clh4q")]
+
+[node name="Gate" parent="." index="0"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_av16k")
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "gate_open"
+
+[node name="sconce" type="Node3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256351, 2.32181, 0)
+
+[node name="wood" type="MeshInstance3D" parent="sconce" index="0"]
+transform = Transform3D(0.0225785, 0, 0, 0, 0.323158, 0, 0, 0, 0.138351, 0, 0, 0)
+mesh = SubResource("ArrayMesh_qp4nq")
+skeleton = NodePath("")
+
+[node name="metal" type="MeshInstance3D" parent="sconce" index="1"]
+transform = Transform3D(0.0225785, 0, 0, 0, 0.323158, 0, 0, 0, 0.138351, 0, 0, 0)
+mesh = SubResource("ArrayMesh_ja565")
+skeleton = NodePath("")
+
+[node name="Fire" type="GPUParticles3D" parent="sconce" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.141559, 0.238526, 0)
+material_override = SubResource("ShaderMaterial_q2ts4")
+emitting = false
+amount = 50
+randomness = 0.74
+fixed_fps = 60
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_i3wmh")
+draw_pass_1 = SubResource("QuadMesh_342rn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="sconce/Fire" index="0"]
+visible = false
+light_color = Color(0, 0.46973, 0.971006, 1)
+light_volumetric_fog_energy = 12.215
+shadow_enabled = true
+shadow_bias = 1.989
+shadow_blur = 10.0
+omni_range = 15.748
+omni_attenuation = 0.499
+script = ExtResource("7_nri80")
+noise = SubResource("NoiseTexture3D_342rn")
+position_jitter_amount = 0.05
+
+[node name="Timer" type="Timer" parent="sconce/Fire/OmniLight3D" index="0"]
+wait_time = 0.1
+autostart = true
+
+[node name="FireBurst" type="GPUParticles3D" parent="sconce" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.141559, 0.238526, 0)
+material_override = SubResource("ShaderMaterial_q2ts4")
+emitting = false
+amount = 50
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.96
+randomness = 0.74
+fixed_fps = 60
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_tkc7x")
+draw_pass_1 = SubResource("QuadMesh_342rn")
+
+[node name="TorchAnimationPlayer" type="AnimationPlayer" parent="sconce" index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_q2ts4")
+}
+autoplay = "off"
+
+[node name="Sparks" type="GPUParticles3D" parent="sconce" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059885, 0.23282, 0)
+emitting = false
+amount = 150
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.73
+process_material = SubResource("ParticleProcessMaterial_fogt6")
+draw_pass_1 = SubResource("QuadMesh_i3wmh")
+
+[connection signal="timeout" from="sconce/Fire/OmniLight3D/Timer" to="sconce/Fire/OmniLight3D" method="_on_timer_timeout"]

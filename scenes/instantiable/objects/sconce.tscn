@@ -1,17 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqejm8aebr4mb"]
+[gd_scene load_steps=3 format=3 uid="uid://cqejm8aebr4mb"]
 
 [ext_resource type="PackedScene" uid="uid://cmins7u0oyorr" path="res://assets/models/objects/sconce.glb" id="1_a305t"]
-[ext_resource type="Material" uid="uid://2w4kjn51lll8" path="res://assets/materials/wood_mat.tres" id="2_m01wg"]
-[ext_resource type="Material" uid="uid://bpm56rj1xt1y5" path="res://assets/materials/metal_mat.tres" id="4_hyuu6"]
 [ext_resource type="PackedScene" uid="uid://bwh738xh4u5p" path="res://scenes/instantiable/vfx/fire.tscn" id="4_qq5b8"]
 
 [node name="sconce" instance=ExtResource("1_a305t")]
-
-[node name="wood" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_m01wg")
-
-[node name="metal" parent="." index="1"]
-surface_material_override/0 = ExtResource("4_hyuu6")
 
 [node name="Fire" parent="." index="2" instance=ExtResource("4_qq5b8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.141559, 0.238526, 0)
