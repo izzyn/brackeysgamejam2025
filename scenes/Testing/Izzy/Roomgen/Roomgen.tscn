@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e32yvve3gd41"]
+
+[ext_resource type="Script" uid="uid://cc0grjg6peagp" path="res://scenes/Testing/Izzy/Roomgen/roomgen.gd" id="1_3pjh3"]
+
+[node name="Roomgen" type="Node"]
+script = ExtResource("1_3pjh3")
