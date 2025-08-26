@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://y0pydi0pxs1e"]
+
+[ext_resource type="Script" uid="uid://cvlnsrne0ck0g" path="res://scenes/Testing/Izzy/weapon_handler.gd" id="1_g0rpt"]
+[ext_resource type="Script" uid="uid://b6j6dfn67yyfk" path="res://scenes/Testing/Izzy/character_body_3d.gd" id="1_s5k8y"]
+[ext_resource type="PackedScene" uid="uid://ij5rohqtpkhg" path="res://test_gun.tscn" id="3_w0i18"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ao4u"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g0rpt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g0rpt"]
+size = Vector3(16.9518, 0.903, 12.6718)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_w0i18"]
+vertices = PackedVector3Array(-7.976, 0.5, -5.836, -7.976, 0.5, 5.914, 8.024, 0.5, 5.914, 8.024, 0.5, -5.836)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w0i18"]
+size = Vector2(16.952, 12.672)
+
+[node name="Izzytesting" type="Node3D"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000560969, 1.98309, 0.00454998)
+script = ExtResource("1_s5k8y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_4ao4u")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00106335, -0.0103626, 0.0158644)
+mesh = SubResource("CapsuleMesh_g0rpt")
+
+[node name="WeaponHandler" type="Node" parent="CharacterBody3D"]
+script = ExtResource("1_g0rpt")
+
+[node name="Weapons" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.27785)
+
+[node name="TestGun" parent="CharacterBody3D/Weapons" instance=ExtResource("3_w0i18")]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_g0rpt")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+size = Vector3(16.9518, 0.903, 12.6718)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticBody3D"]
+navigation_mesh = SubResource("NavigationMesh_w0i18")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_w0i18")
