@@ -29,6 +29,7 @@ func handle_input():
 	
 	jumped = Input.is_action_just_pressed("move_jump")
 	
+	sprinting = Input.is_action_pressed("move_sprint")
 	
 	pass
 
@@ -41,14 +42,20 @@ var move_vector: Vector2
 
 var jumped: bool
 
+var sprinting: bool
+
 @export
 var m_sensitivity: Vector2 = Vector2(0.25, 0.25)
 
 @export
-var velocity_drag: float = 0.5
+var floor_drag: float = 0.5
+@export
+var air_drag: float = 0.5
 
 @export
 var movement_speed: float = 10
+@export
+var sprint_speed: float = 10
 
 @export
 var air_speed_control: float = 0.2
@@ -77,24 +84,27 @@ func _process(delta: float) -> void:
 	aligned_move_vector += -move_vector.y*global_basis.z
 	aligned_move_vector += move_vector.x*global_basis.x
 	
-	if(is_on_floor()):
+	if(is_on_floor() and sprinting):
+		acceleration = aligned_move_vector*sprint_speed
+	elif(is_on_floor()):
 		acceleration = aligned_move_vector*movement_speed
 	else:
 		acceleration = aligned_move_vector*movement_speed*air_speed_control
 	
 	if (!is_on_floor()):
 		acceleration.y += gravity_accel
-		print("Applying gravity")
+		#print("Applying gravity")
 	
 	if(is_on_floor() and jumped):
 		acceleration.y += jump_force
 	
 	velocity += acceleration*delta
-	var drag_force: Vector3 = velocity_drag * pow(velocity.length(), 2) * velocity.normalized()
-	velocity += -drag_force
 	
-	var work_velocity = 0
-	velocity.x -= work_velocity*delta
+	if(is_on_floor()):
+		velocity -= velocity*delta*floor_drag*Vector3(1,0,1)
+	else:
+		velocity -= velocity*delta*air_drag*Vector3(1,0,1)
+
 	move_and_slide()
 	## Reset mosue delta each frame so input isn't repeated each frame
 	reset_input()
