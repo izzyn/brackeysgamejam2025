@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://8kbkxtjv238m"]
+
+[ext_resource type="Shader" uid="uid://4jsldssmlhbv" path="res://scripts/shaders/liquid.gdshader" id="1_ixu1c"]
+[ext_resource type="Texture2D" uid="uid://lmiq63dgoire" path="res://assets/textures/environment/liquidDiffuse.png" id="2_000ss"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ixu1c")
+shader_parameter/slide_speed = 0.09
+shader_parameter/wobble_speed = 1.48
+shader_parameter/wobble_intensity = 0.43
+shader_parameter/texture_scale = 0.765
+shader_parameter/water = ExtResource("2_000ss")
+shader_parameter/emission_color = Color(0, 0.894118, 0.0705882, 1)
+shader_parameter/emission_strength = 4.089
+shader_parameter/emission_depth_fade = 3.112

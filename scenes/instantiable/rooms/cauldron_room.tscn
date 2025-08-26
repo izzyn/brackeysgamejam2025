@@ -1,0 +1,333 @@
+[gd_scene load_steps=14 format=3 uid="uid://clddfiyg8m7ia"]
+
+[ext_resource type="PackedScene" uid="uid://qqlv64dcsmvu" path="res://assets/models/levels/cauldron_room.glb" id="1_h5kjp"]
+[ext_resource type="Material" uid="uid://blmgqndldqepe" path="res://assets/materials/pixel_toon_mat.tres" id="2_h7tre"]
+[ext_resource type="Material" uid="uid://bpm56rj1xt1y5" path="res://assets/materials/metal_mat.tres" id="3_bibg3"]
+[ext_resource type="Material" uid="uid://bk66ipwv7753s" path="res://assets/materials/pipe_mat.tres" id="4_s3saw"]
+[ext_resource type="Texture2D" uid="uid://5j4ombecxq77" path="res://assets/textures/environment/metalDiffuse.png" id="5_a58q8"]
+[ext_resource type="Material" uid="uid://8kbkxtjv238m" path="res://assets/shader_materials/stylized_liquid.tres" id="6_h7tre"]
+[ext_resource type="Shader" uid="uid://fjtficgxvf4l" path="res://scripts/shaders/stream_shader.gdshader" id="7_h7tre"]
+[ext_resource type="Texture2D" uid="uid://lmiq63dgoire" path="res://assets/textures/environment/liquidDiffuse.png" id="7_qrvbp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5kjp"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Shader" id="Shader_skgg3"]
+code = "shader_type spatial;
+
+//render_mode ambient_light_disabled;
+
+uniform vec4 albedo : source_color = vec4(1.0);
+uniform sampler2D albedo_texture : source_color, filter_nearest;
+uniform bool clamp_diffuse_to_max = false;
+
+// Triplanar Mapping Controls
+uniform bool use_triplanar = false;
+uniform float triplanar_scale = 1.0;
+uniform float triplanar_sharpness : hint_range(0.0, 5.0) = 1.0;
+
+uniform int cuts : hint_range(1, 8) = 3;
+uniform float wrap : hint_range(-2.0, 2.0) = 0.0;
+uniform float steepness : hint_range(1.0, 8.0) = 1.0;
+
+uniform bool use_attenuation = true;
+
+uniform bool use_specular = true;
+uniform float specular_strength : hint_range(0.0, 1.0) = 1.0;
+uniform float specular_shininess : hint_range(0.0, 32.0) = 16.0;
+uniform sampler2D specular_map : hint_default_white, filter_nearest;
+
+uniform bool use_rim = true;
+uniform float rim_width : hint_range(0.0, 16.0) = 8.0;
+uniform vec4 rim_color : source_color = vec4(1.0);
+
+uniform bool use_ramp = false;
+uniform sampler2D ramp : source_color;
+
+uniform bool use_borders = false;
+uniform float border_width = 0.01;
+
+varying vec3 world_pos;
+varying vec3 world_normal;
+
+float split_specular(float specular) {
+	return step(0.5, specular);
+}
+
+// Helper function for triplanar texture sampling
+vec3 triplanar_sample(sampler2D tex, float scale) {
+	// Calculate blend weights based on the world normal
+	vec3 blend_weights = abs(world_normal);
+	blend_weights = pow(blend_weights, vec3(triplanar_sharpness));
+	blend_weights = blend_weights / (blend_weights.x + blend_weights.y + blend_weights.z);
+
+	// Sample texture from 3 axes based on world position
+	vec2 uv_x = world_pos.yz * scale;
+	vec2 uv_y = world_pos.xz * scale;
+	vec2 uv_z = world_pos.xy * scale;
+	
+	vec3 tex_x = texture(tex, uv_x).rgb;
+	vec3 tex_y = texture(tex, uv_y).rgb;
+	vec3 tex_z = texture(tex, uv_z).rgb;
+
+	// Blend the 3 samples
+	return tex_x * blend_weights.x + tex_y * blend_weights.y + tex_z * blend_weights.z;
+}
+
+float triplanar_sample_single(sampler2D tex, float scale) {
+	// Calculate blend weights based on the world normal
+	vec3 blend_weights = abs(world_normal);
+	blend_weights = pow(blend_weights, vec3(triplanar_sharpness));
+	blend_weights = blend_weights / (blend_weights.x + blend_weights.y + blend_weights.z);
+
+	// Sample texture from 3 axes based on world position
+	vec2 uv_x = world_pos.yz * scale;
+	vec2 uv_y = world_pos.xz * scale;
+	vec2 uv_z = world_pos.xy * scale;
+	
+	float tex_x = texture(tex, uv_x).r;
+	float tex_y = texture(tex, uv_y).r;
+	float tex_z = texture(tex, uv_z).r;
+
+	// Blend the 3 samples
+	return tex_x * blend_weights.x + tex_y * blend_weights.y + tex_z * blend_weights.z;
+}
+
+void vertex() {
+	// Transform vertex to world space
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	world_normal = normalize(mat3(MODEL_MATRIX) * NORMAL);
+}
+
+void fragment() {
+	vec3 albedo_tex;
+	float specular_tex;
+	
+	if (use_triplanar) {
+		// Apply triplanar mapping to both albedo and specular
+		albedo_tex = triplanar_sample(albedo_texture, triplanar_scale);
+		specular_tex = triplanar_sample_single(specular_map, triplanar_scale);
+	} else {
+		// Default UV mapping
+		albedo_tex = texture(albedo_texture, UV).rgb;
+		specular_tex = texture(specular_map, UV).r;
+	}
+	
+	ALBEDO = albedo.rgb * albedo_tex;
+	// Ensure normal is in the correct space for lighting
+	NORMAL = normalize(NORMAL);
+}
+
+void light() {
+	// Use the built-in NORMAL which is already in the correct space for lighting
+	vec3 normal = normalize(NORMAL);
+	
+	// Attenuation.
+	float attenuation = 1.0;
+	if (use_attenuation) {
+		attenuation = ATTENUATION;
+	}
+	
+	// Diffuse lighting.
+	float NdotL = dot(normal, LIGHT);
+	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
+	diffuse_amount *= steepness;
+	float cuts_inv = 1.0 / float(cuts);
+	float diffuse_stepped = clamp(diffuse_amount + mod(1.0 - diffuse_amount, cuts_inv), 0.0, 1.0);
+
+	// Calculate borders.
+	float border = 0.0;
+	if (use_borders) {
+		float corr_border_width = length(cross(normal, LIGHT)) * border_width * steepness;
+		border = step(diffuse_stepped - corr_border_width, diffuse_amount)
+				 - step(1.0 - corr_border_width, diffuse_amount);
+	}
+	
+	// Apply diffuse result to different styles.
+	vec3 diffuse = ALBEDO.rgb * LIGHT_COLOR;
+	if (use_ramp) {
+		diffuse *= texture(ramp, vec2(diffuse_stepped * (1.0 - border), 0.0)).rgb;
+	} else {
+		diffuse *= diffuse_stepped * (1.0 - border);
+	}
+	
+	if (clamp_diffuse_to_max) {
+		// Clamp diffuse to max for multiple light sources.
+		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);
+	} else {
+		DIFFUSE_LIGHT += diffuse;
+	}
+	
+	// Specular lighting.
+	if (use_specular) {
+		vec3 H = normalize(LIGHT + VIEW);
+		float NdotH = dot(normal, H);
+		
+		float specular_value;
+		if (use_triplanar) {
+			specular_value = triplanar_sample_single(specular_map, triplanar_scale);
+		} else {
+			specular_value = texture(specular_map, UV).r;
+		}
+		
+		float specular_amount = max(pow(NdotH, specular_shininess*specular_shininess), 0.0)
+							    * specular_value
+								* attenuation;
+		specular_amount = split_specular(specular_amount);
+		SPECULAR_LIGHT += specular_strength * specular_amount * LIGHT_COLOR;
+	}
+	
+	// Simple rim lighting.
+	if (use_rim) {
+		float NdotV = dot(normal, VIEW);
+		float rim_light = pow(1.0 - NdotV, rim_width);
+		SPECULAR_LIGHT += rim_light * rim_color.rgb * rim_color.a * LIGHT_COLOR / PI;
+	}
+}"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_idrrs"]
+load_path = "res://.godot/imported/metalSpec.png-d2a4245eaf57a49a40ada76f2be99736.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajuu0"]
+render_priority = 0
+shader = SubResource("Shader_skgg3")
+shader_parameter/albedo = Color(0.396889, 0.396889, 0.396889, 1)
+shader_parameter/albedo_texture = ExtResource("5_a58q8")
+shader_parameter/clamp_diffuse_to_max = true
+shader_parameter/use_triplanar = true
+shader_parameter/triplanar_scale = 0.79
+shader_parameter/triplanar_sharpness = 3.618
+shader_parameter/cuts = 4
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = true
+shader_parameter/specular_strength = 0.219
+shader_parameter/specular_shininess = 4.794
+shader_parameter/specular_map = SubResource("CompressedTexture2D_idrrs")
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 16.0
+shader_parameter/rim_color = Color(0.0605304, 0.0605303, 0.0605303, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bibg3"]
+render_priority = 0
+shader = ExtResource("7_h7tre")
+shader_parameter/slide_speed = 2.08
+shader_parameter/wobble_speed = 0.0
+shader_parameter/wobble_intensity = 0.0
+shader_parameter/texture_scale = 0.765
+shader_parameter/water = ExtResource("7_qrvbp")
+shader_parameter/emission_color = Color(0, 0.894118, 0.0705882, 1)
+shader_parameter/emission_strength = 4.089
+shader_parameter/emission_depth_fade = 3.112
+
+[node name="cauldron_room" instance=ExtResource("1_h5kjp")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_h7tre")
+
+[node name="Cauldron" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_bibg3")
+
+[node name="Cylinder_004" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_h7tre")
+
+[node name="GeoNodesPipes_001" parent="." index="3"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_002" parent="." index="4"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_003" parent="." index="5"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_005" parent="." index="6"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_006" parent="." index="7"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_007" parent="." index="8"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_008" parent="." index="9"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_009" parent="." index="10"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="Sphere" parent="." index="11"]
+surface_material_override/0 = ExtResource("3_bibg3")
+
+[node name="Cylinder_006" parent="." index="12"]
+surface_material_override/0 = ExtResource("3_bibg3")
+
+[node name="GeoNodesPipes_010" parent="." index="13"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_011" parent="." index="14"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_012" parent="." index="15"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_013" parent="." index="16"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_014" parent="." index="17"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_015" parent="." index="18"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="GeoNodesPipes_016" parent="." index="19"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="launder" parent="." index="20"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="Cylinder_001" parent="." index="21"]
+surface_material_override/0 = ExtResource("2_h7tre")
+
+[node name="launder_001" parent="." index="22"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="Cylinder_002" parent="." index="23"]
+surface_material_override/0 = ExtResource("2_h7tre")
+
+[node name="launder_002" parent="." index="24"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="Cylinder_003" parent="." index="25"]
+surface_material_override/0 = ExtResource("2_h7tre")
+
+[node name="launder_003" parent="." index="26"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="Hole" parent="." index="27"]
+surface_material_override/0 = SubResource("StandardMaterial3D_h5kjp")
+
+[node name="hole_002" parent="." index="28"]
+surface_material_override/0 = SubResource("StandardMaterial3D_h5kjp")
+
+[node name="hole_001" parent="." index="29"]
+surface_material_override/0 = SubResource("StandardMaterial3D_h5kjp")
+
+[node name="hole" parent="." index="30"]
+surface_material_override/0 = SubResource("StandardMaterial3D_h5kjp")
+
+[node name="Valve_001" parent="." index="31"]
+surface_material_override/0 = ExtResource("4_s3saw")
+surface_material_override/1 = SubResource("ShaderMaterial_ajuu0")
+
+[node name="Liquid" parent="." index="32"]
+transform = Transform3D(2.30932, 0, 0, 0, 0.657961, 0, 0, 0, 2.30932, 0, 4.14744, 0)
+surface_material_override/0 = ExtResource("6_h7tre")
+
+[node name="stream_003" parent="." index="35"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.4012, 0.311017, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_bibg3")
