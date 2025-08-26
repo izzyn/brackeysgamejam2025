@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://fodvyetjhglp"]
+
+[ext_resource type="Script" uid="uid://d2601umnwbk7v" path="res://scripts/player/player.gd" id="1_0peuj"]
+[ext_resource type="Texture2D" uid="uid://bc7tj5y4we2o8" path="res://icon.svg" id="2_1v0mg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k5jdb"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt3t7"]
+albedo_texture = ExtResource("2_1v0mg")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a21qb"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1nko"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0peuj"]
+sky_top_color = Color(0.380392, 0.533333, 0.686275, 1)
+sky_horizon_color = Color(0.721569, 0.619608, 0.443137, 1)
+sky_curve = 0.0200957
+ground_horizon_color = Color(0.721444, 0.619507, 0.441947, 1)
+ground_curve = 0.0186607
+
+[sub_resource type="Sky" id="Sky_1v0mg"]
+sky_material = SubResource("ProceduralSkyMaterial_0peuj")
+
+[sub_resource type="Environment" id="Environment_k5jdb"]
+background_mode = 2
+sky = SubResource("Sky_1v0mg")
+
+[node name="Blix" type="Node3D"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_0peuj")
+m_sensitivity = Vector2(0.15, 0.15)
+velocity_drag = 20.0
+movement_speed = 200.0
+gravity_accel = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_k5jdb")
+
+[node name="Camera" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="WallRays" type="Node3D" parent="CharacterBody3D"]
+
+[node name="WallRayRight" type="RayCast3D" parent="CharacterBody3D/WallRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23467, 0)
+target_position = Vector3(1, 0, 0)
+
+[node name="WallRayLeft" type="RayCast3D" parent="CharacterBody3D/WallRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23467, 0)
+target_position = Vector3(-1, 0, 0)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_nt3t7")
+mesh = SubResource("PlaneMesh_a21qb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_f1nko")
+debug_color = Color(0.963182, 0, 0.500224, 0.42)
+debug_fill = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.863739, -0.246819, 0.439358, 0, 0.871847, 0.489778, -0.50394, -0.42304, 0.753048, 16.0252, 11.0054, 10.3859)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="DirectionalLight3D"]
+environment = SubResource("Environment_k5jdb")
