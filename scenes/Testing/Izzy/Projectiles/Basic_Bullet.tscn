@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dapebqetkwbmq"]
+
+[ext_resource type="Script" uid="uid://erf11oxt853g" path="res://scenes/Testing/Izzy/Projectiles/basic_bullet.gd" id="1_0c3qi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0c3qi"]
+radius = 0.4
+
+[node name="BasicBullet" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_0c3qi")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0c3qi")

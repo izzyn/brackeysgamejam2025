@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ij5rohqtpkhg"]
+
+[ext_resource type="Script" uid="uid://cqgpmgei1df35" path="res://scenes/Testing/Izzy/Weapons/test_gun.gd" id="1_yf1we"]
+
+[node name="TestGun" type="Node3D"]
+script = ExtResource("1_yf1we")
