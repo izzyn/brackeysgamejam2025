@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh21aq4n7p1yn"]
+
+[ext_resource type="ArrayMesh" uid="uid://kgbs548h5rfd" path="res://assets/meshes/objects/crate.res" id="1_hoed3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0tae2"]
+size = Vector3(0.829102, 0.761963, 0.779297)
+
+[node name="crate" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="Crate" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_hoed3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394245, 0)
+shape = SubResource("BoxShape3D_0tae2")

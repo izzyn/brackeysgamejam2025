@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://chkok4ncwvtwe"]
+
+[ext_resource type="Texture2D" uid="uid://b4v2a800pxhj3" path="res://assets/textures/vfx/smoke_08.png" id="1_oi7w5"]
+
+[sub_resource type="Gradient" id="Gradient_v0tqj"]
+colors = PackedColorArray(0, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oi7w5"]
+gradient = SubResource("Gradient_v0tqj")
+
+[sub_resource type="Curve" id="Curve_oi7w5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_eln34"]
+curve = SubResource("Curve_oi7w5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_idrrs"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.1
+emission_ring_radius = 1.7
+emission_ring_inner_radius = 1.7
+emission_ring_cone_angle = 90.0
+angle_min = -164.2
+angle_max = 175.3
+angular_velocity_min = -50.53
+angular_velocity_max = 125.22
+gravity = Vector3(0, 1, 0)
+radial_accel_min = -1.0
+radial_accel_max = 0.999998
+tangential_accel_min = -1.0
+tangential_accel_max = 0.999998
+scale_min = 0.2
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_eln34")
+color_ramp = SubResource("GradientTexture1D_oi7w5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msryi"]
+render_priority = 2
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_oi7w5")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ajuu0"]
+material = SubResource("StandardMaterial3D_msryi")
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+amount = 200
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_idrrs")
+draw_pass_1 = SubResource("QuadMesh_ajuu0")

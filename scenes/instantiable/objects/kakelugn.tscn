@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=4 uid="uid://b14mldgajjclv"]
+[gd_scene load_steps=25 format=4 uid="uid://b14mldgajjclv"]
 
 [ext_resource type="PackedScene" uid="uid://b0jot2i0t3i7" path="res://assets/models/objects/kakelugn.glb" id="1_vqfq7"]
 [ext_resource type="Texture2D" uid="uid://bbhmh0cc5uv27" path="res://assets/textures/environment/kakelugnDiffuse.png" id="2_ckv3x"]
 [ext_resource type="Texture2D" uid="uid://etfs7eov68ae" path="res://assets/textures/environment/kakelugnSpec.bmp" id="3_ckv3x"]
-[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visuals/flickering_light.gd" id="3_ho01m"]
-[ext_resource type="Material" uid="uid://dvvurfteukngw" path="res://assets/shaders/fire/stylized_fire_shader.tres" id="4_dyoei"]
+[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="3_ho01m"]
+[ext_resource type="Material" uid="uid://dvvurfteukngw" path="res://assets/shader_materials/stylized_fire_shader.tres" id="4_dyoei"]
 [ext_resource type="Texture2D" uid="uid://5j4ombecxq77" path="res://assets/textures/environment/metalDiffuse.png" id="6_dyoei"]
 [ext_resource type="Texture2D" uid="uid://qbmjlqhf3nur" path="res://assets/textures/environment/metalSpec.png" id="7_dyoei"]
 
@@ -477,6 +477,10 @@ shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dyoei"]
+height = 6.78735
+radius = 0.991699
+
 [node name="kakelugn" instance=ExtResource("1_vqfq7")]
 
 [node name="Cylinder" parent="." index="0"]
@@ -547,6 +551,12 @@ autostart = true
 
 [node name="Cylinder_001" parent="." index="2"]
 surface_material_override/0 = SubResource("ShaderMaterial_a66cd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8949, 0)
+shape = SubResource("CylinderShape3D_dyoei")
 
 [connection signal="timeout" from="Fire/OmniLight3D/Timer" to="Fire/OmniLight3D" method="_on_timer_timeout"]
 [connection signal="timeout" from="Fire/OmniLight3D2/Timer" to="Fire/OmniLight3D2" method="_on_timer_timeout"]

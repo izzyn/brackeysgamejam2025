@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd7da6dxc8qo6"]
+
+[ext_resource type="ArrayMesh" uid="uid://dbtmaq5b7y48f" path="res://assets/meshes/objects/large_cage.res" id="1_6kggt"]
+[ext_resource type="ArrayMesh" uid="uid://b20dkiy42h76" path="res://assets/meshes/objects/large_cage_chain.res" id="2_7saoy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_25l2r"]
+height = 1.0293
+radius = 1.01611
+
+[node name="large_cage_chain" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_6kggt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_7saoy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0392746, 0.428342, 0.0547038)
+shape = SubResource("CylinderShape3D_25l2r")

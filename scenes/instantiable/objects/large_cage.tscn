@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdxibo8c8ryef"]
+
+[ext_resource type="ArrayMesh" uid="uid://dbtmaq5b7y48f" path="res://assets/meshes/objects/large_cage.res" id="1_ffhkb"]
+[ext_resource type="ArrayMesh" uid="uid://b20dkiy42h76" path="res://assets/meshes/objects/large_cage_chain.res" id="2_q7mno"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ffhkb"]
+size = Vector3(1.41943, 1, 1.29449)
+
+[node name="large_cage" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_ffhkb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("2_q7mno")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00979763, 0.428342, -0.0103902)
+shape = SubResource("BoxShape3D_ffhkb")

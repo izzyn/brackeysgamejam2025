@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=4 uid="uid://dm0h1khkexvsk"]
+[gd_scene load_steps=24 format=4 uid="uid://dm0h1khkexvsk"]
 
 [ext_resource type="Material" uid="uid://ck03gpfly2wj1" path="res://assets/materials/chain_mat.tres" id="1_ctul8"]
+[ext_resource type="Script" uid="uid://pfg8fik1n5mp" path="res://scripts/visual_helpers/shader_to_chains.gd" id="1_xgb6l"]
 [ext_resource type="Material" uid="uid://dvvurfteukngw" path="res://assets/shader_materials/stylized_fire_shader.tres" id="2_xgb6l"]
 [ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="3_slrmp"]
 
@@ -127,6 +128,8 @@ noise = SubResource("FastNoiseLite_ipank")
 
 [node name="PhysicsChainShort" type="Node3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_xgb6l")
+chain_shader_material = ExtResource("1_ctul8")
 
 [node name="ChainLink" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0198478, 0, 0)
@@ -788,7 +791,6 @@ shape = SubResource("BoxShape3D_thi7j")
 [node name="PinJoint3D" type="HingeJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196479, 0, 0)
 node_b = NodePath("../ChainLink")
-motor/enable = true
 motor/target_velocity = 0.31765
 motor/max_impulse = 170.39
 
@@ -801,6 +803,8 @@ motor/target_velocity = 0.107687
 
 [node name="hanging_lantern" type="RigidBody3D" parent="."]
 transform = Transform3D(4.04606e-09, 1, 2.38826e-09, 0.998504, -4.17064e-09, 0.0546709, 0.0546709, 2.16349e-09, -0.998504, -3.97674, -0.0117188, 0.00881259)
+collision_layer = 2
+collision_mask = 3
 
 [node name="Cube" type="MeshInstance3D" parent="hanging_lantern"]
 transform = Transform3D(0.202754, 0, 0, 0, 0.202754, 0, 0, 0, 0.202754, 0, 0, 0)
@@ -824,14 +828,14 @@ process_material = SubResource("ParticleProcessMaterial_ctul8")
 draw_pass_1 = SubResource("QuadMesh_y7juq")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="hanging_lantern/Fire"]
-light_color = Color(0.819608, 0.501961, 0.0156863, 1)
+light_color = Color(0.976471, 0.607843, 0.054902, 1)
 light_volumetric_fog_energy = 16.0
 light_specular = 6.526
 shadow_enabled = true
 shadow_bias = 0.234
 shadow_blur = 10.0
-omni_range = 4.144
-omni_attenuation = -0.863
+omni_range = 12.752
+omni_attenuation = 0.353
 script = ExtResource("3_slrmp")
 noise = SubResource("NoiseTexture3D_xkvfm")
 position_jitter_amount = 0.375

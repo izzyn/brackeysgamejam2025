@@ -35,7 +35,7 @@ process_material = ExtResource("2_ipank")
 draw_pass_1 = SubResource("QuadMesh_342rn")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_color = Color(0.707911, 0.395783, 0.0712182, 1)
+light_color = Color(0.976471, 0.607843, 0.054902, 1)
 light_volumetric_fog_energy = 12.215
 shadow_enabled = true
 shadow_bias = 1.045

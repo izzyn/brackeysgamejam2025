@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cej0ukuo3k4ki"]
+
+[ext_resource type="ArrayMesh" uid="uid://ctdvnls822ytd" path="res://assets/meshes/objects/metal_barrel.res" id="1_p422o"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lx12k"]
+height = 1.79932
+radius = 0.48584
+
+[node name="Node3D" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_p422o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0341542, -0.351861, 0)
+shape = SubResource("CylinderShape3D_lx12k")
