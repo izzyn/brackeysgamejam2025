@@ -47,7 +47,7 @@ void fragment() {
 	// Calculate depth-based alpha for water transparency
 	float depth_factor = smoothstep(0.0, 0.5, linear_depth - linear_object_depth);
 	ALBEDO = mix(color1, color2, depth_factor);
-	
+
 	// Add emission based on water texture brightness and depth
 	float brightness = dot(color2, vec3(0.299, 0.587, 0.114));
 	float emission_factor = brightness * emission_strength * smoothstep(0.0, emission_depth_fade, linear_depth - linear_object_depth);
