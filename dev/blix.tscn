@@ -51,33 +51,34 @@ uv1_scale = Vector3(3, 2, 2)
 
 [node name="Blix" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="."]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_0peuj")
 m_sensitivity = Vector2(0.15, 0.15)
 floor_drag = 20.0
-air_drag = 5.0
+air_drag = 2.0
 movement_speed = 150.0
 sprint_speed = 330.0
+air_speed_control = 0.1
 jump_force = 1200.0
 gravity_accel = -13.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_k5jdb")
 
-[node name="Camera" type="Camera3D" parent="CharacterBody3D"]
+[node name="Camera" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
-[node name="WallRays" type="Node3D" parent="CharacterBody3D"]
+[node name="WallRays" type="Node3D" parent="Player"]
 
-[node name="WallRayRight" type="RayCast3D" parent="CharacterBody3D/WallRays"]
+[node name="WallRayRight" type="RayCast3D" parent="Player/WallRays"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23467, 0)
 target_position = Vector3(1, 0, 0)
 
-[node name="WallRayLeft" type="RayCast3D" parent="CharacterBody3D/WallRays"]
+[node name="WallRayLeft" type="RayCast3D" parent="Player/WallRays"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23467, 0)
 target_position = Vector3(-1, 0, 0)
 
