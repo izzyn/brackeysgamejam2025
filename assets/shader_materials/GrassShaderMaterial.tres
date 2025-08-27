@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://k4qcs43n3fqn"]
+
+[ext_resource type="Shader" uid="uid://cwwa0vkxbukys" path="res://scripts/shaders/grass.gdshader" id="1_i8rmq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i8rmq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i8rmq"]
+width = 127
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.412
+noise = SubResource("FastNoiseLite_i8rmq")
+
+[resource]
+render_priority = 2
+shader = ExtResource("1_i8rmq")
+shader_parameter/color = Color(0, 0.818819, 0.253863, 1)
+shader_parameter/color2 = Color(0.099752, 0.308927, 0.381825, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_i8rmq")
+shader_parameter/noiseScale = 20.0
+shader_parameter/windStrength = 0.2
+shader_parameter/windSpeed = 2.0
+shader_parameter/windDirection = Vector2(1, 0)
+shader_parameter/windRandomness = 0.3
+shader_parameter/cloudSpeed = 0.1
+shader_parameter/cloudDirection = Vector2(1, 0.5)
+shader_parameter/cloudShadowStrength = 0.3

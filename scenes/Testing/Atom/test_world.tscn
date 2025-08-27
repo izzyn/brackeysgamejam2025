@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbhc1cokmkq5q"]
+[gd_scene load_steps=6 format=3 uid="uid://dbhc1cokmkq5q"]
 
-[ext_resource type="Environment" uid="uid://cyog4adx4j87x" path="res://assets/environments/level_environment_dark.tres" id="1_uj0fx"]
 [ext_resource type="Script" uid="uid://c1sjfcwq8vd1g" path="res://scripts/player/player.gd" id="2_bdijj"]
 [ext_resource type="PackedScene" uid="uid://b1kcusvucjroh" path="res://scenes/instantiable/vfx/camera_outline_shader.tscn" id="3_1jmdg"]
+[ext_resource type="PackedScene" uid="uid://cxsgldw3yv1ul" path="res://scenes/instantiable/rooms/base_room_floating.tscn" id="3_af3ax"]
 [ext_resource type="Script" uid="uid://cr37fh1xk38yn" path="res://scripts/player/debugger.gd" id="4_6c03w"]
-[ext_resource type="PackedScene" uid="uid://cdqab17mmr4kv" path="res://scenes/instantiable/rooms/cage_room.tscn" id="4_uj0fx"]
-[ext_resource type="PackedScene" uid="uid://c1tew2bjd136d" path="res://scenes/instantiable/rooms/base_room.tscn" id="5_uleup"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wdbvl"]
 
@@ -23,7 +21,7 @@ stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(640, 360)
+size = Vector2i(850, 480)
 render_target_update_mode = 4
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="SubViewportContainer/SubViewport"]
@@ -39,21 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00699985, 0.896706, 0.00500
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_wdbvl")
 
-[node name="base_room" parent="SubViewportContainer" instance=ExtResource("5_uleup")]
-
-[node name="Fire" parent="SubViewportContainer/base_room/doors/west_gate/sconce" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.154107, 0.238526, 0)
-
-[node name="cage_room" parent="SubViewportContainer/base_room/room_layout" index="0" instance=ExtResource("4_uj0fx")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer"]
-environment = ExtResource("1_uj0fx")
+[node name="base_room_floating" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_af3ax")]
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("4_6c03w")
-
-[editable path="SubViewportContainer/base_room"]
-[editable path="SubViewportContainer/base_room/doors/north_gate"]
-[editable path="SubViewportContainer/base_room/doors/east_gate"]
-[editable path="SubViewportContainer/base_room/doors/west_gate"]
-[editable path="SubViewportContainer/base_room/doors/south_gate"]

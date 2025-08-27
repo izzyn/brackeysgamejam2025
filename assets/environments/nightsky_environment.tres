@@ -1,0 +1,39 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://gk8ytugpyb53"]
+
+[ext_resource type="Shader" uid="uid://hlgev544ore2" path="res://scripts/shaders/sky_shader.gdshader" id="1_y0cua"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utwvm"]
+shader = ExtResource("1_y0cua")
+shader_parameter/sky_color = Color(0.088749, 0.123944, 0.225714, 1)
+shader_parameter/star_base_color = Color(0.8, 1, 0.3, 1)
+shader_parameter/star_hue_offset = 0.808
+shader_parameter/star_intensity = 0.151
+shader_parameter/star_twinkle_speed = 0.646
+shader_parameter/star_twinkle_intensity = 0.246
+shader_parameter/layer_scale = 30.615
+shader_parameter/layer_scale_step = 12.154
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_utwvm"]
+sky_material = SubResource("ShaderMaterial_utwvm")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 1.9
+sky = SubResource("Sky_utwvm")
+ambient_light_source = 2
+reflected_light_source = 2
+tonemap_mode = 1
+sdfgi_enabled = true
+sdfgi_bounce_feedback = 1.13
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.75
+glow_strength = 0.75
+glow_bloom = 0.25
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0154
+volumetric_fog_albedo = Color(0.136727, 0.205059, 0.243806, 1)
+volumetric_fog_gi_inject = 0.52
+volumetric_fog_anisotropy = 0.71
+volumetric_fog_length = 35.55

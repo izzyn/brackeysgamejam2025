@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://qaqvm3vfrhsw"]
+
+[ext_resource type="Shader" uid="uid://b1o5qm2vdl4qj" path="res://scripts/shaders/god_rays.gdshader" id="1_6314v"]
+
+[sub_resource type="Gradient" id="Gradient_6314v"]
+offsets = PackedFloat32Array(0, 0.193133, 0.613734, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.886275, 0.756863, 0, 1, 0.93169, 0.952064, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wks4i"]
+gradient = SubResource("Gradient_6314v")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5fij6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vpt6f"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_5fij6")
+
+[resource]
+render_priority = 2
+shader = ExtResource("1_6314v")
+shader_parameter/alpha = 0.833
+shader_parameter/rim_power = 2.361
+shader_parameter/rim_wiggle_speed = 0.652
+shader_parameter/rim_wiggle_amount = 1.153
+shader_parameter/texture_emission = SubResource("NoiseTexture2D_vpt6f")
+shader_parameter/gradient = SubResource("GradientTexture1D_wks4i")
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/uv1_scale = Vector3(5, 0.14, 0)
+shader_parameter/uv1_offset = Vector3(0, 0.235, 0)
+shader_parameter/noise_scroll_speed = Vector2(0.045, 0.01)
