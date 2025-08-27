@@ -70,7 +70,7 @@ var gravity_accel: float =  -9.28
 ## Player globals, for use between frames
 var acceleration: Vector3
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	handle_input()
 	
@@ -96,7 +96,7 @@ func _process(delta: float) -> void:
 		#print("Applying gravity")
 	
 	if(is_on_floor() and jumped):
-		acceleration.y += jump_force
+		acceleration.y += jump_force/delta
 	
 	velocity += acceleration*delta
 	
