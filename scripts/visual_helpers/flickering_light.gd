@@ -1,4 +1,3 @@
-# Edit file: res://scripts/FlickeringOmniLight3D.gd
 extends OmniLight3D
 
 @export var noise: NoiseTexture3D

@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="3_ipank"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltevf"]
-render_priority = 0
+render_priority = 1
 shader = ExtResource("1_4bjjl")
 shader_parameter/noise_texture = ExtResource("2_l80mv")
 shader_parameter/texture_mask = ExtResource("3_hcyup")
@@ -18,12 +18,12 @@ shader_parameter/edge_softness = 0.1
 
 [sub_resource type="QuadMesh" id="QuadMesh_342rn"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_dyoei"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l80mv"]
 noise_type = 2
 frequency = 0.3026
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_342rn"]
-noise = SubResource("FastNoiseLite_dyoei")
+noise = SubResource("FastNoiseLite_l80mv")
 
 [node name="Fire" type="GPUParticles3D"]
 material_override = SubResource("ShaderMaterial_ltevf")

@@ -1,16 +1,24 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://8kbkxtjv238m"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://8kbkxtjv238m"]
 
 [ext_resource type="Shader" uid="uid://4jsldssmlhbv" path="res://scripts/shaders/liquid.gdshader" id="1_ixu1c"]
-[ext_resource type="Texture2D" uid="uid://lmiq63dgoire" path="res://assets/textures/environment/liquidDiffuse.png" id="2_000ss"]
 
 [resource]
-render_priority = 0
+render_priority = 2
 shader = ExtResource("1_ixu1c")
-shader_parameter/slide_speed = 0.09
-shader_parameter/wobble_speed = 1.48
-shader_parameter/wobble_intensity = 0.43
-shader_parameter/texture_scale = 0.765
-shader_parameter/water = ExtResource("2_000ss")
-shader_parameter/emission_color = Color(0, 0.894118, 0.0705882, 1)
-shader_parameter/emission_strength = 4.089
-shader_parameter/emission_depth_fade = 3.112
+shader_parameter/WATER_COL = Color(0.0579333, 0.88, 0.044, 1)
+shader_parameter/WATER2_COL = Color(0.12092, 0.644205, 1.92523e-07, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 15.0
+shader_parameter/tile = Vector2(12.985, 25.725)
+shader_parameter/wave_speed = 6.15
+shader_parameter/wave_amplitude = 0.22
+shader_parameter/wave_frequency = 3.3
+shader_parameter/time_offset = 0.0
+shader_parameter/water_size = Vector2(129.15, 128)
+shader_parameter/water_transparency = 4.925
+shader_parameter/water_depth_factor = 0.1
+shader_parameter/foam_width = 0.5
+shader_parameter/foam_edge_softness = 0.05
+shader_parameter/foam_smoothness = 0.03
+shader_parameter/foam_distortion_speed = 0.5
+shader_parameter/foam_distortion_amount = 0.1

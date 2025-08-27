@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clddfiyg8m7ia"]
+[gd_scene load_steps=36 format=3 uid="uid://clddfiyg8m7ia"]
 
 [ext_resource type="PackedScene" uid="uid://qqlv64dcsmvu" path="res://assets/models/levels/cauldron_room.glb" id="1_h5kjp"]
 [ext_resource type="Material" uid="uid://blmgqndldqepe" path="res://assets/materials/pixel_toon_mat.tres" id="2_h7tre"]
@@ -6,8 +6,15 @@
 [ext_resource type="Material" uid="uid://bk66ipwv7753s" path="res://assets/materials/pipe_mat.tres" id="4_s3saw"]
 [ext_resource type="Texture2D" uid="uid://5j4ombecxq77" path="res://assets/textures/environment/metalDiffuse.png" id="5_a58q8"]
 [ext_resource type="Material" uid="uid://8kbkxtjv238m" path="res://assets/shader_materials/stylized_liquid.tres" id="6_h7tre"]
-[ext_resource type="Shader" uid="uid://fjtficgxvf4l" path="res://scripts/shaders/stream_shader.gdshader" id="7_h7tre"]
-[ext_resource type="Texture2D" uid="uid://lmiq63dgoire" path="res://assets/textures/environment/liquidDiffuse.png" id="7_qrvbp"]
+[ext_resource type="Shader" uid="uid://iip0itxdwxl0" path="res://scripts/shaders/stylized_fire.gdshader" id="7_7u4ks"]
+[ext_resource type="Texture2D" uid="uid://bgxegv32lmxou" path="res://assets/textures/vfx/HoleNoise.png" id="8_qrvbp"]
+[ext_resource type="Texture2D" uid="uid://6ck83pikq2h7" path="res://assets/textures/vfx/FireMask.png" id="9_skgg3"]
+[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="10_idrrs"]
+[ext_resource type="PackedScene" uid="uid://dm0h1khkexvsk" path="res://scenes/instantiable/objects/physics_chain_short_light.tscn" id="10_s3saw"]
+[ext_resource type="NoiseTexture3D" uid="uid://dyolbsd25h0u1" path="res://assets/textures/vfx/flicker_noise.tres" id="11_idrrs"]
+[ext_resource type="Script" uid="uid://pfg8fik1n5mp" path="res://scripts/visual_helpers/shader_to_chains.gd" id="12_ajuu0"]
+[ext_resource type="Script" uid="uid://8q4uott0s1us" path="res://scripts/visual_helpers/flickering_spotlight.gd" id="13_qrvbp"]
+[ext_resource type="Material" uid="uid://ck03gpfly2wj1" path="res://assets/materials/chain_mat.tres" id="14_ajuu0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5kjp"]
 shading_mode = 0
@@ -213,21 +220,1202 @@ shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bibg3"]
-render_priority = 0
-shader = ExtResource("7_h7tre")
-shader_parameter/slide_speed = 2.08
-shader_parameter/wobble_speed = 0.0
-shader_parameter/wobble_intensity = 0.0
-shader_parameter/texture_scale = 0.765
-shader_parameter/water = ExtResource("7_qrvbp")
-shader_parameter/emission_color = Color(0, 0.894118, 0.0705882, 1)
-shader_parameter/emission_strength = 4.089
-shader_parameter/emission_depth_fade = 3.112
+[sub_resource type="Shader" id="Shader_uj0fx"]
+code = "shader_type spatial;
+
+render_mode unshaded;
+
+// Water color and foam color
+uniform vec4 WATER_COL : source_color = vec4(0.04, 0.38, 0.88, 1.0);
+uniform vec4 WATER2_COL : source_color = vec4(0.04, 0.35, 0.78, 1.0);
+uniform vec4 FOAM_COL : source_color = vec4(0.8125, 0.9609, 0.9648, 1.0);
+
+// Water animation and appearance
+uniform float distortion_speed = 2.0;
+uniform vec2 tile = vec2(5.0, 5.0);
+uniform float wave_speed = 2;
+uniform float wave_amplitude = 0.5;
+uniform float wave_frequency = 1.5;
+uniform float time_offset = 0.0;
+uniform vec2 water_size = vec2(128.0, 128.0);
+uniform float blend_sharpness : hint_range(0.1, 50.0) = 8.0;
+uniform vec2 flow_direction = vec2(0.0, 1.0); // Direction of the water flow on the XZ plane
+uniform float flow_speed = 0.1; // Speed of the water flow
+
+// Uniforms for transparency and depth effects
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform float water_transparency = 0.8; // Adjust this to control overall water transparency
+uniform float water_depth_factor = 0.1; // Adjust this to control how quickly water becomes opaque with depth
+
+// Foam uniforms for where the mesh intersects the water mesh
+uniform float foam_width = 0.5;
+uniform float foam_edge_softness = 0.05;
+uniform float foam_smoothness = 0.03;
+uniform float foam_distortion_speed = 0.5;
+uniform float foam_distortion_amount = 0.1;
+
+// Math constants
+const float TWOPI = 6.283185307;
+const float SIXPI = 18.84955592;
+
+varying vec3 world_pos;
+varying vec3 world_normal;
+
+ // Noise function for foam distortion
+float noise(vec2 uv) {
+    return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+//  noise function for smoother distortion
+float smooth_noise(vec2 uv) {
+    vec2 id = floor(uv);
+    vec2 f = fract(uv);
+    
+    float a = noise(id);
+    float b = noise(id + vec2(1.0, 0.0));
+    float c = noise(id + vec2(0.0, 1.0));
+    float d = noise(id + vec2(1.0, 1.0));
+    
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+
+// Function to calculate foam
+float calculate_foam(vec2 coords, float depth_diff, float time) {
+    // Add distortion to coords based on time and noise
+    vec2 distorted_coords = coords + vec2(
+        smooth_noise(coords * 5.0 + time * foam_distortion_speed) * foam_distortion_amount,
+        smooth_noise(coords * 5.0 + 100.0 + time * foam_distortion_speed) * foam_distortion_amount
+    );
+    
+    // Calculate foam based on depth difference and distorted coords
+    float foam_shape = smoothstep(0.0, foam_width, abs(depth_diff));
+    foam_shape = smoothstep(foam_edge_softness, 0.0, foam_shape);
+    foam_shape *= smooth_noise(distorted_coords * 10.0);
+    
+    return foam_shape;
+}
+
+// Wave height calculation
+float calculate_wave_height(vec2 position, float time) {
+    float wave_x = sin(position.x * wave_frequency + time * wave_speed);
+    float wave_y = cos(position.y * wave_frequency + time * wave_speed);
+    return (wave_x + wave_y) * 0.5 * wave_amplitude;
+}
+
+void vertex() {
+    vec4 initial_world_pos = MODEL_MATRIX * vec4(VERTEX, 1.0);
+    float wave = calculate_wave_height(initial_world_pos.xz, TIME + time_offset);
+    VERTEX.y += wave;
+	
+	// Pass final world position and normal to the fragment shader
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	world_normal = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+}
+
+// Circle function for water effects 
+float circ(vec2 pos, vec2 c, float s) {
+    c = abs(pos - c);
+    c = min(c, 1.0 - c);
+    return smoothstep(0.0, 0.002, sqrt(s) - sqrt(dot(c, c))) * -1.0;
+}
+
+
+// Water layer function
+// use the circles to draw the toon water design
+float waterlayer(vec2 uv) {
+     uv = mod(uv, 1.0); // Clamp to [0..1]
+
+    float ret = 1.0;
+
+    ret += circ(uv, vec2(0.37378, 0.277169), 0.0268181);
+
+    ret += circ(uv, vec2(0.0317477, 0.540372), 0.0193742);
+
+    ret += circ(uv, vec2(0.430044, 0.882218), 0.0232337);
+
+    ret += circ(uv, vec2(0.641033, 0.695106), 0.0117864);
+
+    ret += circ(uv, vec2(0.0146398, 0.0791346), 0.0299458);
+
+    ret += circ(uv, vec2(0.43871, 0.394445), 0.0289087);
+
+    ret += circ(uv, vec2(0.909446, 0.878141), 0.028466);
+
+    ret += circ(uv, vec2(0.310149, 0.686637), 0.0128496);
+
+    ret += circ(uv, vec2(0.928617, 0.195986), 0.0152041);
+
+    ret += circ(uv, vec2(0.0438506, 0.868153), 0.0268601);
+
+    ret += circ(uv, vec2(0.308619, 0.194937), 0.00806102);
+
+    ret += circ(uv, vec2(0.349922, 0.449714), 0.00928667);
+
+    ret += circ(uv, vec2(0.0449556, 0.953415), 0.023126);
+
+    ret += circ(uv, vec2(0.117761, 0.503309), 0.0151272);
+
+    ret += circ(uv, vec2(0.563517, 0.244991), 0.0292322);
+
+    ret += circ(uv, vec2(0.566936, 0.954457), 0.00981141);
+
+    ret += circ(uv, vec2(0.0489944, 0.200931), 0.0178746);
+
+    ret += circ(uv, vec2(0.569297, 0.624893), 0.0132408);
+
+    ret += circ(uv, vec2(0.298347, 0.710972), 0.0114426);
+
+    ret += circ(uv, vec2(0.878141, 0.771279), 0.00322719);
+
+    ret += circ(uv, vec2(0.150995, 0.376221), 0.00216157);
+
+    ret += circ(uv, vec2(0.119673, 0.541984), 0.0124621);
+
+    ret += circ(uv, vec2(0.629598, 0.295629), 0.0198736);
+
+    ret += circ(uv, vec2(0.334357, 0.266278), 0.0187145);
+
+    ret += circ(uv, vec2(0.918044, 0.968163), 0.0182928);
+
+    ret += circ(uv, vec2(0.965445, 0.505026), 0.006348);
+
+    ret += circ(uv, vec2(0.514847, 0.865444), 0.00623523);
+
+    ret += circ(uv, vec2(0.710575, 0.0415131), 0.00322689);
+
+    ret += circ(uv, vec2(0.71403, 0.576945), 0.0215641);
+
+    ret += circ(uv, vec2(0.748873, 0.413325), 0.0110795);
+
+    ret += circ(uv, vec2(0.0623365, 0.896713), 0.0236203);
+
+    ret += circ(uv, vec2(0.980482, 0.473849), 0.00573439);
+
+    ret += circ(uv, vec2(0.647463, 0.654349), 0.0188713);
+
+    ret += circ(uv, vec2(0.651406, 0.981297), 0.00710875);
+
+    ret += circ(uv, vec2(0.428928, 0.382426), 0.0298806);
+
+    ret += circ(uv, vec2(0.811545, 0.62568), 0.00265539);
+
+    ret += circ(uv, vec2(0.400787, 0.74162), 0.00486609);
+
+    ret += circ(uv, vec2(0.331283, 0.418536), 0.00598028);
+
+    ret += circ(uv, vec2(0.894762, 0.0657997), 0.00760375);
+
+    ret += circ(uv, vec2(0.525104, 0.572233), 0.0141796);
+
+    ret += circ(uv, vec2(0.431526, 0.911372), 0.0213234);
+
+    ret += circ(uv, vec2(0.658212, 0.910553), 0.000741023);
+
+    ret += circ(uv, vec2(0.514523, 0.243263), 0.0270685);
+
+    ret += circ(uv, vec2(0.0249494, 0.252872), 0.00876653);
+
+    ret += circ(uv, vec2(0.502214, 0.47269), 0.0234534);
+
+    ret += circ(uv, vec2(0.693271, 0.431469), 0.0246533);
+
+    ret += circ(uv, vec2(0.415, 0.884418), 0.0271696);
+
+    ret += circ(uv, vec2(0.149073, 0.41204), 0.00497198);
+
+    ret += circ(uv, vec2(0.533816, 0.897634), 0.00650833);
+
+    ret += circ(uv, vec2(0.0409132, 0.83406), 0.0191398);
+
+    ret += circ(uv, vec2(0.638585, 0.646019), 0.0206129);
+
+    ret += circ(uv, vec2(0.660342, 0.966541), 0.0053511);
+
+    ret += circ(uv, vec2(0.513783, 0.142233), 0.00471653);
+
+    ret += circ(uv, vec2(0.124305, 0.644263), 0.00116724);
+
+    ret += circ(uv, vec2(0.99871, 0.583864), 0.0107329);
+
+    ret += circ(uv, vec2(0.894879, 0.233289), 0.00667092);
+
+    ret += circ(uv, vec2(0.246286, 0.682766), 0.00411623);
+
+    ret += circ(uv, vec2(0.0761895, 0.16327), 0.0145935);
+
+    ret += circ(uv, vec2(0.949386, 0.802936), 0.0100873);
+
+    ret += circ(uv, vec2(0.480122, 0.196554), 0.0110185);
+
+    ret += circ(uv, vec2(0.896854, 0.803707), 0.013969);
+
+    ret += circ(uv, vec2(0.292865, 0.762973), 0.00566413);
+
+    ret += circ(uv, vec2(0.0995585, 0.117457), 0.00869407);
+
+    ret += circ(uv, vec2(0.377713, 0.00335442), 0.0063147);
+
+    ret += circ(uv, vec2(0.506365, 0.531118), 0.0144016);
+
+    ret += circ(uv, vec2(0.408806, 0.894771), 0.0243923);
+
+    ret += circ(uv, vec2(0.143579, 0.85138), 0.00418529);
+
+    ret += circ(uv, vec2(0.0902811, 0.181775), 0.0108896);
+
+    ret += circ(uv, vec2(0.780695, 0.394644), 0.00475475);
+
+    ret += circ(uv, vec2(0.298036, 0.625531), 0.00325285);
+
+    ret += circ(uv, vec2(0.218423, 0.714537), 0.00157212);
+
+    ret += circ(uv, vec2(0.658836, 0.159556), 0.00225897);
+
+    ret += circ(uv, vec2(0.987324, 0.146545), 0.0288391);
+
+    ret += circ(uv, vec2(0.222646, 0.251694), 0.00092276);
+
+    ret += circ(uv, vec2(0.159826, 0.528063), 0.00605293);
+
+	return max(ret, 0.0);
+}
+
+
+// Water effect function to return vec4
+vec4 water(vec2 uv, vec3 cdir, float iTime) {
+    uv *= vec2(0.25);
+
+    vec2 a = 0.025 * cdir.xz / cdir.y;
+    float h = sin(uv.x + iTime);
+    uv += a * h;
+    h = sin(0.841471 * uv.x - 0.540302 * uv.y + iTime);
+    uv += a * h;
+
+    float d1 = mod(uv.x + uv.y, TWOPI);
+    float d2 = mod((uv.x + uv.y + 0.25) * 1.3, SIXPI);
+    d1 = iTime * 0.07 + d1;
+    d2 = iTime * 0.5 + d2;
+    vec2 dist = vec2(
+        sin(d1) * 0.15 + sin(d2) * 0.05,
+        cos(d1) * 0.15 + cos(d2) * 0.05
+    );
+
+    vec4 ret = mix(WATER_COL, WATER2_COL, waterlayer(uv + dist.xy));
+    ret = mix(ret, FOAM_COL, waterlayer(vec2(1.0) - uv - dist.yx));
+    return ret;
+}
+
+vec4 triplanar_water(vec3 pos, vec3 normal, float iTime) {
+    // Blend weights based on the world normal
+    vec3 blend_weights = pow(abs(normal), vec3(blend_sharpness));
+    blend_weights = blend_weights / (blend_weights.x + blend_weights.y + blend_weights.z);
+
+    // Main horizontal flow
+    vec2 horizontal_flow = normalize(flow_direction) * flow_speed * iTime;
+    // Vertical flow for sides/waterfalls
+    float vertical_flow = flow_speed * iTime;
+
+    // Y-projection (top-down) uses the full XZ horizontal flow
+    vec2 uv_y = pos.xz + horizontal_flow;
+    vec4 y_proj = water(uv_y * tile, vec3(0, 1, 0), iTime);
+    
+    // X-projection (side) uses Z flow for U and vertical flow for V
+    vec2 uv_x = pos.zy + vec2(horizontal_flow.y, vertical_flow);
+    vec4 x_proj = water(uv_x * tile, vec3(0, 1, 0), iTime);
+    
+    // Z-projection (front/back) uses X flow for U and vertical flow for V
+    vec2 uv_z = pos.xy + vec2(horizontal_flow.x, vertical_flow);
+    vec4 z_proj = water(uv_z * tile, vec3(0, 1, 0), iTime);
+
+    // Blend the projections
+    return x_proj * blend_weights.x + y_proj * blend_weights.y + z_proj * blend_weights.z;
+}
+
+void fragment() {
+    // Calculate water color using triplanar mapping
+    vec4 water_color = triplanar_water(world_pos, world_normal, TIME * distortion_speed);
+    
+    // Get the depth of the scene behind the water
+    float scene_depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
+    vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, scene_depth);
+    vec4 view_coords = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+    view_coords.xyz /= view_coords.w;
+    float linear_scene_depth = -view_coords.z;
+    
+    // Calculate the depth of the water surface itself
+    vec4 water_view_pos = VIEW_MATRIX * vec4(world_pos, 1.0);
+    float linear_water_depth = -water_view_pos.z;
+    
+    // Calculate the difference for depth effects
+    float depth_diff = linear_scene_depth - linear_water_depth;
+    
+    // Calculate foam
+    float foam = calculate_foam(world_pos.xz, depth_diff, TIME);
+    
+    // Calculate water opacity based on depth
+    float water_opacity = clamp(depth_diff * water_depth_factor, 1.0, 1.0);
+    
+    // Mix water color with the scene background
+    vec4 background = texture(SCREEN_TEXTURE, SCREEN_UV);
+    vec4 final_color = mix(background, water_color, water_opacity * water_transparency);
+    
+    // Add foam on top
+    final_color = mix(final_color, FOAM_COL, foam);
+    
+    // Set final color and alpha
+    ALBEDO = final_color.rgb;
+    ALPHA = final_color.a;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_grtjb"]
+render_priority = 1
+shader = SubResource("Shader_uj0fx")
+shader_parameter/WATER_COL = Color(0.0579333, 0.88, 0.044, 1)
+shader_parameter/WATER2_COL = Color(0.521147, 1, 0.457936, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/wave_speed = 11.82
+shader_parameter/wave_amplitude = 0.035
+shader_parameter/wave_frequency = 1.5
+shader_parameter/time_offset = 0.0
+shader_parameter/water_size = Vector2(129.15, 128)
+shader_parameter/blend_sharpness = 8.0
+shader_parameter/flow_direction = Vector2(0, -7.48)
+shader_parameter/flow_speed = 0.815
+shader_parameter/water_transparency = 0.8
+shader_parameter/water_depth_factor = 0.1
+shader_parameter/foam_width = 0.5
+shader_parameter/foam_edge_softness = 0.05
+shader_parameter/foam_smoothness = 0.03
+shader_parameter/foam_distortion_speed = 0.5
+shader_parameter/foam_distortion_amount = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u41tu"]
+render_priority = 1
+shader = SubResource("Shader_uj0fx")
+shader_parameter/WATER_COL = Color(0.0579333, 0.88, 0.044, 1)
+shader_parameter/WATER2_COL = Color(0.521147, 1, 0.457936, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/wave_speed = 11.82
+shader_parameter/wave_amplitude = 0.035
+shader_parameter/wave_frequency = 1.5
+shader_parameter/time_offset = 0.0
+shader_parameter/water_size = Vector2(129.15, 128)
+shader_parameter/blend_sharpness = 8.0
+shader_parameter/flow_direction = Vector2(-43.46, 1)
+shader_parameter/flow_speed = 0.815
+shader_parameter/water_transparency = 0.8
+shader_parameter/water_depth_factor = 0.1
+shader_parameter/foam_width = 0.5
+shader_parameter/foam_edge_softness = 0.05
+shader_parameter/foam_smoothness = 0.03
+shader_parameter/foam_distortion_speed = 0.5
+shader_parameter/foam_distortion_amount = 0.1
+
+[sub_resource type="Shader" id="Shader_1jmdg"]
+code = "shader_type spatial;
+
+render_mode unshaded;
+
+// Water color and foam color
+uniform vec4 WATER_COL : source_color = vec4(0.04, 0.38, 0.88, 1.0);
+uniform vec4 WATER2_COL : source_color = vec4(0.04, 0.35, 0.78, 1.0);
+uniform vec4 FOAM_COL : source_color = vec4(0.8125, 0.9609, 0.9648, 1.0);
+
+// Water animation and appearance
+uniform float distortion_speed = 2.0;
+uniform vec2 tile = vec2(5.0, 5.0);
+uniform float wave_speed = 2;
+uniform float wave_amplitude = 0.5;
+uniform float wave_frequency = 1.5;
+uniform float time_offset = 0.0;
+uniform vec2 water_size = vec2(128.0, 128.0);
+uniform float blend_sharpness : hint_range(0.1, 50.0) = 8.0;
+uniform vec2 flow_direction = vec2(0.0, 1.0); // Direction of the water flow on the XZ plane
+uniform float flow_speed = 0.1; // Speed of the water flow
+
+// Uniforms for transparency and depth effects
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform float water_transparency = 0.8; // Adjust this to control overall water transparency
+uniform float water_depth_factor = 0.1; // Adjust this to control how quickly water becomes opaque with depth
+
+// Foam uniforms for where the mesh intersects the water mesh
+uniform float foam_width = 0.5;
+uniform float foam_edge_softness = 0.05;
+uniform float foam_smoothness = 0.03;
+uniform float foam_distortion_speed = 0.5;
+uniform float foam_distortion_amount = 0.1;
+
+// Math constants
+const float TWOPI = 6.283185307;
+const float SIXPI = 18.84955592;
+
+varying vec3 world_pos;
+varying vec3 world_normal;
+
+ // Noise function for foam distortion
+float noise(vec2 uv) {
+    return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+//  noise function for smoother distortion
+float smooth_noise(vec2 uv) {
+    vec2 id = floor(uv);
+    vec2 f = fract(uv);
+    
+    float a = noise(id);
+    float b = noise(id + vec2(1.0, 0.0));
+    float c = noise(id + vec2(0.0, 1.0));
+    float d = noise(id + vec2(1.0, 1.0));
+    
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+
+// Function to calculate foam
+float calculate_foam(vec2 coords, float depth_diff, float time) {
+    // Add distortion to coords based on time and noise
+    vec2 distorted_coords = coords + vec2(
+        smooth_noise(coords * 5.0 + time * foam_distortion_speed) * foam_distortion_amount,
+        smooth_noise(coords * 5.0 + 100.0 + time * foam_distortion_speed) * foam_distortion_amount
+    );
+    
+    // Calculate foam based on depth difference and distorted coords
+    float foam_shape = smoothstep(0.0, foam_width, abs(depth_diff));
+    foam_shape = smoothstep(foam_edge_softness, 0.0, foam_shape);
+    foam_shape *= smooth_noise(distorted_coords * 10.0);
+    
+    return foam_shape;
+}
+
+// Wave height calculation
+float calculate_wave_height(vec2 position, float time) {
+    float wave_x = sin(position.x * wave_frequency + time * wave_speed);
+    float wave_y = cos(position.y * wave_frequency + time * wave_speed);
+    return (wave_x + wave_y) * 0.5 * wave_amplitude;
+}
+
+void vertex() {
+    vec4 initial_world_pos = MODEL_MATRIX * vec4(VERTEX, 1.0);
+    float wave = calculate_wave_height(initial_world_pos.xz, TIME + time_offset);
+    VERTEX.y += wave;
+	
+	// Pass final world position and normal to the fragment shader
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	world_normal = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+}
+
+// Circle function for water effects 
+float circ(vec2 pos, vec2 c, float s) {
+    c = abs(pos - c);
+    c = min(c, 1.0 - c);
+    return smoothstep(0.0, 0.002, sqrt(s) - sqrt(dot(c, c))) * -1.0;
+}
+
+
+// Water layer function
+// use the circles to draw the toon water design
+float waterlayer(vec2 uv) {
+     uv = mod(uv, 1.0); // Clamp to [0..1]
+
+    float ret = 1.0;
+
+    ret += circ(uv, vec2(0.37378, 0.277169), 0.0268181);
+
+    ret += circ(uv, vec2(0.0317477, 0.540372), 0.0193742);
+
+    ret += circ(uv, vec2(0.430044, 0.882218), 0.0232337);
+
+    ret += circ(uv, vec2(0.641033, 0.695106), 0.0117864);
+
+    ret += circ(uv, vec2(0.0146398, 0.0791346), 0.0299458);
+
+    ret += circ(uv, vec2(0.43871, 0.394445), 0.0289087);
+
+    ret += circ(uv, vec2(0.909446, 0.878141), 0.028466);
+
+    ret += circ(uv, vec2(0.310149, 0.686637), 0.0128496);
+
+    ret += circ(uv, vec2(0.928617, 0.195986), 0.0152041);
+
+    ret += circ(uv, vec2(0.0438506, 0.868153), 0.0268601);
+
+    ret += circ(uv, vec2(0.308619, 0.194937), 0.00806102);
+
+    ret += circ(uv, vec2(0.349922, 0.449714), 0.00928667);
+
+    ret += circ(uv, vec2(0.0449556, 0.953415), 0.023126);
+
+    ret += circ(uv, vec2(0.117761, 0.503309), 0.0151272);
+
+    ret += circ(uv, vec2(0.563517, 0.244991), 0.0292322);
+
+    ret += circ(uv, vec2(0.566936, 0.954457), 0.00981141);
+
+    ret += circ(uv, vec2(0.0489944, 0.200931), 0.0178746);
+
+    ret += circ(uv, vec2(0.569297, 0.624893), 0.0132408);
+
+    ret += circ(uv, vec2(0.298347, 0.710972), 0.0114426);
+
+    ret += circ(uv, vec2(0.878141, 0.771279), 0.00322719);
+
+    ret += circ(uv, vec2(0.150995, 0.376221), 0.00216157);
+
+    ret += circ(uv, vec2(0.119673, 0.541984), 0.0124621);
+
+    ret += circ(uv, vec2(0.629598, 0.295629), 0.0198736);
+
+    ret += circ(uv, vec2(0.334357, 0.266278), 0.0187145);
+
+    ret += circ(uv, vec2(0.918044, 0.968163), 0.0182928);
+
+    ret += circ(uv, vec2(0.965445, 0.505026), 0.006348);
+
+    ret += circ(uv, vec2(0.514847, 0.865444), 0.00623523);
+
+    ret += circ(uv, vec2(0.710575, 0.0415131), 0.00322689);
+
+    ret += circ(uv, vec2(0.71403, 0.576945), 0.0215641);
+
+    ret += circ(uv, vec2(0.748873, 0.413325), 0.0110795);
+
+    ret += circ(uv, vec2(0.0623365, 0.896713), 0.0236203);
+
+    ret += circ(uv, vec2(0.980482, 0.473849), 0.00573439);
+
+    ret += circ(uv, vec2(0.647463, 0.654349), 0.0188713);
+
+    ret += circ(uv, vec2(0.651406, 0.981297), 0.00710875);
+
+    ret += circ(uv, vec2(0.428928, 0.382426), 0.0298806);
+
+    ret += circ(uv, vec2(0.811545, 0.62568), 0.00265539);
+
+    ret += circ(uv, vec2(0.400787, 0.74162), 0.00486609);
+
+    ret += circ(uv, vec2(0.331283, 0.418536), 0.00598028);
+
+    ret += circ(uv, vec2(0.894762, 0.0657997), 0.00760375);
+
+    ret += circ(uv, vec2(0.525104, 0.572233), 0.0141796);
+
+    ret += circ(uv, vec2(0.431526, 0.911372), 0.0213234);
+
+    ret += circ(uv, vec2(0.658212, 0.910553), 0.000741023);
+
+    ret += circ(uv, vec2(0.514523, 0.243263), 0.0270685);
+
+    ret += circ(uv, vec2(0.0249494, 0.252872), 0.00876653);
+
+    ret += circ(uv, vec2(0.502214, 0.47269), 0.0234534);
+
+    ret += circ(uv, vec2(0.693271, 0.431469), 0.0246533);
+
+    ret += circ(uv, vec2(0.415, 0.884418), 0.0271696);
+
+    ret += circ(uv, vec2(0.149073, 0.41204), 0.00497198);
+
+    ret += circ(uv, vec2(0.533816, 0.897634), 0.00650833);
+
+    ret += circ(uv, vec2(0.0409132, 0.83406), 0.0191398);
+
+    ret += circ(uv, vec2(0.638585, 0.646019), 0.0206129);
+
+    ret += circ(uv, vec2(0.660342, 0.966541), 0.0053511);
+
+    ret += circ(uv, vec2(0.513783, 0.142233), 0.00471653);
+
+    ret += circ(uv, vec2(0.124305, 0.644263), 0.00116724);
+
+    ret += circ(uv, vec2(0.99871, 0.583864), 0.0107329);
+
+    ret += circ(uv, vec2(0.894879, 0.233289), 0.00667092);
+
+    ret += circ(uv, vec2(0.246286, 0.682766), 0.00411623);
+
+    ret += circ(uv, vec2(0.0761895, 0.16327), 0.0145935);
+
+    ret += circ(uv, vec2(0.949386, 0.802936), 0.0100873);
+
+    ret += circ(uv, vec2(0.480122, 0.196554), 0.0110185);
+
+    ret += circ(uv, vec2(0.896854, 0.803707), 0.013969);
+
+    ret += circ(uv, vec2(0.292865, 0.762973), 0.00566413);
+
+    ret += circ(uv, vec2(0.0995585, 0.117457), 0.00869407);
+
+    ret += circ(uv, vec2(0.377713, 0.00335442), 0.0063147);
+
+    ret += circ(uv, vec2(0.506365, 0.531118), 0.0144016);
+
+    ret += circ(uv, vec2(0.408806, 0.894771), 0.0243923);
+
+    ret += circ(uv, vec2(0.143579, 0.85138), 0.00418529);
+
+    ret += circ(uv, vec2(0.0902811, 0.181775), 0.0108896);
+
+    ret += circ(uv, vec2(0.780695, 0.394644), 0.00475475);
+
+    ret += circ(uv, vec2(0.298036, 0.625531), 0.00325285);
+
+    ret += circ(uv, vec2(0.218423, 0.714537), 0.00157212);
+
+    ret += circ(uv, vec2(0.658836, 0.159556), 0.00225897);
+
+    ret += circ(uv, vec2(0.987324, 0.146545), 0.0288391);
+
+    ret += circ(uv, vec2(0.222646, 0.251694), 0.00092276);
+
+    ret += circ(uv, vec2(0.159826, 0.528063), 0.00605293);
+
+	return max(ret, 0.0);
+}
+
+
+// Water effect function to return vec4
+vec4 water(vec2 uv, vec3 cdir, float iTime) {
+    uv *= vec2(0.25);
+
+    vec2 a = 0.025 * cdir.xz / cdir.y;
+    float h = sin(uv.x + iTime);
+    uv += a * h;
+    h = sin(0.841471 * uv.x - 0.540302 * uv.y + iTime);
+    uv += a * h;
+
+    float d1 = mod(uv.x + uv.y, TWOPI);
+    float d2 = mod((uv.x + uv.y + 0.25) * 1.3, SIXPI);
+    d1 = iTime * 0.07 + d1;
+    d2 = iTime * 0.5 + d2;
+    vec2 dist = vec2(
+        sin(d1) * 0.15 + sin(d2) * 0.05,
+        cos(d1) * 0.15 + cos(d2) * 0.05
+    );
+
+    vec4 ret = mix(WATER_COL, WATER2_COL, waterlayer(uv + dist.xy));
+    ret = mix(ret, FOAM_COL, waterlayer(vec2(1.0) - uv - dist.yx));
+    return ret;
+}
+
+vec4 triplanar_water(vec3 pos, vec3 normal, float iTime) {
+    // Blend weights based on the world normal
+    vec3 blend_weights = pow(abs(normal), vec3(blend_sharpness));
+    blend_weights = blend_weights / (blend_weights.x + blend_weights.y + blend_weights.z);
+
+    // Main horizontal flow
+    vec2 horizontal_flow = normalize(flow_direction) * flow_speed * iTime;
+    // Vertical flow for sides/waterfalls
+    float vertical_flow = flow_speed * iTime;
+
+    // Y-projection (top-down) uses the full XZ horizontal flow
+    vec2 uv_y = pos.xz + horizontal_flow;
+    vec4 y_proj = water(uv_y * tile, vec3(0, 1, 0), iTime);
+    
+    // X-projection (side) uses Z flow for U and vertical flow for V
+    vec2 uv_x = pos.zy + vec2(horizontal_flow.y, vertical_flow);
+    vec4 x_proj = water(uv_x * tile, vec3(0, 1, 0), iTime);
+    
+    // Z-projection (front/back) uses X flow for U and vertical flow for V
+    vec2 uv_z = pos.xy + vec2(horizontal_flow.x, vertical_flow);
+    vec4 z_proj = water(uv_z * tile, vec3(0, 1, 0), iTime);
+
+    // Blend the projections
+    return x_proj * blend_weights.x + y_proj * blend_weights.y + z_proj * blend_weights.z;
+}
+
+void fragment() {
+    // Calculate water color using triplanar mapping
+    vec4 water_color = triplanar_water(world_pos, world_normal, TIME * distortion_speed);
+    
+    // Get the depth of the scene behind the water
+    float scene_depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
+    vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, scene_depth);
+    vec4 view_coords = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+    view_coords.xyz /= view_coords.w;
+    float linear_scene_depth = -view_coords.z;
+    
+    // Calculate the depth of the water surface itself
+    vec4 water_view_pos = VIEW_MATRIX * vec4(world_pos, 1.0);
+    float linear_water_depth = -water_view_pos.z;
+    
+    // Calculate the difference for depth effects
+    float depth_diff = linear_scene_depth - linear_water_depth;
+    
+    // Calculate foam
+    float foam = calculate_foam(world_pos.xz, depth_diff, TIME);
+    
+    // Calculate water opacity based on depth
+    float water_opacity = clamp(depth_diff * water_depth_factor, 1.0, 1.0);
+    
+    // Mix water color with the scene background
+    vec4 background = texture(SCREEN_TEXTURE, SCREEN_UV);
+    vec4 final_color = mix(background, water_color, water_opacity * water_transparency);
+    
+    // Add foam on top
+    final_color = mix(final_color, FOAM_COL, foam);
+    
+    // Set final color and alpha
+    ALBEDO = final_color.rgb;
+    ALPHA = final_color.a;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qot5w"]
+render_priority = 1
+shader = SubResource("Shader_1jmdg")
+shader_parameter/WATER_COL = Color(0.0579333, 0.88, 0.044, 1)
+shader_parameter/WATER2_COL = Color(0.521147, 1, 0.457936, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/wave_speed = 11.82
+shader_parameter/wave_amplitude = 0.035
+shader_parameter/wave_frequency = 1.5
+shader_parameter/time_offset = 0.0
+shader_parameter/water_size = Vector2(129.15, 128)
+shader_parameter/blend_sharpness = 8.0
+shader_parameter/flow_direction = Vector2(0, 1)
+shader_parameter/flow_speed = 0.815
+shader_parameter/water_transparency = 0.8
+shader_parameter/water_depth_factor = 0.1
+shader_parameter/foam_width = 0.5
+shader_parameter/foam_edge_softness = 0.05
+shader_parameter/foam_smoothness = 0.03
+shader_parameter/foam_distortion_speed = 0.5
+shader_parameter/foam_distortion_amount = 0.1
+
+[sub_resource type="Shader" id="Shader_uleup"]
+code = "shader_type spatial;
+
+render_mode unshaded;
+
+// Water color and foam color
+uniform vec4 WATER_COL : source_color = vec4(0.04, 0.38, 0.88, 1.0);
+uniform vec4 WATER2_COL : source_color = vec4(0.04, 0.35, 0.78, 1.0);
+uniform vec4 FOAM_COL : source_color = vec4(0.8125, 0.9609, 0.9648, 1.0);
+
+// Water animation and appearance
+uniform float distortion_speed = 2.0;
+uniform vec2 tile = vec2(5.0, 5.0);
+uniform float wave_speed = 2;
+uniform float wave_amplitude = 0.5;
+uniform float wave_frequency = 1.5;
+uniform float time_offset = 0.0;
+uniform vec2 water_size = vec2(128.0, 128.0);
+uniform float blend_sharpness : hint_range(0.1, 50.0) = 8.0;
+uniform vec2 flow_direction = vec2(0.0, 1.0); // Direction of the water flow on the XZ plane
+uniform float flow_speed = 0.1; // Speed of the water flow
+
+// Uniforms for transparency and depth effects
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform float water_transparency = 0.8; // Adjust this to control overall water transparency
+uniform float water_depth_factor = 0.1; // Adjust this to control how quickly water becomes opaque with depth
+
+// Foam uniforms for where the mesh intersects the water mesh
+uniform float foam_width = 0.5;
+uniform float foam_edge_softness = 0.05;
+uniform float foam_smoothness = 0.03;
+uniform float foam_distortion_speed = 0.5;
+uniform float foam_distortion_amount = 0.1;
+
+// Math constants
+const float TWOPI = 6.283185307;
+const float SIXPI = 18.84955592;
+
+varying vec3 world_pos;
+varying vec3 world_normal;
+
+ // Noise function for foam distortion
+float noise(vec2 uv) {
+    return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+//  noise function for smoother distortion
+float smooth_noise(vec2 uv) {
+    vec2 id = floor(uv);
+    vec2 f = fract(uv);
+    
+    float a = noise(id);
+    float b = noise(id + vec2(1.0, 0.0));
+    float c = noise(id + vec2(0.0, 1.0));
+    float d = noise(id + vec2(1.0, 1.0));
+    
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+
+// Function to calculate foam
+float calculate_foam(vec2 coords, float depth_diff, float time) {
+    // Add distortion to coords based on time and noise
+    vec2 distorted_coords = coords + vec2(
+        smooth_noise(coords * 5.0 + time * foam_distortion_speed) * foam_distortion_amount,
+        smooth_noise(coords * 5.0 + 100.0 + time * foam_distortion_speed) * foam_distortion_amount
+    );
+    
+    // Calculate foam based on depth difference and distorted coords
+    float foam_shape = smoothstep(0.0, foam_width, abs(depth_diff));
+    foam_shape = smoothstep(foam_edge_softness, 0.0, foam_shape);
+    foam_shape *= smooth_noise(distorted_coords * 10.0);
+    
+    return foam_shape;
+}
+
+// Wave height calculation
+float calculate_wave_height(vec2 position, float time) {
+    float wave_x = sin(position.x * wave_frequency + time * wave_speed);
+    float wave_y = cos(position.y * wave_frequency + time * wave_speed);
+    return (wave_x + wave_y) * 0.5 * wave_amplitude;
+}
+
+void vertex() {
+    vec4 initial_world_pos = MODEL_MATRIX * vec4(VERTEX, 1.0);
+    float wave = calculate_wave_height(initial_world_pos.xz, TIME + time_offset);
+    VERTEX.y += wave;
+	
+	// Pass final world position and normal to the fragment shader
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	world_normal = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+}
+
+// Circle function for water effects 
+float circ(vec2 pos, vec2 c, float s) {
+    c = abs(pos - c);
+    c = min(c, 1.0 - c);
+    return smoothstep(0.0, 0.002, sqrt(s) - sqrt(dot(c, c))) * -1.0;
+}
+
+
+// Water layer function
+// use the circles to draw the toon water design
+float waterlayer(vec2 uv) {
+     uv = mod(uv, 1.0); // Clamp to [0..1]
+
+    float ret = 1.0;
+
+    ret += circ(uv, vec2(0.37378, 0.277169), 0.0268181);
+
+    ret += circ(uv, vec2(0.0317477, 0.540372), 0.0193742);
+
+    ret += circ(uv, vec2(0.430044, 0.882218), 0.0232337);
+
+    ret += circ(uv, vec2(0.641033, 0.695106), 0.0117864);
+
+    ret += circ(uv, vec2(0.0146398, 0.0791346), 0.0299458);
+
+    ret += circ(uv, vec2(0.43871, 0.394445), 0.0289087);
+
+    ret += circ(uv, vec2(0.909446, 0.878141), 0.028466);
+
+    ret += circ(uv, vec2(0.310149, 0.686637), 0.0128496);
+
+    ret += circ(uv, vec2(0.928617, 0.195986), 0.0152041);
+
+    ret += circ(uv, vec2(0.0438506, 0.868153), 0.0268601);
+
+    ret += circ(uv, vec2(0.308619, 0.194937), 0.00806102);
+
+    ret += circ(uv, vec2(0.349922, 0.449714), 0.00928667);
+
+    ret += circ(uv, vec2(0.0449556, 0.953415), 0.023126);
+
+    ret += circ(uv, vec2(0.117761, 0.503309), 0.0151272);
+
+    ret += circ(uv, vec2(0.563517, 0.244991), 0.0292322);
+
+    ret += circ(uv, vec2(0.566936, 0.954457), 0.00981141);
+
+    ret += circ(uv, vec2(0.0489944, 0.200931), 0.0178746);
+
+    ret += circ(uv, vec2(0.569297, 0.624893), 0.0132408);
+
+    ret += circ(uv, vec2(0.298347, 0.710972), 0.0114426);
+
+    ret += circ(uv, vec2(0.878141, 0.771279), 0.00322719);
+
+    ret += circ(uv, vec2(0.150995, 0.376221), 0.00216157);
+
+    ret += circ(uv, vec2(0.119673, 0.541984), 0.0124621);
+
+    ret += circ(uv, vec2(0.629598, 0.295629), 0.0198736);
+
+    ret += circ(uv, vec2(0.334357, 0.266278), 0.0187145);
+
+    ret += circ(uv, vec2(0.918044, 0.968163), 0.0182928);
+
+    ret += circ(uv, vec2(0.965445, 0.505026), 0.006348);
+
+    ret += circ(uv, vec2(0.514847, 0.865444), 0.00623523);
+
+    ret += circ(uv, vec2(0.710575, 0.0415131), 0.00322689);
+
+    ret += circ(uv, vec2(0.71403, 0.576945), 0.0215641);
+
+    ret += circ(uv, vec2(0.748873, 0.413325), 0.0110795);
+
+    ret += circ(uv, vec2(0.0623365, 0.896713), 0.0236203);
+
+    ret += circ(uv, vec2(0.980482, 0.473849), 0.00573439);
+
+    ret += circ(uv, vec2(0.647463, 0.654349), 0.0188713);
+
+    ret += circ(uv, vec2(0.651406, 0.981297), 0.00710875);
+
+    ret += circ(uv, vec2(0.428928, 0.382426), 0.0298806);
+
+    ret += circ(uv, vec2(0.811545, 0.62568), 0.00265539);
+
+    ret += circ(uv, vec2(0.400787, 0.74162), 0.00486609);
+
+    ret += circ(uv, vec2(0.331283, 0.418536), 0.00598028);
+
+    ret += circ(uv, vec2(0.894762, 0.0657997), 0.00760375);
+
+    ret += circ(uv, vec2(0.525104, 0.572233), 0.0141796);
+
+    ret += circ(uv, vec2(0.431526, 0.911372), 0.0213234);
+
+    ret += circ(uv, vec2(0.658212, 0.910553), 0.000741023);
+
+    ret += circ(uv, vec2(0.514523, 0.243263), 0.0270685);
+
+    ret += circ(uv, vec2(0.0249494, 0.252872), 0.00876653);
+
+    ret += circ(uv, vec2(0.502214, 0.47269), 0.0234534);
+
+    ret += circ(uv, vec2(0.693271, 0.431469), 0.0246533);
+
+    ret += circ(uv, vec2(0.415, 0.884418), 0.0271696);
+
+    ret += circ(uv, vec2(0.149073, 0.41204), 0.00497198);
+
+    ret += circ(uv, vec2(0.533816, 0.897634), 0.00650833);
+
+    ret += circ(uv, vec2(0.0409132, 0.83406), 0.0191398);
+
+    ret += circ(uv, vec2(0.638585, 0.646019), 0.0206129);
+
+    ret += circ(uv, vec2(0.660342, 0.966541), 0.0053511);
+
+    ret += circ(uv, vec2(0.513783, 0.142233), 0.00471653);
+
+    ret += circ(uv, vec2(0.124305, 0.644263), 0.00116724);
+
+    ret += circ(uv, vec2(0.99871, 0.583864), 0.0107329);
+
+    ret += circ(uv, vec2(0.894879, 0.233289), 0.00667092);
+
+    ret += circ(uv, vec2(0.246286, 0.682766), 0.00411623);
+
+    ret += circ(uv, vec2(0.0761895, 0.16327), 0.0145935);
+
+    ret += circ(uv, vec2(0.949386, 0.802936), 0.0100873);
+
+    ret += circ(uv, vec2(0.480122, 0.196554), 0.0110185);
+
+    ret += circ(uv, vec2(0.896854, 0.803707), 0.013969);
+
+    ret += circ(uv, vec2(0.292865, 0.762973), 0.00566413);
+
+    ret += circ(uv, vec2(0.0995585, 0.117457), 0.00869407);
+
+    ret += circ(uv, vec2(0.377713, 0.00335442), 0.0063147);
+
+    ret += circ(uv, vec2(0.506365, 0.531118), 0.0144016);
+
+    ret += circ(uv, vec2(0.408806, 0.894771), 0.0243923);
+
+    ret += circ(uv, vec2(0.143579, 0.85138), 0.00418529);
+
+    ret += circ(uv, vec2(0.0902811, 0.181775), 0.0108896);
+
+    ret += circ(uv, vec2(0.780695, 0.394644), 0.00475475);
+
+    ret += circ(uv, vec2(0.298036, 0.625531), 0.00325285);
+
+    ret += circ(uv, vec2(0.218423, 0.714537), 0.00157212);
+
+    ret += circ(uv, vec2(0.658836, 0.159556), 0.00225897);
+
+    ret += circ(uv, vec2(0.987324, 0.146545), 0.0288391);
+
+    ret += circ(uv, vec2(0.222646, 0.251694), 0.00092276);
+
+    ret += circ(uv, vec2(0.159826, 0.528063), 0.00605293);
+
+	return max(ret, 0.0);
+}
+
+
+// Water effect function to return vec4
+vec4 water(vec2 uv, vec3 cdir, float iTime) {
+    uv *= vec2(0.25);
+
+    vec2 a = 0.025 * cdir.xz / cdir.y;
+    float h = sin(uv.x + iTime);
+    uv += a * h;
+    h = sin(0.841471 * uv.x - 0.540302 * uv.y + iTime);
+    uv += a * h;
+
+    float d1 = mod(uv.x + uv.y, TWOPI);
+    float d2 = mod((uv.x + uv.y + 0.25) * 1.3, SIXPI);
+    d1 = iTime * 0.07 + d1;
+    d2 = iTime * 0.5 + d2;
+    vec2 dist = vec2(
+        sin(d1) * 0.15 + sin(d2) * 0.05,
+        cos(d1) * 0.15 + cos(d2) * 0.05
+    );
+
+    vec4 ret = mix(WATER_COL, WATER2_COL, waterlayer(uv + dist.xy));
+    ret = mix(ret, FOAM_COL, waterlayer(vec2(1.0) - uv - dist.yx));
+    return ret;
+}
+
+vec4 triplanar_water(vec3 pos, vec3 normal, float iTime) {
+    // Blend weights based on the world normal
+    vec3 blend_weights = pow(abs(normal), vec3(blend_sharpness));
+    blend_weights = blend_weights / (blend_weights.x + blend_weights.y + blend_weights.z);
+
+    // Main horizontal flow
+    vec2 horizontal_flow = normalize(flow_direction) * flow_speed * iTime;
+    // Vertical flow for sides/waterfalls
+    float vertical_flow = flow_speed * iTime;
+
+    // Y-projection (top-down) uses the full XZ horizontal flow
+    vec2 uv_y = pos.xz + horizontal_flow;
+    vec4 y_proj = water(uv_y * tile, vec3(0, 1, 0), iTime);
+    
+    // X-projection (side) uses Z flow for U and vertical flow for V
+    vec2 uv_x = pos.zy + vec2(horizontal_flow.y, vertical_flow);
+    vec4 x_proj = water(uv_x * tile, vec3(0, 1, 0), iTime);
+    
+    // Z-projection (front/back) uses X flow for U and vertical flow for V
+    vec2 uv_z = pos.xy + vec2(horizontal_flow.x, vertical_flow);
+    vec4 z_proj = water(uv_z * tile, vec3(0, 1, 0), iTime);
+
+    // Blend the projections
+    return x_proj * blend_weights.x + y_proj * blend_weights.y + z_proj * blend_weights.z;
+}
+
+void fragment() {
+    // Calculate water color using triplanar mapping
+    vec4 water_color = triplanar_water(world_pos, world_normal, TIME * distortion_speed);
+    
+    // Get the depth of the scene behind the water
+    float scene_depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
+    vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, scene_depth);
+    vec4 view_coords = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+    view_coords.xyz /= view_coords.w;
+    float linear_scene_depth = -view_coords.z;
+    
+    // Calculate the depth of the water surface itself
+    vec4 water_view_pos = VIEW_MATRIX * vec4(world_pos, 1.0);
+    float linear_water_depth = -water_view_pos.z;
+    
+    // Calculate the difference for depth effects
+    float depth_diff = linear_scene_depth - linear_water_depth;
+    
+    // Calculate foam
+    float foam = calculate_foam(world_pos.xz, depth_diff, TIME);
+    
+    // Calculate water opacity based on depth
+    float water_opacity = clamp(depth_diff * water_depth_factor, 1.0, 1.0);
+    
+    // Mix water color with the scene background
+    vec4 background = texture(SCREEN_TEXTURE, SCREEN_UV);
+    vec4 final_color = mix(background, water_color, water_opacity * water_transparency);
+    
+    // Add foam on top
+    final_color = mix(final_color, FOAM_COL, foam);
+    
+    // Set final color and alpha
+    ALBEDO = final_color.rgb;
+    ALPHA = final_color.a;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hy28"]
+render_priority = 1
+shader = SubResource("Shader_uleup")
+shader_parameter/WATER_COL = Color(0.0579333, 0.88, 0.044, 1)
+shader_parameter/WATER2_COL = Color(0.521147, 1, 0.457936, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/wave_speed = 11.82
+shader_parameter/wave_amplitude = 0.035
+shader_parameter/wave_frequency = 1.5
+shader_parameter/time_offset = 0.0
+shader_parameter/water_size = Vector2(129.15, 128)
+shader_parameter/blend_sharpness = 8.0
+shader_parameter/flow_direction = Vector2(18.7, 8.24)
+shader_parameter/flow_speed = 0.815
+shader_parameter/water_transparency = 0.8
+shader_parameter/water_depth_factor = 0.1
+shader_parameter/foam_width = 0.5
+shader_parameter/foam_edge_softness = 0.05
+shader_parameter/foam_smoothness = 0.03
+shader_parameter/foam_distortion_speed = 0.5
+shader_parameter/foam_distortion_amount = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltevf"]
+render_priority = 1
+shader = ExtResource("7_7u4ks")
+shader_parameter/noise_texture = ExtResource("8_qrvbp")
+shader_parameter/texture_mask = ExtResource("9_skgg3")
+shader_parameter/emission_intensity = 2.0
+shader_parameter/time_scale = 3.0
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/edge_softness = 0.1
+
+[sub_resource type="Gradient" id="Gradient_ymdgk"]
+colors = PackedColorArray(0.733479, 0.430208, 0, 1, 1, 0, 0.447059, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s3saw"]
+gradient = SubResource("Gradient_ymdgk")
+width = 128
+
+[sub_resource type="Curve" id="Curve_lswb3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.365019, 0.35828), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6d38h"]
+curve = SubResource("Curve_lswb3")
+
+[sub_resource type="Curve" id="Curve_tca28"]
+_data = [Vector2(0, 0), 0.0, 3.65289, 0, 0, Vector2(0.22807, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a58q8"]
+width = 128
+curve = SubResource("Curve_tca28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7u4ks"]
+lifetime_randomness = 0.44
+direction = Vector3(0, 1, 0)
+spread = 61.2
+flatness = 0.29
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 4.0
+linear_accel_max = 4.0
+scale_min = 0.7
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_a58q8")
+color_ramp = SubResource("GradientTexture2D_s3saw")
+emission_curve = SubResource("CurveTexture_6d38h")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qrvbp"]
 
 [node name="cauldron_room" instance=ExtResource("1_h5kjp")]
 
-[node name="Cylinder" parent="." index="0"]
+[node name="Metal" parent="." index="0"]
 surface_material_override/0 = ExtResource("2_h7tre")
 
 [node name="Cauldron" parent="." index="1"]
@@ -320,14 +1508,91 @@ surface_material_override/0 = SubResource("StandardMaterial3D_h5kjp")
 [node name="hole" parent="." index="30"]
 surface_material_override/0 = SubResource("StandardMaterial3D_h5kjp")
 
-[node name="Valve_001" parent="." index="31"]
+[node name="Cylinder_005" parent="." index="31"]
+surface_material_override/0 = ExtResource("4_s3saw")
+
+[node name="Valve_001" parent="." index="32"]
 surface_material_override/0 = ExtResource("4_s3saw")
 surface_material_override/1 = SubResource("ShaderMaterial_ajuu0")
 
-[node name="Liquid" parent="." index="32"]
-transform = Transform3D(2.30932, 0, 0, 0, 0.657961, 0, 0, 0, 2.30932, 0, 4.14744, 0)
+[node name="Liquid" parent="." index="33"]
+transform = Transform3D(1.709, 0, 0, 0, 1.256, 0, 0, 0, 1.699, 0.0566758, 2.95918, 0.0705571)
 surface_material_override/0 = ExtResource("6_h7tre")
 
-[node name="stream_003" parent="." index="35"]
-transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.4012, 0.311017, 0)
-surface_material_override/0 = SubResource("ShaderMaterial_bibg3")
+[node name="stream" parent="." index="34"]
+surface_material_override/0 = SubResource("ShaderMaterial_grtjb")
+
+[node name="stream_001" parent="." index="35"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.044733, 9.53674e-07, -0.194131)
+surface_material_override/0 = SubResource("ShaderMaterial_u41tu")
+
+[node name="stream_003" parent="." index="36"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.415092, -0.0554209, 0.0200105)
+surface_material_override/0 = SubResource("ShaderMaterial_qot5w")
+
+[node name="stream_002" parent="." index="37"]
+surface_material_override/0 = SubResource("ShaderMaterial_7hy28")
+
+[node name="Fire" type="GPUParticles3D" parent="." index="38"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106476, 0, -0.0034073)
+material_override = SubResource("ShaderMaterial_ltevf")
+amount = 50
+randomness = 0.74
+fixed_fps = 60
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_7u4ks")
+draw_pass_1 = SubResource("QuadMesh_qrvbp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Fire" index="0"]
+light_color = Color(0.817021, 0.463606, 0.104874, 1)
+light_volumetric_fog_energy = 16.0
+shadow_enabled = true
+shadow_bias = 2.869
+shadow_opacity = 0.52
+shadow_blur = 10.0
+omni_range = 31.717
+omni_attenuation = 0.301
+script = ExtResource("10_idrrs")
+noise = ExtResource("11_idrrs")
+position_jitter_amount = 0.05
+
+[node name="Timer" type="Timer" parent="Fire/OmniLight3D" index="0"]
+wait_time = 0.1
+autostart = true
+
+[node name="lights" type="Node3D" parent="." index="39"]
+
+[node name="PhysicsChainShort" parent="lights" index="0" instance=ExtResource("10_s3saw")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3.41849, 6.34547, 11.3364)
+script = ExtResource("12_ajuu0")
+chain_shader_material = ExtResource("14_ajuu0")
+
+[node name="GooLight" type="OmniLight3D" parent="lights" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.96576, 0)
+light_color = Color(0, 0.86269, 0, 1)
+light_indirect_energy = 5.052
+light_volumetric_fog_energy = 16.0
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_transmittance_bias = 1.564
+shadow_blur = 10.0
+omni_range = 3.374
+omni_attenuation = -2.527
+
+[node name="GooLight2" type="SpotLight3D" parent="lights" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.77, 0)
+light_color = Color(0.143484, 1, 0.127226, 1)
+light_energy = 0.891
+light_indirect_energy = 5.16
+light_volumetric_fog_energy = 16.0
+shadow_enabled = true
+spot_range = 30.201
+spot_attenuation = -0.08
+spot_angle = 57.17
+script = ExtResource("13_qrvbp")
+noise = ExtResource("11_idrrs")
+flicker_speed = 0.93
+position_jitter_amount = -0.625
+
+[connection signal="timeout" from="Fire/OmniLight3D/Timer" to="Fire/OmniLight3D" method="_on_timer_timeout"]
