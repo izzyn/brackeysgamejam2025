@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c1sjfcwq8vd1g" path="res://scripts/player/player.gd" id="2_bdijj"]
 [ext_resource type="PackedScene" uid="uid://b1kcusvucjroh" path="res://scenes/instantiable/vfx/camera_outline_shader.tscn" id="3_1jmdg"]
-[ext_resource type="PackedScene" uid="uid://cxsgldw3yv1ul" path="res://scenes/instantiable/rooms/base_room_floating.tscn" id="3_af3ax"]
 [ext_resource type="Script" uid="uid://cr37fh1xk38yn" path="res://scripts/player/debugger.gd" id="4_6c03w"]
-[ext_resource type="PackedScene" uid="uid://cg8vjltaxybkt" path="res://assets/models/enemies/gingerdead_man.glb" id="4_tpvkv"]
+[ext_resource type="PackedScene" uid="uid://c1tew2bjd136d" path="res://scenes/instantiable/rooms/base_room.tscn" id="4_tpvkv"]
+[ext_resource type="PackedScene" uid="uid://clddfiyg8m7ia" path="res://scenes/instantiable/rooms/cauldron_room.tscn" id="5_uj0fx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wdbvl"]
 
@@ -38,29 +38,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00699985, 0.896706, 0.00500
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_wdbvl")
 
-[node name="base_room_floating" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_af3ax")]
-
-[node name="gingerdead_man" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_tpvkv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43052, -12.955)
-
-[node name="Skeleton3D" parent="SubViewportContainer/SubViewport/gingerdead_man/Armature" index="0"]
-bones/0/position = Vector3(0.139045, 0.205152, 1.13044e-08)
-bones/0/rotation = Quaternion(-6.10413e-09, 1.53151e-07, -0.185676, 0.982611)
-bones/1/rotation = Quaternion(-1.77636e-15, 2.22045e-16, 8.70137e-15, 1)
-bones/3/rotation = Quaternion(0.010386, 1.2829e-07, -0.116288, 0.993161)
-bones/4/rotation = Quaternion(0.0358974, -0.0263386, 0.805459, 0.590977)
-bones/5/rotation = Quaternion(-0.0303901, -1.16881e-07, -0.340265, 0.939838)
-bones/6/position = Vector3(0.139045, 0.205152, 1.13044e-08)
-bones/6/rotation = Quaternion(0.671553, 0.221397, 0.671553, -0.221397)
-bones/7/rotation = Quaternion(-0.376178, 0.0374048, 0.14873, 0.913767)
-bones/8/position = Vector3(0.139045, 0.205152, 1.13044e-08)
-bones/8/rotation = Quaternion(0.544462, -0.451178, -0.544462, -0.451178)
-bones/9/rotation = Quaternion(-0.378977, 0.0791828, 0.0515813, 0.920568)
-
-[node name="AnimationPlayer" parent="SubViewportContainer/SubViewport/gingerdead_man" index="1"]
-autoplay = "walk"
-
 [node name="Node" type="Node" parent="."]
 script = ExtResource("4_6c03w")
 
-[editable path="SubViewportContainer/SubViewport/gingerdead_man"]
+[node name="base_room" parent="." instance=ExtResource("4_tpvkv")]
+
+[node name="cauldron_room" parent="." instance=ExtResource("5_uj0fx")]
