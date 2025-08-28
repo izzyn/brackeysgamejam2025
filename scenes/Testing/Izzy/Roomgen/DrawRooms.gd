@@ -16,9 +16,9 @@ func _draw():
 					if wall.open:
 						var offset = Vector2(rectsize,rectsize)/2
 						var color = Color.RED
-						var direction = rooms[y][x].directions[wall]
-						if direction == RoomData.Direction.UP or direction == RoomData.Direction.DOWN:
-							color = Color.BLUE
+						#var direction = rooms[y][x].directions[wall]
+						#if direction == RoomData.Direction.UP or direction == RoomData.Direction.DOWN:
+							#color = Color.BLUE
 						draw_line(wall.separated_cells[0].coords * 1.1 * rectsize + offset, wall.separated_cells[1].coords * 1.1 * rectsize + offset, color, 50)
 	for y in len(rooms):
 		for x in len(rooms[y]):

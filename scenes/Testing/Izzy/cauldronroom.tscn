@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://tjhij35h86en"]
+
+[ext_resource type="PackedScene" uid="uid://bcdco5tf15lun" path="res://scenes/instantiable/rooms/base_roomizzy.tscn" id="1_bcfdp"]
+[ext_resource type="PackedScene" uid="uid://clddfiyg8m7ia" path="res://scenes/instantiable/rooms/cauldron_room.tscn" id="5_0yjvq"]
+
+[node name="TestWorld" type="Node3D"]
+
+[node name="base_room" parent="." instance=ExtResource("1_bcfdp")]
+
+[node name="cauldron_room" parent="." instance=ExtResource("5_0yjvq")]
+
+[editable path="cauldron_room"]

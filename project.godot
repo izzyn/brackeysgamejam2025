@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BrackeysGameJam2025"
-run/main_scene="uid://y0pydi0pxs1e"
+run/main_scene="uid://di5lwf0ab65u3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

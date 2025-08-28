@@ -1,20 +1,74 @@
 extends Control
 
 var cells : Array[Array]
-var room_nr : int = 20
+var room_nr : int = 12
 var grid_size : int = 8
 var roomgen_complete : bool
 
 @export
 var rooms : Array[PackedScene]
+
 func _ready() -> void:
-	#roomgen()
+	roomgen()
+	generate_rooms()
 	pass
 
 func generate_rooms():
+	var displacement_vector : Vector3 = Vector3.ZERO
+	var last_x = 0
 	for y in cells: 
-		for cell in y: 
+		for cell : RoomData in y: 
+			if cell.room_name == "#":
+				continue
 			
+			var picked_room = rooms.pick_random().instantiate()
+			var roomsnode = get_node("../Rooms")
+			
+			roomsnode.add_child(picked_room)
+			picked_room.position = displacement_vector
+			cell.room_scene = picked_room
+			last_x += 400
+			displacement_vector.x += 400
+		if last_x != 0:
+			displacement_vector.z += 400
+	
+	for y in cells: 
+		for cell : RoomData in y: 
+			if cell.room_name == "#" or !cell.room_scene:
+				continue
+			
+			for gate in cell.room_scene.get_node("base_room/doors").get_children():
+				var dir = 0
+				var other_gate = ""
+				if gate.name == "north_gate":
+					dir = RoomData.Direction.UP
+					other_gate = "south_gate"
+				elif gate.name == "south_gate":
+					dir = RoomData.Direction.DOWN
+					other_gate = "north_gate"
+				elif gate.name == "east_gate":
+					dir = RoomData.Direction.RIGHT
+					other_gate = "west_gate"
+				elif gate.name == "west_gate":
+					dir = RoomData.Direction.LEFT
+					other_gate = "east_gate"
+				
+				if dir not in cell.directions:
+					gate.get_node("AnimationPlayer").play("gate_close")
+					gate.get_node("Portal/Screen").get_active_material(0).set_shader_parameter("active", 0.0) 
+					continue
+				var walldata = cell.directions[dir]
+				
+				if !walldata.open:
+					gate.get_node("AnimationPlayer").play("gate_close")
+					gate.get_node("Portal/Screen").get_active_material(0).set_shader_parameter("active", 0.0) 
+					continue
+				for item : RoomData in walldata.separated_cells:
+					if item != cell:
+						var portaltolink =item.room_scene.get_node("base_room/doors/%s/Portal" % other_gate)
+						gate.get_node("Portal").linked = true
+						gate.get_node("Portal").linked_portal = portaltolink
+
 	pass
 func roomgen():
 	var rooms_made = 1
@@ -79,10 +133,10 @@ func genwall(cell1, cell2, vertical) -> Wall:
 	cell2.walls.append(nwall)
 	nwall.separated_cells.append(cell2)
 	if vertical:
-		cell1.directions[nwall]=RoomData.Direction.DOWN
-		cell2.directions[nwall]=RoomData.Direction.UP
+		cell1.directions[RoomData.Direction.DOWN]=nwall
+		cell2.directions[RoomData.Direction.UP]=nwall
 	else:
-		cell1.directions[nwall]=RoomData.Direction.LEFT
-		cell2.directions[nwall]=RoomData.Direction.RIGHT
+		cell1.directions[RoomData.Direction.LEFT]=nwall
+		cell2.directions[RoomData.Direction.RIGHT]=nwall
 	return nwall
 	pass

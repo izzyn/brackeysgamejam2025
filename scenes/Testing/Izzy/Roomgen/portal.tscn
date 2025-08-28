@@ -1,11 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://5qjhwriyxkdk"]
 
 [ext_resource type="Script" uid="uid://cgfbl84aqhppc" path="res://scenes/Testing/Izzy/Roomgen/Portal.gd" id="1_o53rk"]
-[ext_resource type="Shader" uid="uid://cnuyhoc25nimr" path="res://scenes/Testing/Izzy/Roomgen/swirl.gdshader" id="2_qoc6e"]
+[ext_resource type="Shader" uid="uid://cvf7tevvhiikk" path="res://scenes/Testing/Izzy/Roomgen/swirl.gdshader" id="2_qoc6e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6xypc"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_qoc6e")
+shader_parameter/active = 1.0
 shader_parameter/spin_rotation_speed = 2.0
 shader_parameter/move_speed = 7.0
 shader_parameter/offset = Vector2(-0.004, 0.13)
@@ -35,22 +37,6 @@ material = SubResource("StandardMaterial3D_3gw7s")
 
 [node name="Portal" type="Node3D" groups=["Portals"]]
 script = ExtResource("1_o53rk")
-
-[node name="PortalView" type="SubViewport" parent="."]
-handle_input_locally = false
-snap_2d_transforms_to_pixel = true
-snap_2d_vertices_to_pixel = true
-msaa_3d = 2
-screen_space_aa = 1
-canvas_item_default_texture_repeat = 1
-size = Vector2i(1152, 648)
-render_target_clear_mode = 2
-
-[node name="ViewPortCam" type="Camera3D" parent="PortalView"]
-keep_aspect = 0
-cull_mask = 1048573
-current = true
-fov = 120.0
 
 [node name="Screen" type="MeshInstance3D" parent="."]
 process_mode = 3

@@ -4,7 +4,7 @@ render_mode unshaded;
 //took it directly from balatro source code
 //buy balatro now: https://www.playbalatro.com
 
-
+uniform float active = 1;
 uniform highp float spin_rotation_speed = 2.0;
 uniform highp float move_speed = 7.0;
 uniform highp vec2 offset = vec2(0., 0.);
@@ -61,4 +61,5 @@ vec4 effect(vec2 screenSize, vec2 screen_coords){
 void fragment() {
     vec2 uv = UV;
 	ALBEDO *= effect(vec2(1.0,1.0), uv).xyz;
+	ALBEDO *= active;
 }

@@ -13,7 +13,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3pjh3")
-rooms = null
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
