@@ -1,15 +1,17 @@
-[gd_scene load_steps=46 format=4 uid="uid://de7tgoogckogd"]
+[gd_scene load_steps=42 format=4 uid="uid://bxdcniyt4ipox"]
 
-[ext_resource type="PackedScene" uid="uid://dskasiidy5wda" path="res://assets/models/objects/gate.glb" id="1_clh4q"]
-[ext_resource type="Material" uid="uid://bpm56rj1xt1y5" path="res://assets/materials/metal_mat.tres" id="2_av16k"]
-[ext_resource type="Script" uid="uid://de4ce0ij0ftxu" path="res://scripts/objects/gate_controller.gd" id="2_fogt6"]
-[ext_resource type="Material" uid="uid://2w4kjn51lll8" path="res://assets/materials/wood_mat.tres" id="3_nri80"]
-[ext_resource type="Shader" uid="uid://iip0itxdwxl0" path="res://scripts/shaders/stylized_fire.gdshader" id="5_nri80"]
-[ext_resource type="Texture2D" uid="uid://bgxegv32lmxou" path="res://assets/textures/vfx/HoleNoise.png" id="6_fogt6"]
-[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="7_nri80"]
-[ext_resource type="Texture2D" uid="uid://6ck83pikq2h7" path="res://assets/textures/vfx/FireMask.png" id="7_tkc7x"]
+[ext_resource type="PackedScene" uid="uid://dskasiidy5wda" path="res://assets/models/objects/gate.glb" id="1_6tw5e"]
+[ext_resource type="Material" uid="uid://bpm56rj1xt1y5" path="res://assets/materials/metal_mat.tres" id="2_rpqet"]
+[ext_resource type="Material" uid="uid://2w4kjn51lll8" path="res://assets/materials/wood_mat.tres" id="3_egbhi"]
+[ext_resource type="Shader" uid="uid://iip0itxdwxl0" path="res://scripts/shaders/stylized_fire.gdshader" id="4_4nwvv"]
+[ext_resource type="Texture2D" uid="uid://bgxegv32lmxou" path="res://assets/textures/vfx/HoleNoise.png" id="5_5mrdl"]
+[ext_resource type="Texture2D" uid="uid://6ck83pikq2h7" path="res://assets/textures/vfx/FireMask.png" id="6_7yv23"]
+[ext_resource type="Script" uid="uid://d3dlb46ewodpp" path="res://scripts/visual_helpers/flickering_light.gd" id="7_0m4uf"]
+[ext_resource type="PackedScene" uid="uid://5qjhwriyxkdk" path="res://scenes/Testing/Izzy/Roomgen/portal.tscn" id="8_8luec"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_fogt6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nf1db"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xekw2"]
 _surfaces = [{
 "aabb": AABB(-3.78499, -0.983072, -0.29278, 10.385, 1.58482, 0.606432),
 "format": 34896613377,
@@ -30,16 +32,22 @@ _surfaces = [{
 "format": 34896613431,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
-"material": ExtResource("3_nri80"),
+"material": SubResource("StandardMaterial3D_nf1db"),
 "primitive": 3,
 "uv_scale": Vector4(2, 1, 0.465421, 2),
 "vertex_count": 24,
 "vertex_data": PackedByteArray("6BbSA1ExSvz//47z/z9K/LvaxvkAAEr80C0AAKhYSvzQLQAAqFhX0f//jvP/v1fR//+O8/8/V9HQLQAAVqdX0dAtAABWpyqUu9rG+f//KpT//47z/78qlOgW0gOtziqU6BbSA63OwY93tf///7/Bj7vaxvn//8GPAAClB1anwY8AAKUHVqeq0He1////P6rQd7X///+/qtAAAKUHqFiq0AAApQeoWC/8u9rG+QAAL/x3tf///z8v/OgW0gNRMS/8en1gG3p9YBt6fWAben1gG+dXMFDnVzBQ51cwUOdXMFDdHC9t3Rwvbd0cL23dHC9tcN2Xl3Ddl5dw3ZeXcN2Xl5+nv7Cfp7+wn6e/sJ+nv7BWgrbpVoK26VaCtulWgrbp")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_fogt6")
+shadow_mesh = SubResource("ArrayMesh_xekw2")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_tkc7x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d44jh"]
+resource_name = "metal"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v8nn2"]
 _surfaces = [{
 "aabb": AABB(-7.61274, -1.19886, -1.05218, 16.4137, 2.05392, 2),
 "format": 34359742465,
@@ -61,7 +69,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 204,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAbABgAHAAdABsAHgAdABwAHgAfAB0AIAAfAB4AIAAhAB8AIgAhACAAIgAjACEAJAAjACIAJAAlACMAJgAnACgAJwAmACkAKQAmACoAJwApACsALAAtAC4ALAAvAC0AMAAxADIAMQAwADMAMwAwADQAMQAzADUANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMAdgB3AHgAdgB5AHcA"),
-"material": ExtResource("2_av16k"),
+"material": SubResource("StandardMaterial3D_d44jh"),
 "name": "metal",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -69,13 +77,13 @@ _surfaces = [{
 "vertex_data": PackedByteArray("m5vzwBh0mb88pHI/m5vzwM8XTT/irYa/m5vzwM8XTT88pHI/m5vzwBh0mb/irYa/m5vzwBh0mb/irYa/m5uzwM8XTT/irYa/m5vzwM8XTT/irYa/m5uzwBh0mb/irYa/m5uzwBh0mb/irYa/m5uzwM8XTT88pHI/m5uzwM8XTT/irYa/m5uzwBh0mb88pHI/m5uzwBh0mb88pHI/m5vzwM8XTT88pHI/m5uzwM8XTT88pHI/m5vzwBh0mb88pHI/m5vzwBh0mb/irYa/m5uzwBh0mb88pHI/m5uzwBh0mb/irYa/m5vzwBh0mb88pHI/m5uzwM8XTT/irYa/m5vzwM8XTT88pHI/m5vzwM8XTT/irYa/m5uzwM8XTT88pHI/JTPTQI5VBj9QjxC+9dKiQMIwED/RCv6+9dKiQMgwED8455W+aabzQOhx/z7msni+JTPTQI5VBj/k7iU+aabzQOhx/z49CYc+9dKiQMgwED/9lqA+9dKiQMIwED9JXQQ/muVkQAQMGj/m7iU+Gv8jQJKoID9ACYc+muVkQAQMGj9OjxC+Gv8jQJKoID/gsni+9dKiQMgwED8455W+9dKiQMIwED/RCv6+Nj1ywISMb7+efKm9AJb2v5Sqe7+gfKm9HMQ2wIybdb9yLDS+HMQ2wIybdb8EjEk+Nj1ywISMb7/TO9Q9AJb2v5Sqe7/RO9Q99dKiQMIwED/RCv6+kvRvQEvlWj/isni+Gv8jQJKoID/gsni+sc3IQHttSj/RCv6+ktAMQaz1OT89CYc+sc3IQHttSj/RCv6+ktAMQaz1OT/msni+kvRvQEvlWj8/CYc+sc3IQHttSj9JXQQ/kvRvQEvlWj/isni+Gv8jQJKoID9ACYc+sc3IQHttSj9JXQQ/9dKiQMIwED9JXQQ/kvRvQEvlWj8/CYc+aabzQOhx/z49CYc+ktAMQaz1OT/msni+aabzQOhx/z7msni+ktAMQaz1OT89CYc+Gv8jQJKoID/gsni+kvRvQEvlWj8/CYc+Gv8jQJKoID9ACYc+kvRvQEvlWj/isni+9dKiQMIwED9JXQQ/ktAMQaz1OT89CYc+aabzQOhx/z49CYc+sc3IQHttSj9JXQQ/aabzQOhx/z7msni+sc3IQHttSj/RCv6+9dKiQMIwED/RCv6+ktAMQaz1OT/msni+jfzEwKqBHT57eNM+jfzEwKBveD6ZyMi+jfzEwKBveD57eNM+jfzEwKqBHT6ZyMi+jfzEwKqBHT6ZyMi+05ihQIC0Xb2cyMi+jfzEwKBveD6ZyMi+816QQOrLCb6cyMi+816QQOrLCb6cyMi+05ihQIC0Xb14eNM+05ihQIC0Xb2cyMi+816QQOrLCb54eNM+816QQOrLCb54eNM+jfzEwKBveD57eNM+05ihQIC0Xb14eNM+jfzEwKqBHT57eNM+jfzEwKqBHT6ZyMi+816QQOrLCb54eNM+816QQOrLCb6cyMi+jfzEwKqBHT57eNM+05ihQIC0Xb2cyMi+jfzEwKBveD57eNM+jfzEwKBveD6ZyMi+05ihQIC0Xb14eNM+u/LbwCNq8L50eNM+u/LbwCjzwr6gyMi+u/LbwCjzwr50eNM+u/LbwCNq8L6gyMi+u/LbwCNq8L6gyMi+VLSsP8RwLb+jyMi+u/LbwCjzwr6gyMi+qJlPP3cIQr+jyMi+qJlPP3cIQr+jyMi+VLSsP8RwLb9xeNM+VLSsP8RwLb+jyMi+qJlPP3cIQr9xeNM+qJlPP3cIQr9xeNM+u/LbwCjzwr50eNM+VLSsP8RwLb9xeNM+u/LbwCNq8L50eNM+u/LbwCNq8L6gyMi+qJlPP3cIQr9xeNM+qJlPP3cIQr+jyMi+u/LbwCNq8L50eNM+VLSsP8RwLb+jyMi+u/LbwCjzwr50eNM+u/LbwCjzwr6gyMi+VLSsP8RwLb9xeNM+AAD/f/9///8AAP9//3///wAA/3//f///AAD/f/9//////////3//////////f/////////9//////////3///////3//f///////f/9///////9//3///////3//f////3//f/9/////f/9//3////9//3//f////3//f/9/////fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwP///+/0HwvA////7/QfC8D////v9B8LwPP/JdB0HwvA8/8l0HQfC8Dz/yXQdB8LwPP/JdB0HwvA8/8l0HQfC8Dz/yXQSAmsPj///+/ICaw+P///78gJrD4////vyAmsPj///+/LoPP/M/8Z74ug8/8z/xnvi6Dz/zP/Ge+LoPP/M/8Z74ug8/8z/xnvi6Dz/zP/Ge+sHggpv///z+weCCm////P7B4IKb///8/sHggpv///z+UlJUU////v5SUlRT///+/lJSVFP///7+UlJUU////v2praev///+/amtp6////79qa2nr////v2praev///+/TofeWf///z9Oh95Z////P06H3ln///8/TofeWf///z/e2U4H////v97ZTgf///+/3tlOB////7/e2U4H////vwAA/3//f///AAD/f/9///8AAP9//3///wAA/3//f////////6uAqf//////5eqLyv//////f////////1vvUcijkKQQWu9RyKOQpBBa71HIo5CkEFrvUcijkKQQWu9RyP9//38U73TI/3//f7mAov//f/9/W+9RyP9//3//f///oXxdA6H8UL6hfF0DofxQvqF8XQOh/FC+oXxdA6H8UL5Ng7D8TgOmwU2DsPxOA6bBTYOw/E4DpsFNg7D8TgOmwQAA/3//f///AAD/f/9///8AAP9//3///wAA/3//f/////////WAg///////lOk0y///////f////////1vvUcijkKQQWu9RyKOQpBBa71HIo5CkEFrvUcijkKQQWu9RyP9//3/57oLI/3//fxGBdv//f/9/W+9RyP9//3//f///XnuhBF37rr1ee6EEXfuuvV57oQRd+669XnuhBF37rr11hIj7dgQ6wnWEiPt2BDrCdYSI+3YEOsJ1hIj7dgQ6wg==")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_tkc7x")
+shadow_mesh = SubResource("ArrayMesh_v8nn2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q2ts4"]
-render_priority = 2
-shader = ExtResource("5_nri80")
-shader_parameter/noise_texture = ExtResource("6_fogt6")
-shader_parameter/texture_mask = ExtResource("7_tkc7x")
+render_priority = 0
+shader = ExtResource("4_4nwvv")
+shader_parameter/noise_texture = ExtResource("5_5mrdl")
+shader_parameter/texture_mask = ExtResource("6_7yv23")
 shader_parameter/emission_intensity = 2.0
 shader_parameter/time_scale = 3.0
 shader_parameter/texture_scale = Vector2(1, 1)
@@ -85,7 +93,7 @@ shader_parameter/edge_softness = 0.1
 offsets = PackedFloat32Array(0.00190114, 1)
 colors = PackedColorArray(0.0888431, 0.587518, 1, 1, 1, 0, 0.447059, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_q2ts4"]
+[sub_resource type="GradientTexture2D" id="3"]
 gradient = SubResource("Gradient_ymdgk")
 width = 128
 
@@ -93,14 +101,14 @@ width = 128
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.365019, 0.35828), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_i3wmh"]
+[sub_resource type="CurveTexture" id="CurveTexture_6d38h"]
 curve = SubResource("Curve_lswb3")
 
 [sub_resource type="Curve" id="Curve_tca28"]
 _data = [Vector2(0.0217391, 0), 0.0, 3.65289, 0, 0, Vector2(1, 0.878261), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_8ldbi"]
+[sub_resource type="CurveTexture" id="5"]
 width = 128
 curve = SubResource("Curve_tca28")
 
@@ -115,21 +123,21 @@ linear_accel_min = 4.0
 linear_accel_max = 4.0
 scale_min = 0.7
 scale_max = 0.8
-scale_curve = SubResource("CurveTexture_8ldbi")
+scale_curve = SubResource("5")
 color = Color(0, 0.538208, 0.931617, 1)
-color_ramp = SubResource("GradientTexture2D_q2ts4")
-emission_curve = SubResource("CurveTexture_i3wmh")
+color_ramp = SubResource("3")
+emission_curve = SubResource("CurveTexture_6d38h")
 
 [sub_resource type="QuadMesh" id="QuadMesh_342rn"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5njn1"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dyoei"]
 noise_type = 2
 frequency = 0.3026
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_342rn"]
-noise = SubResource("FastNoiseLite_5njn1")
+noise = SubResource("FastNoiseLite_dyoei")
 
-[sub_resource type="CurveTexture" id="CurveTexture_hqp1m"]
+[sub_resource type="CurveTexture" id="CurveTexture_fogt6"]
 width = 128
 curve = SubResource("Curve_tca28")
 
@@ -144,9 +152,9 @@ linear_accel_min = 4.0
 linear_accel_max = 4.0
 scale_min = 0.0
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_hqp1m")
-color_ramp = SubResource("GradientTexture2D_q2ts4")
-emission_curve = SubResource("CurveTexture_i3wmh")
+scale_curve = SubResource("CurveTexture_fogt6")
+color_ramp = SubResource("3")
+emission_curve = SubResource("CurveTexture_6d38h")
 
 [sub_resource type="Animation" id="Animation_q2ts4"]
 length = 0.001
@@ -419,7 +427,7 @@ _data = {
 offsets = PackedFloat32Array(0, 0.0969582, 0.203422, 0.389734, 0.475285, 0.992395, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0.935, 1, 1, 1, 1, 1, 0.657626, 0.549443, 0.973147, 1, 0.318422, 0.103058, 0.946542, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_d2urh"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tkc7x"]
 gradient = SubResource("Gradient_fogt6")
 
 [sub_resource type="Curve" id="Curve_fogt6"]
@@ -427,14 +435,14 @@ _limits = [0.0, 1.0, 0.0, 44.42]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.393617, 0.919334), 0.0, 0.0, 0, 0, Vector2(11.0245, 0.391304), 0.0, 0.0, 0, 0, Vector2(44.42, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_ge5pj"]
+[sub_resource type="CurveTexture" id="CurveTexture_tkc7x"]
 curve = SubResource("Curve_fogt6")
 
 [sub_resource type="Curve" id="Curve_q2ts4"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.326087, 0.926087), 0.0, 0.0, 0, 0, Vector2(1, 0.134783), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_cmhbr"]
+[sub_resource type="CurveTexture" id="CurveTexture_i3wmh"]
 curve = SubResource("Curve_q2ts4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fogt6"]
@@ -451,14 +459,13 @@ radial_accel_min = -3.73
 radial_accel_max = -1.01
 scale_min = 0.05
 scale_max = 0.1
-scale_curve = SubResource("CurveTexture_cmhbr")
-color_ramp = SubResource("GradientTexture1D_d2urh")
-emission_curve = SubResource("CurveTexture_ge5pj")
+scale_curve = SubResource("CurveTexture_i3wmh")
+color_ramp = SubResource("GradientTexture1D_tkc7x")
+emission_curve = SubResource("CurveTexture_tkc7x")
 hue_variation_min = -0.28
 hue_variation_max = 0.13
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd6tl"]
-render_priority = 2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkc7x"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -470,74 +477,15 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_i3wmh"]
-material = SubResource("StandardMaterial3D_dd6tl")
+material = SubResource("StandardMaterial3D_tkc7x")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fogt6"]
-size = Vector3(0.30072, 2.8147, 2.21082)
-
-[sub_resource type="Animation" id="Animation_hqp1m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GateCollision:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.00259399, 0.107788, 0.0140991)]
-}
-
-[sub_resource type="Animation" id="Animation_5njn1"]
-resource_name = "collision_close"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GateCollision:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.003, 3.163, 0.014), Vector3(0.00259399, 0.107788, 0.0140991)]
-}
-
-[sub_resource type="Animation" id="Animation_8ldbi"]
-resource_name = "collision_open"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GateCollision:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.00259399, 0.107788, 0.0140991), Vector3(0.003, 3.163, 0.014)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d2urh"]
-_data = {
-&"RESET": SubResource("Animation_hqp1m"),
-&"collision_close": SubResource("Animation_5njn1"),
-&"collision_open": SubResource("Animation_8ldbi")
-}
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_tkc7x"]
-size = Vector3(5.71448, 1, 3.32031)
-
-[node name="gate" instance=ExtResource("1_clh4q")]
-script = ExtResource("2_fogt6")
+[node name="gate" instance=ExtResource("1_6tw5e")]
 
 [node name="Gate" parent="." index="0"]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
-surface_material_override/0 = ExtResource("2_av16k")
+surface_material_override/0 = ExtResource("2_rpqet")
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "gate_open"
 
 [node name="sconce" type="Node3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256351, 2.32181, 0)
@@ -546,11 +494,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256351, 2.32181, 0)
 transform = Transform3D(0.0225785, 0, 0, 0, 0.323158, 0, 0, 0, 0.138351, 0, 0, 0)
 mesh = SubResource("ArrayMesh_qp4nq")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_egbhi")
 
 [node name="metal" type="MeshInstance3D" parent="sconce" index="1"]
 transform = Transform3D(0.0225785, 0, 0, 0, 0.323158, 0, 0, 0, 0.138351, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ja565")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_rpqet")
 
 [node name="Fire" type="GPUParticles3D" parent="sconce" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.141559, 0.238526, 0)
@@ -572,7 +522,7 @@ shadow_bias = 1.989
 shadow_blur = 10.0
 omni_range = 15.748
 omni_attenuation = 0.499
-script = ExtResource("7_nri80")
+script = ExtResource("7_0m4uf")
 noise = SubResource("NoiseTexture3D_342rn")
 position_jitter_amount = 0.05
 
@@ -598,6 +548,7 @@ draw_pass_1 = SubResource("QuadMesh_342rn")
 libraries = {
 &"": SubResource("AnimationLibrary_q2ts4")
 }
+autoplay = "off"
 
 [node name="Sparks" type="GPUParticles3D" parent="sconce" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059885, 0.23282, 0)
@@ -610,24 +561,7 @@ randomness = 0.73
 process_material = SubResource("ParticleProcessMaterial_fogt6")
 draw_pass_1 = SubResource("QuadMesh_i3wmh")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
-
-[node name="GateCollision" type="CollisionShape3D" parent="StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00259399, 0.107788, 0.0140991)
-shape = SubResource("BoxShape3D_fogt6")
-
-[node name="CollisionAnimationPlayer" type="AnimationPlayer" parent="StaticBody3D" index="1"]
-libraries = {
-&"": SubResource("AnimationLibrary_d2urh")
-}
-
-[node name="Area3D" type="Area3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.582409, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07656, 0, -0.0380859)
-shape = SubResource("BoxShape3D_tkc7x")
+[node name="Portal" parent="." index="3" instance=ExtResource("8_8luec")]
+transform = Transform3D(-4.79736e-08, 0, 1, 0, 1.3494, 0, -1.09751, 0, -4.37114e-08, -0.0914212, 0.010112, -0.00363016)
 
 [connection signal="timeout" from="sconce/Fire/OmniLight3D/Timer" to="sconce/Fire/OmniLight3D" method="_on_timer_timeout"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

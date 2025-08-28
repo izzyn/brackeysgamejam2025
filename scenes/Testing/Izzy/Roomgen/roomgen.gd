@@ -4,8 +4,17 @@ var cells : Array[Array]
 var room_nr : int = 20
 var grid_size : int = 8
 var roomgen_complete : bool
+
+@export
+var rooms : Array[PackedScene]
 func _ready() -> void:
 	#roomgen()
+	pass
+
+func generate_rooms():
+	for y in cells: 
+		for cell in y: 
+			
 	pass
 func roomgen():
 	var rooms_made = 1

@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgcvjmj6b6qkf"]
+
+[ext_resource type="Script" uid="uid://b6j6dfn67yyfk" path="res://scenes/Testing/Izzy/character_body_3d.gd" id="1_pu2q2"]
+[ext_resource type="Script" uid="uid://cvlnsrne0ck0g" path="res://scenes/Testing/Izzy/weapon_handler.gd" id="2_e2pgk"]
+[ext_resource type="PackedScene" uid="uid://ij5rohqtpkhg" path="res://test_gun.tscn" id="3_lbp4t"]
+[ext_resource type="PackedScene" uid="uid://b1kcusvucjroh" path="res://scenes/instantiable/vfx/camera_outline_shader.tscn" id="4_aydih"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrwsy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8l6xr"]
+
+[node name="CharacterBody3D2" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_pu2q2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xrwsy")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00106335, -0.0103626, 0.0158644)
+mesh = SubResource("CapsuleMesh_8l6xr")
+
+[node name="WeaponHandler" type="Node" parent="."]
+script = ExtResource("2_e2pgk")
+
+[node name="Weapons" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.27785)
+
+[node name="TestGun" parent="Weapons" instance=ExtResource("3_lbp4t")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="ParentMeToCamera" parent="Camera3D" instance=ExtResource("4_aydih")]
