@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbhc1cokmkq5q"]
+[gd_scene load_steps=11 format=3 uid="uid://dbhc1cokmkq5q"]
 
 [ext_resource type="Script" uid="uid://c1sjfcwq8vd1g" path="res://scripts/player/player.gd" id="2_bdijj"]
 [ext_resource type="PackedScene" uid="uid://b1kcusvucjroh" path="res://scenes/instantiable/vfx/camera_outline_shader.tscn" id="3_1jmdg"]
+[ext_resource type="PackedScene" uid="uid://dvl13042jqtk0" path="res://scenes/instantiable/vfx/slime_splash.tscn" id="3_6c03w"]
 [ext_resource type="Script" uid="uid://cr37fh1xk38yn" path="res://scripts/player/debugger.gd" id="4_6c03w"]
 [ext_resource type="PackedScene" uid="uid://c1tew2bjd136d" path="res://scenes/instantiable/rooms/base_room.tscn" id="4_tpvkv"]
 [ext_resource type="PackedScene" uid="uid://clddfiyg8m7ia" path="res://scenes/instantiable/rooms/cauldron_room.tscn" id="5_uj0fx"]
+[ext_resource type="PackedScene" uid="uid://c3et8ub4gy3ev" path="res://scenes/instantiable/vfx/cauldron_projectile.tscn" id="6_bdijj"]
+[ext_resource type="PackedScene" uid="uid://ojxmdvn8mfw5" path="res://scenes/instantiable/vfx/gumball_projectile.tscn" id="7_1jmdg"]
+[ext_resource type="PackedScene" uid="uid://brru6ssvh0pym" path="res://scenes/instantiable/vfx/gum_splash.tscn" id="9_6c03w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wdbvl"]
 
@@ -44,3 +48,17 @@ script = ExtResource("4_6c03w")
 [node name="base_room" parent="." instance=ExtResource("4_tpvkv")]
 
 [node name="cauldron_room" parent="." instance=ExtResource("5_uj0fx")]
+
+[node name="cauldron_projectile" parent="." instance=ExtResource("6_bdijj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.79411, 1.27162, 3.53662)
+
+[node name="gumball_projectile" parent="." instance=ExtResource("7_1jmdg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.20397, 1.27162, 3.53662)
+
+[node name="SlimeSplash1" parent="." instance=ExtResource("3_6c03w")]
+transform = Transform3D(-0.179043, 0, -0.983841, 0, 1, 0, 0.983841, 0, -0.179043, -6.91154, -0.0229658, 7.063)
+
+[node name="GumSplash" parent="." instance=ExtResource("9_6c03w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.50475, 0.0182427, 7.5105)
+
+[editable path="SlimeSplash1"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3et8ub4gy3ev"]
+
+[ext_resource type="Material" uid="uid://cpg5qwe1nv73u" path="res://assets/materials/enemies/cauldron_projectile.tres" id="1_4weo2"]
+[ext_resource type="Script" uid="uid://c7v8cvc2kp7ed" path="res://scripts/visual_helpers/metaball_controller.gd" id="2_d7r0c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d7r0c"]
+material = ExtResource("1_4weo2")
+
+[node name="cauldron_projectile" type="Node3D"]
+
+[node name="VFX" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 0, 0, 0)
+mesh = SubResource("BoxMesh_d7r0c")
+script = ExtResource("2_d7r0c")
+motion_radius = 0.11
+min_radius = 0.03
+max_radius = 0.1
+speed = 5.015
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0, 0.968293, 0.0201887, 1)
+light_energy = 4.484
