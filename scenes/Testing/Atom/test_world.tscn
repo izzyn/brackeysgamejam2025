@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbhc1cokmkq5q"]
+[gd_scene load_steps=12 format=3 uid="uid://dbhc1cokmkq5q"]
 
 [ext_resource type="Script" uid="uid://c1sjfcwq8vd1g" path="res://scripts/player/player.gd" id="2_bdijj"]
 [ext_resource type="PackedScene" uid="uid://b1kcusvucjroh" path="res://scenes/instantiable/vfx/camera_outline_shader.tscn" id="3_1jmdg"]
 [ext_resource type="PackedScene" uid="uid://dvl13042jqtk0" path="res://scenes/instantiable/vfx/slime_splash.tscn" id="3_6c03w"]
+[ext_resource type="PackedScene" uid="uid://rjs1r1juaspp" path="res://scenes/instantiable/enemies/gumball.tscn" id="3_uleup"]
 [ext_resource type="Script" uid="uid://cr37fh1xk38yn" path="res://scripts/player/debugger.gd" id="4_6c03w"]
 [ext_resource type="PackedScene" uid="uid://c1tew2bjd136d" path="res://scenes/instantiable/rooms/base_room.tscn" id="4_tpvkv"]
 [ext_resource type="PackedScene" uid="uid://clddfiyg8m7ia" path="res://scenes/instantiable/rooms/cauldron_room.tscn" id="5_uj0fx"]
@@ -31,6 +32,7 @@ render_target_update_mode = 4
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-0.179043, 0, -0.983841, 0, 1, 0, 0.983841, 0, -0.179043, -6, 1, 0)
+collision_mask = 5
 script = ExtResource("2_bdijj")
 floor_drag = 1.0
 
@@ -60,5 +62,8 @@ transform = Transform3D(-0.179043, 0, -0.983841, 0, 1, 0, 0.983841, 0, -0.179043
 
 [node name="GumSplash" parent="." instance=ExtResource("9_6c03w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.50475, 0.0182427, 7.5105)
+
+[node name="gumball" parent="." instance=ExtResource("3_uleup")]
+transform = Transform3D(-0.646976, 0, -0.76251, 0, 1, 0, 0.76251, 0, -0.646976, -3, -0.0544715, 8)
 
 [editable path="SlimeSplash1"]

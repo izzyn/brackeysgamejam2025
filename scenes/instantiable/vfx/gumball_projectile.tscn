@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ojxmdvn8mfw5"]
+[gd_scene load_steps=6 format=3 uid="uid://ojxmdvn8mfw5"]
 
 [ext_resource type="Shader" uid="uid://bc2uwm8o216sr" path="res://scripts/shaders/goo_shader.gdshader" id="1_qm1wr"]
+[ext_resource type="Texture2D" uid="uid://qbmjlqhf3nur" path="res://assets/textures/environment/metalSpec.png" id="2_2t608"]
 [ext_resource type="Script" uid="uid://c7v8cvc2kp7ed" path="res://scripts/visual_helpers/metaball_controller.gd" id="2_dirp4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dirp4"]
@@ -11,8 +12,12 @@ shader_parameter/radi = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/blend_r = 0.49
 shader_parameter/base_color = Color(0.999998, 0.171052, 0.649225, 1)
 shader_parameter/fresnel_color = Color(1, 1, 1, 1)
-shader_parameter/fresnel_strength = 2.58
-shader_parameter/fresnel_emition = 0.945
+shader_parameter/fresnel_strength = 6.28
+shader_parameter/fresnel_emition = 0.485
+shader_parameter/specular_map = ExtResource("2_2t608")
+shader_parameter/triplanar_scale = Vector3(1, 1, 1)
+shader_parameter/specular_strength = 1.635
+shader_parameter/roughness = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_2t608"]
 material = SubResource("ShaderMaterial_dirp4")

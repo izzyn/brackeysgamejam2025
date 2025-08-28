@@ -4,34 +4,38 @@
 
 [node name="gumball" instance=ExtResource("1_0e712")]
 
+[node name="Gumball" parent="." index="0"]
+transform = Transform3D(0.515, 0, 0, 0, 0.515, 0, 0, 0, 0.515, 0, 0, 0)
+
 [node name="Skeleton3D" parent="Gumball" index="0"]
-bones/0/position = Vector3(-0.00530392, 0.0314623, -2.22059)
-bones/1/position = Vector3(4.04282, 3.89653, -0.164393)
+bones/1/position = Vector3(3.16178, 6.2885, -0.168578)
 bones/1/rotation = Quaternion(-0.0942683, -0.21338, -0.386587, 0.892263)
-bones/2/position = Vector3(-1.79065e-10, -1.19175, -1.7807)
-bones/2/rotation = Quaternion(-0.828396, 7.46584e-08, -9.08767e-08, 0.560142)
+bones/2/position = Vector3(6.95781e-11, 1.15164, -1.24522)
+bones/2/rotation = Quaternion(-0.707488, 8.42481e-08, -8.43392e-08, 0.706726)
 bones/3/rotation = Quaternion(0.231039, 0.557284, 0.779424, -0.168979)
-bones/4/rotation = Quaternion(-0.0835351, 0.976787, 0.068889, 0.184836)
-bones/5/rotation = Quaternion(0.222997, 0.881632, 0.23544, 0.342877)
-bones/6/rotation = Quaternion(0.169722, 0.871783, 0.253777, -0.383126)
-bones/8/rotation = Quaternion(0.6032, 0.37127, 0.208237, 0.674496)
-bones/9/rotation = Quaternion(-0.654485, -0.0970921, -0.572124, 0.484662)
-bones/10/rotation = Quaternion(0.47194, 0.0621748, 0.417528, 0.774)
-bones/12/rotation = Quaternion(0.609255, -0.225433, -0.0719616, 0.756842)
-bones/13/rotation = Quaternion(0.623551, -0.405287, 0.646971, -0.168391)
-bones/14/rotation = Quaternion(0.220128, -0.457939, 0.634607, 0.582332)
-bones/16/rotation = Quaternion(-0.0231431, -0.755314, -0.0610418, 0.652104)
-bones/17/rotation = Quaternion(0.212021, -0.535271, 0.24541, 0.77994)
-bones/18/rotation = Quaternion(0.0852491, 0.930712, -0.299737, -0.19148)
-bones/19/rotation = Quaternion(7.92158e-09, 1.01683e-08, -0.434005, 0.90091)
-bones/20/rotation = Quaternion(-1.18547e-07, -2.35286e-07, 0.434005, 0.90091)
-bones/21/scale = Vector3(1, 7.62295, 1)
-bones/23/position = Vector3(2.90921, -3.35295, -0.127014)
+bones/4/rotation = Quaternion(0.0757711, 0.910381, 0.381517, 0.141103)
+bones/5/rotation = Quaternion(0.356864, 0.734807, 0.383294, 0.431036)
+bones/6/rotation = Quaternion(0.138729, 0.866579, 0.321482, -0.355589)
+bones/8/rotation = Quaternion(0.681655, 0.334084, 0.0164872, 0.65074)
+bones/9/rotation = Quaternion(-0.675377, -0.340813, -0.607621, 0.241887)
+bones/10/rotation = Quaternion(0.442231, 0.0123977, 0.595204, 0.670829)
+bones/12/rotation = Quaternion(0.430888, -0.173108, -0.198612, 0.863089)
+bones/13/rotation = Quaternion(0.480147, -0.634743, 0.49267, -0.351905)
+bones/14/rotation = Quaternion(8.47653e-05, -0.513735, 0.439605, 0.736765)
+bones/16/rotation = Quaternion(0.247802, -0.563, -0.633593, 0.46924)
+bones/17/rotation = Quaternion(0.587952, -0.333393, 0.694116, 0.247717)
+bones/18/rotation = Quaternion(0.4194, 0.779355, -0.422703, -0.195016)
+bones/19/rotation = Quaternion(-9.68145e-05, 0.000101973, -0.0541002, 0.998536)
+bones/20/rotation = Quaternion(-9.68297e-05, -0.000102211, 0.0541002, 0.998536)
+bones/23/position = Vector3(2.86593, 0.944853, -0.131648)
 bones/23/rotation = Quaternion(0.887022, 0.355584, 0.274474, -0.106848)
-bones/24/position = Vector3(-2.79821, -3.15797, -0.157135)
+bones/24/position = Vector3(-3.07641, -2.94107, -0.157369)
 bones/24/rotation = Quaternion(0.862079, -0.373877, 0.314187, 0.135359)
-bones/25/position = Vector3(-3.63575, 3.85977, -0.157136)
+bones/25/position = Vector3(-2.98713, 2.79605, -0.153673)
 bones/25/rotation = Quaternion(-0.355123, 0.847297, -0.153011, -0.364092)
 
 [node name="mouth_left" parent="Gumball/Skeleton3D" index="1"]
 transform = Transform3D(0.887354, -2.44801e-08, -5.0182e-09, 2.43644e-08, 0.887142, -0.0194241, 5.55292e-09, 0.0194241, 0.887142, 0.0296069, -0.0511247, -0.166105)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "walk_forward"
