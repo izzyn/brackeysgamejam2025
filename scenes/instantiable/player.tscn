@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://oua8c6fuyact"]
+
+[ext_resource type="Script" uid="uid://d2601umnwbk7v" path="res://scripts/player/player.gd" id="1_aaa3c"]
+[ext_resource type="Script" uid="uid://d2vxuyprtr662" path="res://scenes/instantiable/player_camera.gd" id="2_j66yd"]
+[ext_resource type="Script" uid="uid://c5vk5e5j1pstd" path="res://scripts/player/wall_ray.gd" id="2_yy751"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k5jdb"]
+radius = 0.3
+height = 1.8
+
+[node name="Player" type="CharacterBody3D"]
+physics_interpolation_mode = 1
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_aaa3c")
+
+[node name="BoundingBean" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_k5jdb")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+script = ExtResource("2_j66yd")
+
+[node name="WallRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -0.38)
+script = ExtResource("2_yy751")

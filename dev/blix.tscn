@@ -1,11 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://fodvyetjhglp"]
 
-[ext_resource type="Script" uid="uid://d2601umnwbk7v" path="res://scripts/player/player.gd" id="1_0peuj"]
+[ext_resource type="PackedScene" uid="uid://oua8c6fuyact" path="res://scenes/instantiable/player.tscn" id="1_0peuj"]
 [ext_resource type="Texture2D" uid="uid://bc7tj5y4we2o8" path="res://icon.svg" id="2_1v0mg"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k5jdb"]
-radius = 0.4
-height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt3t7"]
 albedo_texture = ExtResource("2_1v0mg")
@@ -49,37 +45,14 @@ uv1_scale = Vector3(3, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0peuj"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5jdb"]
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("2_1v0mg")
+uv1_scale = Vector3(3, 2, 2)
+
 [node name="Blix" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-script = ExtResource("1_0peuj")
-m_sensitivity = Vector2(0.15, 0.15)
-floor_drag = 20.0
-air_drag = 5.0
-movement_speed = 150.0
-sprint_speed = 330.0
-jump_force = 1200.0
-gravity_accel = -13.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_k5jdb")
-
-[node name="Camera" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-
-[node name="WallRays" type="Node3D" parent="CharacterBody3D"]
-
-[node name="WallRayRight" type="RayCast3D" parent="CharacterBody3D/WallRays"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23467, 0)
-target_position = Vector3(1, 0, 0)
-
-[node name="WallRayLeft" type="RayCast3D" parent="CharacterBody3D/WallRays"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23467, 0)
-target_position = Vector3(-1, 0, 0)
+[node name="Player" parent="." instance=ExtResource("1_0peuj")]
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_nt3t7")
@@ -169,5 +142,41 @@ skeleton = NodePath("../Ground")
 [node name="StaticBody3D" type="StaticBody3D" parent="Box5"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box5/StaticBody3D"]
+shape = SubResource("BoxShape3D_0peuj")
+debug_fill = false
+
+[node name="Box6" type="MeshInstance3D" parent="."]
+transform = Transform3D(8.81627, 0, 0, 0, -4.37114e-08, 8.81627, 0, -1, -3.85371e-07, -36.0789, 3.41069, -13.2898)
+material_override = SubResource("StandardMaterial3D_0peuj")
+mesh = SubResource("BoxMesh_1v0mg")
+skeleton = NodePath("../Ground")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Box6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box6/StaticBody3D"]
+shape = SubResource("BoxShape3D_0peuj")
+debug_fill = false
+
+[node name="Box7" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.22719, 0.707884, 2.72798e-07, 0, -4.37114e-08, 8.81627, 6.24089, -0.706329, -2.72199e-07, -36.0789, 3.41069, -9.60337)
+material_override = SubResource("StandardMaterial3D_0peuj")
+mesh = SubResource("BoxMesh_1v0mg")
+skeleton = NodePath("../Ground")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Box7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box7/StaticBody3D"]
+shape = SubResource("BoxShape3D_0peuj")
+debug_fill = false
+
+[node name="Box8" type="MeshInstance3D" parent="."]
+transform = Transform3D(8.81627, 0, 0, 0, 0.021082, 8.81431, 0, -0.999778, 0.185865, -36.0789, 3.47702, -2.67659)
+material_override = SubResource("StandardMaterial3D_k5jdb")
+mesh = SubResource("BoxMesh_1v0mg")
+skeleton = NodePath("../Ground")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Box8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box8/StaticBody3D"]
 shape = SubResource("BoxShape3D_0peuj")
 debug_fill = false

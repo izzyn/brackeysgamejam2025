@@ -13,7 +13,7 @@ const JUMP_VELOCITY = 4.5
 @export var max_pitch = 90.0
 
 # Onready variables to cache node references
-@onready var camera_mount = $"Camera3D"
+@onready var camera = $"Camera3D"
 
 # Get the gravity setting from the project settings
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -36,7 +36,7 @@ func _input(event):
 			# Adjust pitch and clamp it
 			pitch -= event.relative.y * sens_vertical
 			pitch = clamp(pitch, min_pitch, max_pitch)
-			camera_mount.rotation_degrees.x = pitch
+			camera.rotation_degrees.x = pitch
 
 func _physics_process(delta):
 	# Apply gravity when the character is not on the floor
@@ -57,7 +57,7 @@ func _physics_process(delta):
 	# Get the input direction vector based on movement actions (left, right, forward, back)
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var strafe_direction = transform.basis.x * input_dir.x
-	var forward_direction = camera_mount.global_transform.basis.z * input_dir.y  # Change direction to match correct forward movement
+	var forward_direction = camera.global_transform.basis.z * input_dir.y  # Change direction to match correct forward movement
 
 	# Calculate the velocity based on input
 	velocity.x = (strafe_direction.x + forward_direction.x) * SPEED
