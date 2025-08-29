@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://bt6vclswc18a1"]
+
+[ext_resource type="PackedScene" uid="uid://b3u7ypxttrdju" path="res://assets/models/enemies/skullcream.glb" id="1_ybv75"]
+[ext_resource type="Script" uid="uid://booobt8hlqfju" path="res://scripts/enemies/skullcream.gd" id="2_kjecy"]
+[ext_resource type="PackedScene" uid="uid://davtmq7r5411t" path="res://scenes/instantiable/vfx/skull_cream_explode.tscn" id="3_0pstp"]
+
+[sub_resource type="Gradient" id="Gradient_ybv75"]
+offsets = PackedFloat32Array(0, 0.157895, 0.348684, 0.552632, 0.710526)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0.893333, 1, 1, 1, 0.894118, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hdtqv"]
+gradient = SubResource("Gradient_ybv75")
+
+[sub_resource type="Curve" id="Curve_kjecy"]
+_limits = [0.0, 1.0, 0.0, 44.42]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.393617, 0.919334), 0.0, 0.0, 0, 0, Vector2(11.0245, 0.391304), 0.0, 0.0, 0, 0, Vector2(44.42, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_0pstp"]
+curve = SubResource("Curve_kjecy")
+
+[sub_resource type="Curve" id="Curve_8ork0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.168539, 0.617978), -1.18919, -1.18919, 0, 0, Vector2(0.44382, 0), -22.2857, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fller"]
+curve = SubResource("Curve_8ork0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aua14"]
+lifetime_randomness = 0.25
+emission_shape = 2
+emission_sphere_radius = 1.5
+angle_min = -78.1
+angle_max = 233.1
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -15.0
+radial_accel_max = -10.0
+damping_max = 1.0
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_fller")
+color_ramp = SubResource("GradientTexture1D_hdtqv")
+emission_curve = SubResource("CurveTexture_0pstp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqgxg"]
+render_priority = 2
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.815686, 0.815686, 0.815686, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ggfcj"]
+material = SubResource("StandardMaterial3D_pqgxg")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8ork0"]
+radius = 2.83132
+
+[node name="skullcream" instance=ExtResource("1_ybv75")]
+script = ExtResource("2_kjecy")
+explosion_vfx = ExtResource("3_0pstp")
+
+[node name="explosion_charge" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059885, -0.0419261, 0)
+emitting = false
+amount = 150
+lifetime = 1.16
+one_shot = true
+explosiveness = 0.66
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_aua14")
+draw_pass_1 = SubResource("QuadMesh_ggfcj")
+
+[node name="Area3D" type="Area3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("SphereShape3D_8ork0")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

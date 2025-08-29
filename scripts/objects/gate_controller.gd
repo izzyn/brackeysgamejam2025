@@ -3,7 +3,6 @@ extends Node3D
 @onready var animation_player = $AnimationPlayer
 @onready var torch_animation_player = $sconce/TorchAnimationPlayer
 @onready var gate_collision = $StaticBody3D/GateCollision
-@onready var area_3d = $Area3D
 @onready var collision_animation_player = $StaticBody3D/CollisionAnimationPlayer
 
 var is_open: bool = false
@@ -34,10 +33,3 @@ func toggle_gate():
 	else:
 		open_gate()
 		
-
-func _on_area_3d_body_entered(body):
-	open_gate()
-
-
-func _on_area_3d_body_exited(body):
-	close_gate()
