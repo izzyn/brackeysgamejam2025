@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://b5nf6hjgueotl"]
+
+[ext_resource type="PackedScene" uid="uid://8o78l8whjfdp" path="res://assets/models/weapons/rock_candy_zapper.glb" id="1_g4ar4"]
+[ext_resource type="Script" uid="uid://btdqse4e32uub" path="res://scripts/weapons/rock_candy_zapper.gd" id="2_mfosj"]
+[ext_resource type="PackedScene" uid="uid://b465dgbgga41q" path="res://scenes/instantiable/vfx/lightning.tscn" id="3_s4504"]
+
+[sub_resource type="Gradient" id="Gradient_s4504"]
+offsets = PackedFloat32Array(0, 0.0833333, 0.27381, 0.386905)
+colors = PackedColorArray(0, 0, 0, 0, 0.36395, 0.47819, 1, 1, 1, 1, 0.893333, 1, 1, 1, 0.894118, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5xnqd"]
+gradient = SubResource("Gradient_s4504")
+
+[sub_resource type="Curve" id="Curve_grgdk"]
+_limits = [0.0, 1.0, 0.0, 44.42]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.393617, 0.919334), 0.0, 0.0, 0, 0, Vector2(11.0245, 0.391304), 0.0, 0.0, 0, 0, Vector2(44.42, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_e5pib"]
+curve = SubResource("Curve_grgdk")
+
+[sub_resource type="Curve" id="Curve_thdd2"]
+_data = [Vector2(0.185567, 0.58427), -22.2857, 0.0, 0, 0, Vector2(0.335052, 0.0224719), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c2y32"]
+curve = SubResource("Curve_thdd2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rbvuj"]
+lifetime_randomness = 0.25
+emission_shape = 2
+emission_sphere_radius = 0.1
+angle_min = -78.1
+angle_max = 233.1
+direction = Vector3(0, 0, 0)
+spread = 112.5
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -12.93
+radial_accel_max = -12.93
+tangential_accel_min = 3.0
+tangential_accel_max = 3.0
+damping_max = 1.0
+scale_min = 0.05
+scale_max = 0.06
+scale_curve = SubResource("CurveTexture_c2y32")
+color_ramp = SubResource("GradientTexture1D_5xnqd")
+emission_curve = SubResource("CurveTexture_e5pib")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqgxg"]
+render_priority = 2
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.815686, 0.815686, 0.815686, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_sibtu"]
+material = SubResource("StandardMaterial3D_pqgxg")
+
+[node name="Weapon" instance=ExtResource("1_g4ar4")]
+script = ExtResource("2_mfosj")
+cooldown = 2.0
+
+[node name="gun" parent="." index="0"]
+transform = Transform3D(1.09738, 0, 0, 0, 1.09738, 0, 0, 0, 1.09738, -0.145, -0.914, 0.2)
+
+[node name="Skeleton3D" parent="gun" index="0"]
+bones/1/position = Vector3(-2.05206e-11, 0.658094, 0.325751)
+
+[node name="rock" parent="gun/Skeleton3D" index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.592489, 0)
+
+[node name="Timer" type="Timer" parent="." index="2"]
+wait_time = 0.5
+one_shot = true
+
+[node name="VFX" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.149833, -0.214869, 2.164)
+
+[node name="lightning" parent="VFX" index="0" instance=ExtResource("3_s4504")]
+
+[node name="charged_particles" type="GPUParticles3D" parent="VFX" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00269637, -1.69246, -0.191202)
+amount = 30
+explosiveness = 0.07
+randomness = 1.0
+trail_lifetime = 0.69
+process_material = SubResource("ParticleProcessMaterial_rbvuj")
+draw_pass_1 = SubResource("QuadMesh_sibtu")

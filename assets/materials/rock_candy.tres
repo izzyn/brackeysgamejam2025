@@ -1,0 +1,49 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://vghyyaolbl1t"]
+
+[ext_resource type="Shader" uid="uid://bcypje47v2iwv" path="res://scripts/shaders/rock_candy.gdshader" id="1_cj1hw"]
+[ext_resource type="Material" uid="uid://cpjkhuo23uqv" path="res://assets/materials/electric_waves.material" id="1_mr7od"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cj1hw"]
+load_path = "res://.godot/imported/boneDiff.png-4044f51d6d0d00d8f93a9609ec63657c.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cj1hw"]
+noise_type = 0
+seed = 1
+frequency = 0.0067
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mr7od"]
+seamless = true
+seamless_blend_skirt = 0.192
+noise = SubResource("FastNoiseLite_cj1hw")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mr7od"]
+load_path = "res://.godot/imported/boneSpec.png-83116c73dcf1095321ea837b3b8ba30f.s3tc.ctex"
+
+[resource]
+render_priority = 2
+next_pass = ExtResource("1_mr7od")
+shader = ExtResource("1_cj1hw")
+shader_parameter/albedo = Color(0.0028284, 0.135645, 0.639534, 1)
+shader_parameter/albedo_texture = SubResource("CompressedTexture2D_cj1hw")
+shader_parameter/clamp_diffuse_to_max = true
+shader_parameter/emission_color = Color(0, 0.154499, 0.812734, 1)
+shader_parameter/emission_strength = 10.0
+shader_parameter/alpha_value = 1.0
+shader_parameter/alpha_texture = SubResource("NoiseTexture2D_mr7od")
+shader_parameter/use_triplanar = true
+shader_parameter/triplanar_scale = 4.1
+shader_parameter/triplanar_sharpness = 5.0
+shader_parameter/cuts = 4
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = true
+shader_parameter/specular_strength = 0.686
+shader_parameter/specular_shininess = 15.115
+shader_parameter/specular_map = SubResource("CompressedTexture2D_mr7od")
+shader_parameter/use_rim = true
+shader_parameter/rim_width = 16.0
+shader_parameter/rim_color = Color(0.481789, 0.481789, 0.481789, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01

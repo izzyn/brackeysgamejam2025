@@ -1,18 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm3ml6panaa53"]
+[gd_scene load_steps=4 format=3 uid="uid://dm3ml6panaa53"]
 
+[ext_resource type="Script" uid="uid://nl4khp5s01ra" path="res://scripts/weapons/candy_cane_ammo.gd" id="1_obubo"]
 [ext_resource type="ArrayMesh" uid="uid://dqsp12rrqatov" path="res://assets/meshes/weapons/candy_cane_ammo.res" id="1_vp00e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_obubo"]
-radius = 0.300414
-height = 2.40273
+radius = 0.125567
+height = 1.21386
 
-[node name="candy_cane_ammo" type="AnimatableBody3D"]
+[node name="candy_cane_ammo" type="CharacterBody3D"]
+script = ExtResource("1_obubo")
+duration = 2.0
+speed = 60.0
 
 [node name="CandyCaneAmmo" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.907724)
+transform = Transform3D(0.48, 0, 0, 0, 0.48, 0, 0, 0, 0.48, 0, 0, -0.907724)
 mesh = ExtResource("1_vp00e")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.120799, 0.117681)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.120799, -0.413286)
 shape = SubResource("CapsuleShape3D_obubo")

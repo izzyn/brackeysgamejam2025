@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name BasicBullet
 
 @export
 var duration : float = 5

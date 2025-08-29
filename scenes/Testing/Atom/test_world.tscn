@@ -1,14 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbhc1cokmkq5q"]
+[gd_scene load_steps=6 format=3 uid="uid://dbhc1cokmkq5q"]
 
-[ext_resource type="PackedScene" uid="uid://dvl13042jqtk0" path="res://scenes/instantiable/vfx/slime_splash.tscn" id="3_6c03w"]
-[ext_resource type="PackedScene" uid="uid://rjs1r1juaspp" path="res://scenes/instantiable/enemies/gumball.tscn" id="3_uleup"]
-[ext_resource type="PackedScene" uid="uid://c1tew2bjd136d" path="res://scenes/instantiable/rooms/base_room.tscn" id="4_tpvkv"]
-[ext_resource type="PackedScene" uid="uid://clddfiyg8m7ia" path="res://scenes/instantiable/rooms/cauldron_room.tscn" id="5_uj0fx"]
-[ext_resource type="PackedScene" uid="uid://c3et8ub4gy3ev" path="res://scenes/instantiable/vfx/cauldron_projectile.tscn" id="6_bdijj"]
-[ext_resource type="PackedScene" uid="uid://ojxmdvn8mfw5" path="res://scenes/instantiable/vfx/gumball_projectile.tscn" id="7_1jmdg"]
-[ext_resource type="PackedScene" uid="uid://brru6ssvh0pym" path="res://scenes/instantiable/vfx/gum_splash.tscn" id="9_6c03w"]
-[ext_resource type="Environment" uid="uid://cyog4adx4j87x" path="res://assets/environments/level_environment_dark.tres" id="9_dmn5w"]
+[ext_resource type="Environment" uid="uid://gk8ytugpyb53" path="res://assets/environments/nightsky_environment.tres" id="2_ho6nu"]
 [ext_resource type="PackedScene" uid="uid://oua8c6fuyact" path="res://scenes/instantiable/player.tscn" id="9_uleup"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cmc0u"]
+size = Vector3(16.9518, 0.903, 12.6718)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_af3ax"]
+vertices = PackedVector3Array(-7.976, 0.5, -5.836, -7.976, 0.5, 5.914, 8.024, 0.5, 5.914, 8.024, 0.5, -5.836)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tpvkv"]
+size = Vector2(16.952, 12.672)
 
 [node name="TestWorld" type="Node3D"]
 
@@ -24,33 +27,56 @@ stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(384, 216)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("9_uleup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42749, 8.78217)
-
-[node name="base_room" parent="." instance=ExtResource("4_tpvkv")]
-
-[node name="cauldron_room" parent="." instance=ExtResource("5_uj0fx")]
-
-[node name="cauldron_projectile" parent="." instance=ExtResource("6_bdijj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.79411, 1.27162, 3.53662)
-
-[node name="gumball_projectile" parent="." instance=ExtResource("7_1jmdg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.20397, 1.27162, 3.53662)
-
-[node name="SlimeSplash1" parent="." instance=ExtResource("3_6c03w")]
-transform = Transform3D(-0.179043, 0, -0.983841, 0, 1, 0, 0.983841, 0, -0.179043, -6.91154, -0.0229658, 7.063)
-
-[node name="GumSplash" parent="." instance=ExtResource("9_6c03w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.50475, 0.0182427, 7.5105)
-
-[node name="gumball" parent="." instance=ExtResource("3_uleup")]
-transform = Transform3D(-0.646976, 0, -0.76251, 0, 1, 0, 0.76251, 0, -0.646976, -3, -0.0544715, 8)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("9_dmn5w")
+environment = ExtResource("2_ho6nu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_cmc0u")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+size = Vector3(16.9518, 0.903, 12.6718)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticBody3D"]
+navigation_mesh = SubResource("NavigationMesh_af3ax")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_tpvkv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8522, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_cmc0u")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D2"]
+size = Vector3(16.9518, 0.903, 12.6718)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticBody3D2"]
+navigation_mesh = SubResource("NavigationMesh_af3ax")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2/NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_tpvkv")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -9.57844, 6.78818, -5.93957)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_cmc0u")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D3"]
+size = Vector3(16.9518, 0.903, 12.6718)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticBody3D3"]
+navigation_mesh = SubResource("NavigationMesh_af3ax")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3/NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_tpvkv")
 
 [editable path="SubViewportContainer/SubViewport/Player"]
-[editable path="SlimeSplash1"]
