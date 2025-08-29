@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://oua8c6fuyact"]
+[gd_scene load_steps=6 format=3 uid="uid://oua8c6fuyact"]
 
 [ext_resource type="Script" uid="uid://d2601umnwbk7v" path="res://scripts/player/player.gd" id="1_aaa3c"]
 [ext_resource type="Script" uid="uid://d2vxuyprtr662" path="res://scenes/instantiable/player_camera.gd" id="2_j66yd"]
 [ext_resource type="Script" uid="uid://c5vk5e5j1pstd" path="res://scripts/player/wall_ray.gd" id="2_yy751"]
+[ext_resource type="PackedScene" uid="uid://b1kcusvucjroh" path="res://scenes/instantiable/vfx/camera_outline_shader.tscn" id="3_j66yd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k5jdb"]
 radius = 0.3
@@ -22,6 +23,8 @@ shape = SubResource("CapsuleShape3D_k5jdb")
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 script = ExtResource("2_j66yd")
+
+[node name="ParentMeToCamera" parent="Camera" instance=ExtResource("3_j66yd")]
 
 [node name="WallRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

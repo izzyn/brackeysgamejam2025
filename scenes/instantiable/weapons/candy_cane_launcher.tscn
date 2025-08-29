@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq88y5r18ucc6"]
+
+[ext_resource type="PackedScene" uid="uid://mbwsasonbo3h" path="res://assets/models/weapons/candy_cane_launcher.glb" id="1_bsojm"]
+
+[node name="Weapon" type="Node3D"]
+
+[node name="candy_cane_launcher" parent="." instance=ExtResource("1_bsojm")]
+
+[node name="Skeleton3D" parent="candy_cane_launcher/gun" index="0"]
+bones/0/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/1/position = Vector3(-1.10571, 0.542466, -6.14765e-08)
+bones/1/rotation = Quaternion(-2.67059e-08, 2.66792e-08, 0.707107, 0.707107)
+
+[editable path="candy_cane_launcher"]
