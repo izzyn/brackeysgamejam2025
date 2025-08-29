@@ -30,3 +30,6 @@ script = ExtResource("2_j66yd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, -0.38)
 script = ExtResource("2_yy751")
+
+[node name="WeaponSlot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.797081, 0.547326)
