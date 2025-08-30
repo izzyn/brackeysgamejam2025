@@ -48,6 +48,7 @@ alpha_curve = SubResource("CurveTexture_uuaeg")
 emission_curve = SubResource("CurveTexture_r2js6")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atqis"]
+render_priority = 2
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -130,6 +131,7 @@ alpha_curve = SubResource("CurveTexture_48gr2")
 emission_curve = SubResource("CurveTexture_cdlk0")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0isau"]
+render_priority = 2
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -191,6 +193,7 @@ color = Color(0.205117, 0.205117, 0.205117, 1)
 alpha_curve = SubResource("CurveTexture_a3kuo")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4io1p"]
+render_priority = 2
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true

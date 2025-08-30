@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d2vxuyprtr662" path="res://scenes/instantiable/player_camera.gd" id="2_j66yd"]
 [ext_resource type="Script" uid="uid://c5vk5e5j1pstd" path="res://scripts/player/wall_ray.gd" id="2_yy751"]
 [ext_resource type="PackedScene" uid="uid://b1kcusvucjroh" path="res://scenes/instantiable/vfx/camera_outline_shader.tscn" id="3_j66yd"]
-[ext_resource type="PackedScene" uid="uid://b5nf6hjgueotl" path="res://scenes/instantiable/weapons/rock_candy_zapper.tscn" id="4_ti81w"]
+[ext_resource type="PackedScene" uid="uid://bfgc3m473svar" path="res://scenes/instantiable/weapons/cherry_launcher.tscn" id="4_ti81w"]
 [ext_resource type="Script" uid="uid://cvlnsrne0ck0g" path="res://scenes/Testing/Izzy/weapon_handler.gd" id="6_ti81w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k5jdb"]
@@ -13,6 +13,7 @@ height = 1.8
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 physics_interpolation_mode = 1
+collision_mask = 5
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -31,7 +32,8 @@ script = ExtResource("2_j66yd")
 [node name="WeaponSlot" type="Node3D" parent="Camera"]
 transform = Transform3D(-1, 1.06542e-08, -8.67711e-08, 0, 0.992546, 0.121869, 8.74228e-08, 0.121869, -0.992546, 0.42, -0.355, -0.535)
 
-[node name="Weapon" parent="Camera/WeaponSlot" instance=ExtResource("4_ti81w")]
+[node name="Weapon" parent="Camera/WeaponSlot" node_paths=PackedStringArray("camera") instance=ExtResource("4_ti81w")]
+camera = NodePath("../..")
 
 [node name="WallRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

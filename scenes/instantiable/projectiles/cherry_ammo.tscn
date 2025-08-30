@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c614d8w0fkdga"]
+
+[ext_resource type="Script" uid="uid://dsqhbr2fi3xa6" path="res://scripts/weapons/cherry_ammo.gd" id="1_bv0w6"]
+[ext_resource type="ArrayMesh" uid="uid://dbcrwc2q8iykx" path="res://assets/meshes/weapons/cherry_ammo.res" id="1_hwhig"]
+[ext_resource type="PackedScene" uid="uid://bbrsiylo1unlw" path="res://scenes/instantiable/vfx/cherry_ammo_explosion.tscn" id="2_glgt1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwhig"]
+radius = 0.0568817
+
+[node name="cherry_ammo" type="CharacterBody3D"]
+script = ExtResource("1_bv0w6")
+vfx_scene = ExtResource("2_glgt1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_hwhig")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.011349, -0.0138244)
+shape = SubResource("SphereShape3D_hwhig")

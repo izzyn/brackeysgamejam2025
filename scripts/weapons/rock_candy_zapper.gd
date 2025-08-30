@@ -4,7 +4,7 @@ extends WeaponScene
 @onready var timer = $Timer
 @onready var animation_player = $AnimationPlayer
 @onready var lightning = $VFX/lightning
-const ELECTRIC_WAVES = preload("res://scenes/instantiable/vfx/electric_waves.material")
+const ELECTRIC_WAVES = preload("res://assets/materials/electric_waves.material")
 const ROCK_CANDY = preload("res://assets/materials/rock_candy.tres")
 @export var camera: Camera3D
 

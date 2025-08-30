@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbrsiylo1unlw"]
+
+[ext_resource type="Script" uid="uid://bgu5qhcp5275m" path="res://scripts/visual_helpers/cherry_ammo_explosion.gd" id="1_32fpx"]
+[ext_resource type="PackedScene" uid="uid://c76ggriths1rd" path="res://scenes/instantiable/vfx/explosion_light.tscn" id="1_684jt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_32fpx"]
+radius = 1.21058
+
+[node name="cherry_ammo_explosion" type="Node3D"]
+script = ExtResource("1_32fpx")
+
+[node name="ExplosionLight" parent="." instance=ExtResource("1_684jt")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="hurt_box" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_32fpx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

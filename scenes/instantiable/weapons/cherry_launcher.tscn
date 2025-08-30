@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfgc3m473svar"]
+
+[ext_resource type="PackedScene" uid="uid://dc62xgv1cvwa2" path="res://assets/models/weapons/cherry_launcher.glb" id="1_5n5gw"]
+[ext_resource type="Script" uid="uid://dh15r1shd3tse" path="res://scripts/weapons/cherry_launcher.gd" id="2_mu3n2"]
+[ext_resource type="PackedScene" uid="uid://ca0xt7tqp4c1g" path="res://scenes/instantiable/vfx/electric_sparks_1.tscn" id="2_tkkfr"]
+[ext_resource type="PackedScene" uid="uid://c614d8w0fkdga" path="res://scenes/instantiable/projectiles/cherry_ammo.tscn" id="3_hpn2h"]
+
+[node name="Weapon" instance=ExtResource("1_5n5gw")]
+script = ExtResource("2_mu3n2")
+bullet = ExtResource("3_hpn2h")
+arc_height = 3.0
+gravity = 15.0
+cooldown = 2.0
+
+[node name="cherry_launcher" parent="." index="0"]
+transform = Transform3D(0.376779, -0.0240584, -0.0937011, 0, 0.376779, -0.0967404, 0.0967404, 0.0937011, 0.364942, 0.03, -0.086, -0.128)
+
+[node name="Skeleton3D" parent="cherry_launcher" index="0"]
+bones/0/position = Vector3(0, 0, 0)
+bones/1/position = Vector3(3.38289e-14, 0.538116, -0.792816)
+bones/2/position = Vector3(-1.6583e-14, 0.655936, 0.37433)
+bones/3/rotation = Quaternion(0.448911, 0, 9.96783e-17, 0.893576)
+
+[node name="ElectricSparks_1" parent="." index="2" instance=ExtResource("2_tkkfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0509341, 0.149422, 0.113949)
+
+[node name="Timer" type="Timer" parent="." index="3"]
+wait_time = 2.0
+one_shot = true
